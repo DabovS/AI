@@ -199,3 +199,7 @@ An agent is anything that can perceive its environment through sensors and act u
 Some programs operate in an entirely **artificial environment** confined to keyboard input, database, computer file systems and character output on a screen. 
 
 In contrast, some software agents (software robots or softbots) exist in rich, unlimited softbots domains. The simulator has a **very detailed, complex environment**. The software agent needs to choose from a long array of actions in real time. A softbot is designed to scan online preferences of the customer and shows interesting items to the customer works in the **real** as well as an **artificial** environment.
+
+# Reference
+[Artificial Intelligence - Quick Guide](https://www.tutorialspoint.com/artificial_intelligence/artificial_intelligence_quick_guide.htm#)
+[Basics of Artificial Intelligence (AI)](https://prutor.ai/ai-with-python-prime-concept/)
