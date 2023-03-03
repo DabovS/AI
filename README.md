@@ -200,6 +200,139 @@ Some programs operate in an entirely **artificial environment** confined to keyb
 
 In contrast, some software agents (software robots or softbots) exist in rich, unlimited softbots domains. The simulator has a **very detailed, complex environment**. The software agent needs to choose from a long array of actions in real time. A softbot is designed to scan online preferences of the customer and shows interesting items to the customer works in the **real** as well as an **artificial** environment.
 
+# Getting Started
+In this chapter, we will learn how to get started with Python. We will also undestand how Python helps for Artificial Intelligence.
+
+## Why Python for AI
+Artificial intelligence is considered to be the trending technology of the future. Already there are a number of applications made on it. Due to this, many companies and researchers are taking interest in it. But the main question that arises here is that in which programming language can these AI applications be developed? There are various programming languages like Lisp, Prolog, C++, Java and Python, which can be used for developing applications of AI. Among them, Python programming language gains a huge popularity and the reasons are as follows:
+
+1. **Simple syntax & less coding**
+
+* Python involves very less coding and simple syntax among other programming languages which can be used for developing AI applications. Due to the feature, the testing can be easier and we can focus more on programming.
+
+2. **Inbuilt libaries for AI projects**
+
+* A major advantage for using Python for AI is that it comes with inbuilt libararies. Python has libaries for almost all kinds of AI projects. For example, **NumPy**, **SciPy**, **matplotlib**, **nltk**, **SimpleAI** are some the important inbuilt libraries of Python.
+    * **Open Source** - Python is an open source programming language. This makes it widely popular in the community.
+    * **Can be used for broad range of programming** - Python can be used for a broad range of programming tasks like small shell script to enterprise web applications. This is another reason Python is suitable for AI projects.
+
+## Features of Python
+Python is a high-level, interpreted, interactive and object-oriented scripting language. Python is designed to be highly readable. It uses English keywords frequently where as other languages use punctuation, and it has fewer syntactical constructions than other languages. Python's features include the following:
+
+* **Easy-to-learn** - Python was few keywords, simple structure, and a clearly defined syntax. This allows the student to pick up the language quickly. 
+* **Easy-to-read** - Python code is more clearly defined and visible to the eyes. 
+* **Easy-to-maintain** - Python's source code is fairly easy-to-maintain.
+* **A broad standard libary** - Python's bulk of the libary is very portable and cross-platform compatible on UNIX, Windows, and Macintosh.
+* **Interactive Mode** - Python has support for an interactive mode which allows interactive testing and debugging of snippets of code.
+* **Portable** - Python can run on a wide variety of hardware platforms and has the same interface on all platforms.
+* **Extendable** - We can add low-level modules to the Python interpreter. These modules enable programmers to add to or customize their tools to be more efficient.
+* **Databases** - Python provides interfaces to all major commercial databases.
+* **GUI Programming** - Python supports GUI applications that can be created and ported to many system calls, libaries and windows systems, such as Windows MFC, Macintosh, and the X Windows system of Unix.
+* **Scalable** - Python provides a better structure and support for large programs than shell scripting.
+
+### Important features of Python
+Let us now consider the following important features of Python:
+
+* It supports functional and structured programming methods as well as OOP.
+* It can be used as a scripting language or can be compiled to byte-code for building large applications.
+* It provides very high-level dynamic data types and supports dynamic type checking.
+* It supports automatic garbage collection.
+* It can be easily integrated with C, C++, COM, ActiveX, CORBA, and Java.
+
+## Installing Python
+Python distribution is available for a large number of platforms. You need to download only the binary code applicable for your platform and install Python.
+
+If the binary code for your platform is not available, you need a C compiler to compile the source code manually. Compiling the source code offers more flexibility in term of choice of features that you require in your installation. 
+Here is a quick overview of features that you require in your installation.
+
+Here is quick overview of installing Python on various platforms:
+
+1. **Unix and Linux installation**
+
+* Follow these steps to install Python on Unix/Linux machine.
+    * Open a Web browser and go to https://www.python.org/download
+    * Follow the link to download zipped source code available for Unix/Linux.
+    * Download and extract files.
+    * Editing the *Modules/Setup* file if you want to customize some options.
+    * run ./configure script
+    * make
+    * make install
+* This installs Python at the standard location */usr/local/bin* and its libraries at */usr/local/lib/pythonXX* where XX is the version of Python.
+
+2. **Windows Installation**
+
+* Follow these steps to install Python on Windows machine. 
+* Follow the link for the Windows installer *python-XYZ.msi* file  where XYZ is the version you need to install.
+* To use this installer *python-XYZ.msi*, the Windows system must support Microsoft Installer 2.0. Save the installer file to your local machine and then run it to find out if your machine supports MSI..
+* Run the downloaded file. This brings up the Python install wizard, which is really easy to use. Just accept the default settings and wait until the install is finished.
+
+3. **Macintosh Installation**
+
+* If you are on MAC OS X, it is recommended that you use Homebrew to install Python 3. It is a great package installer for Mac OS X and it is really easy to use. If you don't have Homebrew, you can install it using the following command:
+
+```
+$ ruby -e "$(curl -fsSL
+https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+We can update the package manager with the command below:
+
+```
+$ brew update
+```
+
+Now run the following command to install Python 3 on your system:
+
+```
+$ brew install python3
+```
+
+## Setting up PATH
+Programs and other executable files can be in many directories, so operating systems provide a search path that lists the directories that the OS searches for executables.
+
+The path is stored in an environment variable, which is a named string maintained by the operating system. This variable contains information available to the command shell and other programs.
+
+The path variable is named as PATH in Unix or Path in Windows (Unix is case-sensitive, Windows is not).
+
+In Mac OS, the installer handles the path details. To invoke the Python interpreter from any particular directory, you must add the Python directory to your path.
+
+### Setting Path at Unix/Linux
+To add the Python directory to the past for a particular session in Unix:
+
+* In the csh shell
+
+```
+setenv PATH "$PATH:/usr/local/bin/python"
+```
+
+* In the bash shell (Linux)
+
+```
+export ATH = "$PATH:/usr/local/bin/python"
+```
+
+* In the sh or ksh shell
+
+```
+PATH = "$PATH:/usr/local/bin/python"
+```
+
+**Note**: /usr/local/bin/python is the path of the Python directory.
+
+### Setting a Path at Windows
+To add the Python directory to the path for a particular session in Windows:
+
+* At the command prompt
+
+```
+path %path%;C:\Python
+```
+
+**Note**: C:\Python is the path of the Python directory.
+
+## Running Python
+Let us now see the different ways to run Python. The ways are described below:
+
 # Reference
 
 * [Artificial Intelligence - Quick Guide](https://www.tutorialspoint.com/artificial_intelligence/artificial_intelligence_quick_guide.htm#)
