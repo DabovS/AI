@@ -56,7 +56,7 @@ The intelligence is intangible. It is composed of:
 * Perception
 * Linguistic Intelligence
 
-![Figure 1 - Intelligence](01.Intelligence.png)
+![01 Intelligence](https://user-images.githubusercontent.com/124214430/222724983-0eb6649d-36ca-4039-b3f4-60d8169180a2.png)
 
 ### Reasoning
 It is the set of processes that enables us to provide besis for judgement, making decisions, and prediction. There are broadly two types:
@@ -183,7 +183,7 @@ In this section, we will see  the different fields supported by AI.
 ## Cognitive Modeling: Simulating Human Thinking Procedure
 Cognitive modeling is basically the field of study within computer science that edals with the study and simulating the thinking process of human beings. The main task of AI is to make machine think like human. The most important feature of human thinking process is problem solving. That is why more or less cognitive modeling tries to undestand how humans can solve the problems. After that this model can be used for various AI applications such as machine learning, robotics, natural language processing, etc. Following is the diagram of different thinking levels of human brain:
 
-![Figure 02 - Different thinking levels](./02.Brain.png)
+![02 Brain](https://user-images.githubusercontent.com/124214430/222725005-3b196c64-c3db-45b0-9744-5579ac279b21.png)
 
 ## Agent & Environment
 In this section, we will focus on the agent and environment and how these help in Artificial Intelligence.
