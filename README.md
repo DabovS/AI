@@ -61,14 +61,14 @@ The intelligence is intangible. It is composed of:
 ### Reasoning
 It is the set of processes that enables us to provide besis for judgement, making decisions, and prediction. There are broadly two types:
 
-1. **Inductive Reasoning**
+1. [**Inductive Reasoning**](https://www.scribbr.com/methodology/inductive-reasoning/)
 
 * It conducts specific observations to makes broad general statements. 
 * Even if all of the premises are true in a statement, inductive reasoning allows for the conclusion to be false.
 
 **Example**: "Nita is a teacher, Nita is studious. Therefore, All teachers are studious." 
 
-2. **Deductive Reasoning**
+2. [**Deductive Reasoning**](https://www.scribbr.com/methodology/deductive-reasoning/)
 
 * It starts with a general statement and examines the possibilities to reach a specific, logical conclusion.
 * If something is true of a class of things in general, it is also true for all members of that class.
@@ -204,3 +204,5 @@ In contrast, some software agents (software robots or softbots) exist in rich, u
 
 * [Artificial Intelligence - Quick Guide](https://www.tutorialspoint.com/artificial_intelligence/artificial_intelligence_quick_guide.htm#)
 * [Basics of Artificial Intelligence (AI)](https://prutor.ai/ai-with-python-prime-concept/)
+* [Inductive Reasoning](https://www.scribbr.com/methodology/inductive-reasoning/)
+* [What Is Deductive Reasoning?](https://www.scribbr.com/methodology/deductive-reasoning/)
