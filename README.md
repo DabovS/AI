@@ -545,7 +545,7 @@ The techniques for data preprocessing are described below:
 This is the preprocessing technique which is used when we need to convert our numerical values into Boolean values. We can use an inbuilt method to binarize the input data say by using 0.5 as the threshold value in the following way:
 
 ```
-data_binarized = preprocessing.Binarizer(threshold = 0.5).transform
+data_binarized = preprocessing.Binarizer(threshold = 0.5).transform(imput)
 print("\nBinarized data:\n", data_binarized)
 ```
 Now after running the above code we will get the following output, all the values above 0.5(threshold values) would be converter to 1 and al the values below 0.5 would be converted to 0.
