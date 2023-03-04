@@ -333,6 +333,328 @@ path %path%;C:\Python
 ## Running Python
 Let us now see the different ways to run Python. The ways are described below:
 
+
+### Interective Interpreter
+We can start Python from Unix, DOS, or any other system that provides you a command-line interpreter or shell window.
+
+* Enter **python** at the command line.
+* Start coding right away in the interactive interpreter.
+
+```
+$python # Unix/Linux
+```
+Or
+```
+python% # Unix/Linux
+```
+Or
+```
+C:> python # Windows/DOS
+```
+
+Here is the list of all the available command line options:
+
+| S.No. | Option & Description |
+--- | --- |
+| 1 | **-d** It provides debug output. |
+| 2 | **-o** It generates optimized bytecode (resulting in .pyo files) |
+| 3 | **-s** Do not run import site to look for Python paths on startup. |
+| 4 | **-v** Verbose output (detailed trace on import statements). |
+| 5 | **-x** Disables class-based built-in exceptions (just use strings), obsolete starting with version 1.6 |
+| 6 | **-c cmd** Runs Python script sent in as cmd string. | 
+| 7 | **File** Run Python script from given file. |
+
+## Script from the Command-line
+A Python script can be executed at the command line by invoking the interpreter on your application, as in the following:
+
+```
+$python script.py # Unix/Linux
+```
+or
+```
+python% script.py # Unix/Linux
+```
+or,
+```
+C:> python script.py # Windows/DOS
+```
+
+**Note:** Be sure the file permission mode allows execution.
+
+## Integrated Development Environment
+You can run Python from a Graphical User Interface (GUI) environment as well, if you have a GUI application on your system that support Python.
+
+* **Unix** - IDLE is the very first Unix IDE for Python.
+* **Windows** - PythonWin is the first Windows interface for Python and is an IDE with a GUI.
+* **Macintosh** - The Macintosh version of Python along with the IDLE IDE is available from the main website, downloadable as either MacBinary or BinHex'd files.
+
+If you are not able to set up the environment properly, then you can take help from your system admin. Make sure the Python environment is properly set up and working perfectly fine.
+
+We can also use another Python platform called Anaconda. It includes hundreds of popular data science packages and the conda package and virtual environment manager for Windows, Linux, and MacOS. You can download it as per your operating system from the link https://www.anaconda.com/download/.
+
+For this tutorial we are using Python 3.6.3 version on MS Windows.
+
+# Machine Learning
+Learning means the acquisition of knowledge or skills through study or experience. Based on this, we can define machine learning (ML) as follows:
+
+It may be defined as the field of computer science, more specifically an application of artificial intelligence, which provides computer systems the ability to learn with data and improve from experience without being explicitly programmed.
+
+Basically, the main focus of machine learning is to allow the computers learn automatically without human intervention. Now the question arises that how such learning can be started and done? It can be started with the observation of data. The data can be some examples, instruction or some direct experiences too. Then on the basis of this input, machine makes better decisions by looking for some patterns in data. 
+
+## Types of Machine Learning (ML)
+Machine Learning Algorithms helps computer system learn without being explicitly programmed. These algorithms are categorized into supervised or unsupervised. Let us now see a few algorithms:
+
+### Supervised machine learning algorithms
+This is the most commonly used machine learning algorithm. It is called supervised because the process of algorithm learning from the training dataset can be thought of as a teacher supervising the learning process. In this kind of ML algorithm, the possibile outcomes are already known and training data is also labeled with correct answers. It can be understood as follows:
+
+Suppose we have input variables **x** and an output variable **y** and we applied an algorithm to learn the mapping function from the input to output such as:
+
+```
+Y = f(x)
+```
+
+Now, the main goal is to approximate the mapping function so well that when we have new input data (x), we can predict the output variable (Y) for that data.
+
+Mainly supervised learning problems can be divided into the following two kinds of problems:
+
+* **Classification** - A problem is called classification problem when we have the categorized output such as "black", "teaching", "non-teaching", etc.
+* **Regression** - A problem is called regression problem when we have the real value output such as "distance", "kilogram", etc.
+
+Decision tree, random forest, knn, logistic regression are the examples of supervised machine learning algorithms.
+
+### Unsupervised machine learning algorithms
+As the name suggests, these kind of machine learning algorithms do not have any supervisor to provide any sort of guidance. That is why unsupervised machine learning algorithms are closely aligned with what some call true artificial intelligence. It can be understood as follows:
+
+Suppose we have input variable x, then there will be no corresponding output variables as there is in supervised learning algorithms.
+
+In simple words, we can say that in unsupervised learning there will be no correct answer and no teacher for the guidance. Algorithms help to discover interesting patterns in data.
+
+Unsupervised learning problems can be divided into the following two kinds of problems:
+
+* **Clustering** - In clustering problems, we need to discover the inherent groupings in the data. For example, grouping customers by their purchasing behavior.
+* **Association** - A problem is called association problem because such kinds of problem require discovering the rules that describe large portions of our data. For example, finding the customers who buy both **x** and **y**.
+
+K-means for clustering, Apriori algorith, for association are the examples of unsupervised machine learning algorithms.
+
+#### Reinforcement machine learning algorithms
+These kinds of machine learning algorithms are used very less. These algorithms train the system to make specific decisions. Basically, the machine is exposed to an environment where it trains itself continually using the trial and error method. These algorithms learn from past experience and tries to capture the best possible knowledge to make accurate decisions. Markov Decision Process is an example of reinforcement machine learning algorithms.
+
+## Most Common Machine Learning Algorithms
+In this section, we will learn about the most common machine learning algorithms. The algorithms are described below:
+
+### Linear Regression
+It is one of the most well-known algorithms in statistics and machine learning.
+
+Basic concept - Mainly linear regression is a linear model that assumes a linear relationship between the input variables say x and the single output variable say y. In other words, we can say that y can be calculated from a linear combination of the input variables x. The relationship between variables can be established by fitting a best line. 
+
+#### Types of Linear Regression
+Linear regression is of the following two types:
+
+* **Simple linear regression**. A linear regression algorithm is called simple linear regression if it is having only one independent variable.
+* **Multiple linear regression**. A linear regression algorithm is called multiple linear regression if it is having more than one independent variable.
+
+Linear regression is mainly used to estimate the real values based on continuous variable(s). For example, the total sale of a shop in a day, based on real values, can be estimated by linear regression.
+
+### Logic Regression
+It is a classification algorithm and also known as **logit** regression.
+
+Mainly logistic regression is a classification algorithm that is used to estimate the discrete values like 0 or 1, true or false, yes or no based on given set of independent variable. Basically, it predicts the probability hence its output lies in between 0 and 1.
+
+### Decision Tree
+Decision tree is a supervised learning algorithm that is mostly used for classification problems. 
+
+Basically it is a classifier expressed as recursive partition based on the independent variables. Decision tree has nodes which form the rooted tree. Rooted tree is a direccted tree with a node called "root". Root does not have any incoming edges and all the other nodes have one incoming edge. These nodes are called leaves or decision nodes. For example, consider the following decision tree to see whether a person is fit or not.
+
+### Support Vector Machine (SVM)
+It is used for both classification and regression problems. But mainly it is used for classification problems. The main concept of SVM is to plot each data item as a point in n-dimensional space with the value of each feature being the value of a particular coordinate. Here n would be the features we would have. Following is a simple graphical representation to undestand the concept of SVM.
+
+![03 Vectors](https://user-images.githubusercontent.com/124214430/222920396-87f8bf9b-2415-45eb-91fd-26cba15e6d63.png)
+
+In the above diagram, we have two features hence we first need to plot these two variables in two dimensional space where each point has two coordinates, called support vectors. The line splits the data into two different classified groups. This line would be the classifier.
+
+### Naive Bayes
+It is also a classification technique. The logic behind this classification technique is to use Bayes theorem for building classifiers. The assumption is that the predictors are independent. In simple words, it assumes that the presence of a particular feature in a class in unrelated to the presence of any other feature. Below is the equation for Bayes theorem:
+
+```
+$$P\left (\frac{A}{B}\right) = \frac{P\left (\frac{B}{A}\right)P\left (A \right)}{P\left (B \right)}$$
+```
+
+The Naive Bayes model is easy to build and particularly useful for large data sets.
+
+### K-Nearest Neighbors (KNN)
+It is used for both classification and regression of the problems. It is widely used to solve classification problems. The main concept of the algorithm is that it used to store all the available cases and classifies new cases by majority votes of its k neighbors. The case being then assigned to the class which is the most common amongst its K-nearest neighbors, measured by a distance function. The distance function can be Euclidean, Minkowski and Hamming distance. Consider the following to use KNN:
+
+* Computationally KNN are expensive than other algorithms used for classification problems.
+* The normalization of variables needed otherwise higher range variables can bias it.
+* In KNN, we need to work on pre-processing stage like noise removal.
+
+### K-Means Clustering
+As the name suggests, it is used to solve clustering problems. It is basically a type of unsupervised learning. The main logic of K-Means clustering algorithm is to classify the data set through a number of clusters. Follow these stpes to form clusters by K-means:
+
+* K-means picks k number of points for each cluster known as centroids.
+* Now each data point forms a cluster with the closest centroids, i.e., k clusters.
+* Now, it will find the centroids each cluster based on the existing cluster members.
+* We need to repeat these steps until convergence occurs.
+
+### Random Forest
+It is a supervised classification algorithm. The advantage of random forest algorithm is that it can be used for both classification and regression kind of problems. Basically it is the collection of decision trees (i.e., forest) or you can say ensemble of the decision trees. The basic concept of random forest is that each tree gives a classification and the forest chooses the best classifications from them. Followings are the advantages of Random Forest algorithm:
+
+* Random forest clasifier can be used for both classification and regression tasks.
+* They can handle the missing values.
+* It won't over fir the model even if we have more number of trees in the forest. 
+
+# Data Preparation
+We have already studied supervised as well as unsupervised machine learning algorithms. These algorithms require formatted data to start the training process. We must prepare or format data in a certain way so that it can be supplied as an input to ML algorithms. 
+
+This chapter focuses on data preparation for machine learning algorithms.
+
+## Preprocessing the Data
+In our daily life, we deal with lots of data but this data is in raw form. To provide the data as the input of machine learning lagorithms, we need to convert it into a meaningful data. That is where data preprocessing comes into picture. In other simple words, we can say that before providing the dta to the machine learning algorithms w need to preprocess the data.
+
+### Data preprocessing steps
+Follow these steps to preprocess the data in Python:
+
+**Step 1 - Importing the useful packages** - If we are using Python then this would be the first step for converting the data into a certain format, i.e., preprocessing it can be done as follows:
+
+```
+import numpy as np
+import sklearn.preprocessing
+```
+Have we have used the following two packages:
+
+* **NumPy** - Basically NumPy is a general purpose array-processing package designed to efficiently manipulate large multi-dimentional arrays of arbitrary records without sacrificing to much speed for small multi-dimentional arrays.
+* **Sklearn.preprocessing** - This package provides many common utility functions and transformer classes to change raw feature vectors into a representaion that is more suitable for machine learning algorithms.
+
+**Step 2 - Defining sample data** - After importing the packages, we need to define some sample data so that we can apply preprocessing techniques on that data. We will now define the following sample data:
+
+```
+Input_data = np.array([2.1,  -1.9,  5.5],
+                      [-1.5,  2.4   3.5],
+                      [0.5,  -7.9,  5.6],
+                      [5.9,   2.3, -5.8],)
+```
+
+**Step3 - Applying preprocessing technique** - In this step, we need to applyany of the preprocessing techniques.
+
+The following section describes the data preprocessing techniques.
+
+## Techniques for Data Preprocessing
+The techniques for data preprocessing are described below:
+
+### Binarization
+This is the preprocessing technique which is used when we need to convert our numerical values into Boolean values. We can use an inbuilt method to binarize the input data say by using 0.5 as the threshold value in the following way:
+
+```
+data_binarized = preprocessing.Binarizer(threshold = 0.5).transform
+print("\nBinarized data:\n", data_binarized)
+```
+Now after running the above code we will get the following output, all the values above 0.5(threshold values) would be converter to 1 and al the values below 0.5 would be converted to 0.
+
+#### Binarized data
+
+```
+[[ 1.  0.  1.]
+ [ 0.  1.  1.]
+ [ 0.  0.  1.]
+ [ 1.  1.  0.]]
+```
+
+### Mean Removal
+It is another very common preprocessing technique that is used in machine learning. Basically it is used to eliminate the mean from feature vector so that every feature is centered on zero. We can also remove the bias from the feature in the feature vector. For applying mean removal preprocessing technique on the sample data, we can write the Python code shown below. The code will display the Mean and Standard deviation of the input data:
+
+```
+print("Mean = ", input_data.mean(axis = 0))
+print("Std deviation = ", input_)data.std(axis = 0)
+```
+
+We will get the following output after running the above line of code:
+
+```
+         Mean = [1.75      -1.275      2.2]
+Std deviation = [2.71431391 4.20022321 4.69414529]
+```
+
+Now, the code below will remove the Mean and Standard deviation of the input data:
+
+```
+data_scaled = preprocessing.scale(input_data)
+print("Mean =", data_scaled.mean(axis=0))
+print("Std deviation =", data_scaled.std(axis = 0))
+```
+
+We will get the following output after running the above lines of code:
+
+```
+         Mean = [1.110022302e-16 0.0000000e+00 0.0000000e+00]
+Std deviation = [1.              1.            1.]
+```
+
+### Scaling 
+It is another data preprocessing technique that is used to scale the feature vectors. Scaling of feature vectors is needed because the values of every feature can vary between many random values. In other words we can say that scaling is important because we do not want any feature to be synthetically large or small. With the help of the following Python code, we can do the scalling of our input data, i.e. feature vector:
+
+
+#### Min max scaling
+
+```
+data_scaler_minmax = preprocessing.MinMaxScaler(feature_range=(0,1))
+data_scaled_minmax = data_scaler_minmax.fit_transform(input_data)
+print ("\nMin max scaled data:\n", data_scaled_minmax)
+```
+
+We will get the following output after running the above lines of code:
+
+#### Min max scaled data
+
+```
+[ [ 0.48648649  0.58252427  0.99122807]
+  [ 0.          1.          0.81578947]
+  [ 0.27027027  0.          1.        ]
+  [ 1.          0.99029126  0.        ] ]
+```
+
+### Normalization
+It is another data preprocessing technique that is used to modify the feature vectors. Such kind of modification is necessary to measure the feature vectors on a common scale. Followings are two types of normalization which can be used in machine learning:
+
+#### L1 Normalization
+It is also referred to as **Least Absolute Deviations**. This kind of normalization modifies the values so that the sum of the abolute values is always up to 1 in each row it can be implemented on the input data with the help of the following Python code:
+
+```
+# Normalize data
+data_normalized_l1 = preprocessing.normalize(input_data, norm ='l1')
+print("\nL1 normalized data:\n", data_normalized_l1)
+```
+
+The above line of code generates the following output & miuns;
+
+```
+L1 normalized data:
+[[  0.22105236   -0.2           0.57894737]
+ [ -0.2027027     0.342432432   0.47297297]
+ [  0.03571429   -0.54628571    0.4       ]
+ [  0.42142857    0.16428571   -0.41428571]]
+```
+
+#### L2 Normalization
+It is also referred to as **least squares**. This kind of normalization modifies the vlues so that the sum of the squares is always up to 1 in each row. It can be implemented on the input data with the help of the following Python code:
+
+```
+# Normalize data
+data_normalized_l2 = preprocessing.normalize(input_data, norm = '12')
+print("\nL2 normalized data :\n", data_normalized_l2)
+```
+
+The above line of code will generate the following output:
+
+```
+L2 normalized data:
+[[ 0.33946114   -0.30713151     0.88906489]
+ [-0.33325106    0.53320169     0.7775858 ]
+ [ 0.05156558   -0.81473612     0.57753446]
+ [ 0.68706914    0.26784051    -0.6754239 ]]
+```
+
+
+
 # Reference
 
 * [Artificial Intelligence - Quick Guide](https://www.tutorialspoint.com/artificial_intelligence/artificial_intelligence_quick_guide.htm#)
