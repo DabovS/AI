@@ -653,6 +653,482 @@ L2 normalized data:
  [ 0.68706914    0.26784051    -0.6754239 ]]
 ```
 
+### Labeling the data
+We already know that data in acertain format is necessary for machine learning algorithms. Another important requirement is that the data must be labelled properly before sending it as the input of machine learning algorithms. For example, if we talk about classification, there are lot of labels on the data. Those labels are in the form of words, numbers, etc. Functions related to machine learning in **sklearn** expect that the data much have number labels. Hence, if the data is in other form then it must be converted to numbers. The process of transforming the word labels into numerical form is called lable encoding.
+
+#### Label encoding steps
+Follow these steps for encoding the data labels in Python.
+
+**Step 1 - Importing the useful packages**
+If we are using Python then this would be first step for converting the data into certain format, i.e., preprocessing. It can be done as follows:
+
+```
+import numpy as np
+from sklearn import preprocessing
+```
+
+**Step 2- Defining sample labels**
+After importing the packages, we need to define some sample labels so that we can create and train the label encoder. We will now define the following sample labels:
+
+```
+# Sample_input labels
+input_labels = ['red', 'black', 'green', 'black', 'yellow', 'white']
+```
+
+**Step 3 - Creating & training label encoder object
+In this step, we need to create the label encoder and train it. The following Python code will help in doing this:
+
+```
+# Creating the label encoder
+encoder = preprocessing.labelEncoder()
+encoder.fit(input_labels)
+```
+
+Following would be the output after running the above Python code:
+
+```
+LabelEncoder()
+```
+
+**Step 4 - Checking the performance by encoding random order list**
+This step can be used to check the performance by encoding the random ordered list. Following Python code can be written to do the same:
+
+```
+# encoding a set of labels
+text_labels = ['green', 'red', 'black']
+encoded_values = encoder.transform(test_labels)
+print("\nLabels = ", test_labels)
+```
+
+The labels would get printed as follows:
+
+```
+Labels = ['green', 'red', 'black']
+```
+
+Now, can we get the list of encoded values i.e. word labels converted to numbers as follows:
+
+```
+print("Encoded values =", list(envoded_values))
+```
+
+The encoded values would get printed as follows
+
+```
+Encoded values = [1, 2, 0]
+```
+
+**Step 5 - Checking the performance by decoding a random set of numbers**
+This step can be used to check the performance by decoding the random set of numbers. Following Python code can be written to do same:
+
+```
+# decoding a set of values
+endoded_values = [3, 0, 4, 1]
+decoded_list = encoder.inverse_transform(encoded_values)
+print("\nEncoded values =", encoded values)
+```
+
+Now, Encoded values would get printed as follows:
+
+```
+Encoded values = [3, 0, 4, 1]
+print("\nDecoded lavels =", list(decoded_list))
+```
+
+Now, decoded values would get printed as follows:
+
+```
+Decoded labels = ['white', 'black', 'yellow', 'green']
+```
+
+#### Laveled v/s Unlabeled Data
+Unlabeled data mainly consists of the sample of natural or human-created object that can easily be obtained from the world. They include, audio, video, photos, news articles, etc.
+
+On the other hand, labeled data takes a set of unlabeled data and augments each piece of that unlabeled data with some tag or label or class that is meaningful. For example, if we have a photo then the label can be put based on the content of the photo, i.e., it is photo of boy or a girl or animal or anthing else Labeling the data needs human expertise or judgement about a given piece ofunlabeled data.
+
+There are many scenarios where unlabeled data is plentiful and easily obtained but labeled data often requires a human/expert to annotate. Semi-supervised learning attempts to combine labeled and unlabeled data to buld better moodels.
+
+## Classification
+In this chapter, we will focus on implemeting supervised learning - clasiification.
+
+The clasiffication technique or model attempts to get some conclusion from observed values. In classification problem, we have the categorized output such as "Black" or "white" or "Teaching" and "Non-Teaching". While building the classification model, we need to have training dataset that contrains data points and the corresponding labels. For example, if we want to check whether the image is of a car or not. For cheking this, we will build a training dataset having the two classes related to "car" and "no car". Then we need to train the model by using training samples. The classification models are mainly used in face recognition, spam identification, etc.
+
+### Steps for Building a Classifier in Python
+For building a classifier in Python, we are going to use Python 3 and Scikit-learn which is a tool for machine learning. Follow these steps to build a classifier in Python:
+
+**Step 1 - Import Scikit-learn**
+This would be very first step for building a classifier in Python. In this step, we will install a Pyhon package called Scikit-learn which is one of the best machine learning modules in Python. The following command will help us import he package:
+
+```
+Import Sklearn
+```
+
+**Step 2 - Import Scikit-learn's dataset**
+In this step, we can begin working with the dataset for our machine learning model. Here, we are going to use **the** Breast Cancer Wisconsin Diagnostic Database. The dataset includes various information about breast cancer tumors, as well as classification label of **malignat** or **benign**. The dataset has 569 instances, or data, on 569 tumors and includes information on 30 attributs, or features, such as the radius of the tumor, texture, smoothness, and are. With the help of the following command, we can import the Scikit-learn's breast cancer dataset:
+
+```
+from sklearn.datasets import load_breast_cancer
+```
+
+Now, the following command will lload the dataset.
+
+```
+data = load_breast_cancer()
+```
+
+Following is a list of important dictionary keys:
+
+* Classification label names(target_names)
+* The actual labels(target)
+* The attribute/feature names(feature_names)
+* The attribute(data)
+
+Now, with the help of the following command, we can create new variables for each important set of information and assign the data in other words, we can organize the data with the following command:
+
+```
+label_names = data['target_names']
+labels = data['target']
+feature_names = data['feature_names']
+features = data ['data']
+```
+
+Now, to make it clearer we can print the class labels, the first data instance's label, our feature names and the feature's value with the help of the following commands:
+
+```
+print(label_names)
+```
+
+The above command will print the class names which are malignant and benign respectively. It is shown as the output below:
+
+```
+['malignant' 'benign']
+```
+
+Now, the command below will show that they are mapped to binary values 0 and 1. Here 0 represents malignant cancer and 1 represents benign cancer. You will receive the following output:
+
+```
+print(labels[0])
+0
+```
+
+The two commands given below will produce the feature names and fature values.
+
+```
+print(feature_names[0])
+mean radius
+print (features[0])
+[ 1.79900000e+01 1.03800000e+01 1.22800000e+02 1.00100000e+03
+  1.18400000e-01 2.77600000e-01 3.00100000e-01 1.47100000e-01
+  2.41900000e-01 7.87100000e-02 1.09500000e+00 9.05300000e-02
+  8.58900000e+00 1.53400000e+02 6.39900000e-03 4.90400000e-02
+  5.37300000e-02 1.58700000e-02 3.00300000e-02 6.19300000e+03
+  2.53800000e+01 1.73300000e+01 1.84600000e+02 2.01900000e+03
+  1.22000000e-01 6.65600000e-01 7.11900000e-01 2.65400000e-01
+  4.60100000e-01 1.18900000e-01]
+```
+
+From the above output, we can see that the first data instance is a malignant tumor the radius of which is 1.7990000e+01.
+
+**Step 3 - Organizing data into sets**
+In this step, we will divide our data into two parts namely a traning aset and a test set. Spliting the data into these sets is very important because we have to test our model on the unseen data. To split the data into sets, sklearn has a function called the **train_test_split()** function. With the help of the following commands, we can split the data in thease sets:
+
+```
+from sklearn.model_selection import train_test_split
+```
+
+The above command will import the **train_test_split** function from sklearn and the command below will split the data into training and test data. In the example given below, we are using 40 % of the data for testing and remaining data would be used for training the model.
+
+```
+train, test, train_labels, test_labels = train_test_split(features)
+```
+
+**Step 4 - Building the model**
+In this step, we will building our model. We are going to use Naive Bayes algorithm for building the model. Following commands can be used to build the model:
+
+```
+from sklearn.naive_bayes import GaussianNB
+```
+
+The above command will import the GaussianNB module. Now, the following command will help you initialize the model.
+
+```
+gnb = GaussianNB()
+```
+
+We will train the model by filtering it to the data using gnb.fit()
+
+```
+model = gnb.fit(train, train_labels)
+```
+
+**Step 5 - Evaluating the model and its accuracy**
+In this steps, we are going to evaluate the model by making prediction on our test data. Then we will find out its accuracy also. For making predictions, we will use the predict() function. The following command will help you do this:
+
+```
+preds = gnb.predict(test)
+print(preds)
+[1 0 0 1 1 0 0 0 1 1 1 0 1 0 1 0 1 1 1 0 1 1 0 1 1 1 1 1 1
+ 0 1 1 1 1 1 1 1 0 1 0 1 1 0 1 1 1 1 1 1 1 1 0 0 1 1 1 1 0
+ 0 1 1 0 0 1 1 1 0 0 1 1 0 0 1 0 1 1 1 1 1 1 0 1 1 0 0 0 0
+ 0 1 1 1 1 1 1 1 1 0 0 1 0 0 1 0 0 1 1 1 0 1 1 0 1 1 0 0 0
+ 1 1 1 0 0 1 1 0 1 0 0 1 1 0 0 0 1 1 1 0 1 1 0 0 1 0 1 1 0
+ 1 0 0 1 1 1 1 1 1 1 1 0 0 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0
+ 1 1 0 1 1 1 1 1 1 0 0 0 1 1 0 1 0 1 1 1 1 0 1 1 0 1 1 1 0
+ 1 0 0 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 0 1 0 0 1 1 0 1]
+```
+The above series of 0s and 1s are the predicted values for the tumor classes - malignant and benign.
+
+Now, by comparing the two arrays namely **test_labels** and **preds**, we can find out the accuracy of our model. We are going to use the **accuracy_score()** function to determine the accuracy. Consider the following command for this:
+
+```
+from sklearn.metrics import accuracy_score
+print(accuracy_score(test_labels.preds))
+0.951754385965
+```
+
+The result shows that the NaiveBayes classifier is 95.17% accurate.
+
+In this way, with the help of the above steps we can build our classifier in Python.
+
+### Building Classifier in Python
+In this section, we will learn how to build a classifier in Python. 
+
+#### Naive Bayes Classifier
+Naive Bayes is a classification technique used to build classifier using the Bayes theorem. The assumption is that the predictors are independent. In simple words, it assumes that the presence of a particular feature in a class in unrelated to the presence of any other feature. For building Naive Bayes classifier we need to use the python libary called scikit learn. There are three types of Naive Bayes models named **Gaussian, Multinomial, and BBernoulli** under scikit learn package.
+
+To build a Naive Bayes machine learning classifier model, we need the following & minus.
+
+#### Dataset
+We are going to use the dataset named Breast Cance Wisconsin Diagnostic Database. The dataset includes various information about breast cancer tumors, as well asa classification labels of **malignant** or **benign**. The dataset has 569 instances, or data, on 569 tumors and includes information on 30 attributes, or features, such as the radius of the tumor, texture, smoothness, and are. We can import this dataset from sklearn package.
+
+#### NaIve Bayes Model
+For building Naive Bayes classifier, we need Naive Bayes model. As told earlier, there are three types of Naive Bayes models named **Gaussian, Multinomial** and **Bernoulli** under scikit learn package. Here, in the following example we are going to use the Gaussian Naive Bayes model.
+
+By using the above, we are going to build a Naive Bayes machine learning model to use the tumor information to predict whether or not a tumor is malignant or benign.
+
+To begin with, we need to install the sklearn module. It can be done with thehelp of the following command:
+
+```
+Import Sklearn
+```
+
+Now, we need to import the dataset named Breast Cancer Wisconsin Diagnostic Database.
+
+```
+from sklearn.datasets import load_breast_cancer
+```
+
+Now, the following command will load the dataset.
+
+```
+data = load_breast_cancer()
+```
+
+The data can be organized as follows:
+
+```
+label_names = data ['target_names']
+labels = data['target']
+feature_names = data['faeture_names']
+features = data['data']
+```
+Now, to make it cleare we can print the class labels, the first data instance label, our feature names and the features value with the help of the following command:
+
+```
+print(label_names)
+```
+The above command will print the class names which are malignant and benign respectively. It is show as the output below:
+
+```
+['malignant' 'benign']
+```
+
+Now, the command given below will show that they are mapped to binary values 0 and 1. Here 0 represents malignant cancer and 1 represents benign cancer. It is shown as the output below:
+
+```
+print(labels[0])
+0
+```
+The following two commands will produce the feature names and feature values:
+
+```
+print(feature_names[0])
+mean radius
+print(features[0])
+[ 1.79900000e+01 1.03800000e+01 1.22800000e+02 1.00100000e+03
+  1.18400000e-01 2.77600000e-01 3.00100000e-01 1.47100000e-01
+  2.41900000e-01 7.87100000e-02 1.09500000e+00 9.05300000e-02
+  8.58900000e+00 1.53400000e+02 6.39900000e-03 4.90400000e-02
+  5.37300000e-02 1.58700000e-02 3.00300000e-02 6.19300000e+03
+  2.53800000e+01 1.73300000e+01 1.84600000e+02 2.01900000e+03
+  1.22000000e-01 6.65600000e-01 7.11900000e-01 2.65400000e-01
+  4.60100000e-01 1.18900000e-01
+]
+```
+
+From the above output, we can see that the first data instance is a malignant tumor the main radius of which is 1.7990000e+01.
+
+For testing our model on unseen data, we need to split our data into training and testing data. It can be done with the help of the following code:
+
+```
+from sklearn.model_selection import train_test_split
+```
+
+The above command will import the **train_test_split** function from sklearn and the command below will split the data into training and test data. In the below example, we are using 40 % of the data for testing and theremining data would be used for training the model.
+
+```
+train, test, train_labels, test_labels = 
+train_test_split (feature, labels, test_size = 0.40, random_state = 42)
+```
+
+Now, we are building the model with the following command:
+
+```
+from sklearn.naive_bayes import GaussianNB
+```
+
+The above command will import the GaussianNB module. Now, with the command given below we need to initialize the model.
+
+```
+gnb = GaussianNB()
+```
+
+We will train the model by fitting it to the data by using gnb.fit()
+
+```
+model = gnb.fit(train, train_labels)
+```
+
+Now, evaluate the model by making prediction on the test data and it can be done as follows:
+
+```
+preds = gnb.predict(test)
+print(preds)
+[1 0 0 1 1 0 0 0 1 1 1 0 1 0 1 0 1 1 1 0 1 1 0 1 1 1 1 1 1
+ 0 1 1 1 1 1 1 1 0 1 0 1 1 0 1 1 1 1 1 1 1 1 0 0 1 1 1 1 0
+ 0 1 1 0 0 1 1 1 0 0 1 1 0 0 1 0 1 1 1 1 1 1 0 1 1 0 0 0 0
+ 0 1 1 1 1 1 1 1 1 0 0 1 0 0 1 0 0 1 1 1 0 1 1 0 1 1 0 0 0
+ 1 1 1 0 0 1 1 0 1 0 0 1 1 0 0 0 1 1 1 0 1 1 0 0 1 0 1 1 0
+ 1 0 0 1 1 1 1 1 1 1 1 0 0 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0
+ 1 1 0 1 1 1 1 1 1 0 0 0 1 1 0 1 0 1 1 1 1 0 1 1 0 1 1 1 0
+ 1 0 0 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 0 1 0 0 1 1 0 1]
+```
+
+The above series of 0s and 1s are the predicted values for the tumor classes i.e. malignant and benign.
+
+Now, by comparing the two arrays namely **test_labels** and **preds**, we can find out the accuracy of our model. We are going to use the **accuracy_score()** function to determine the accuracy. Consider the following command:
+
+```
+from sklearn.metrics import accuracy_score
+print(accuracy_score(test_labels.preds))
+0.951754385967
+```
+
+The result shows that NaiveBayes classifier is 95.17% accurate.
+
+That was machine learning classifier based on Naive Bayse Gaussian model.
+
+### Support Vector Machine (SVM)
+Basically, Support vector machine (SVM) is a supervised machine learning algorithm that can be used for both regression and classification. The main concept of SVM is to plot each data item as a point in n-dimensional space with the value of each feature being the value of a particular coordinate. Here n would be the features we would have. Following is a simple graphical representation to understand the concept of SVM:
+
+![03 Vectors](https://user-images.githubusercontent.com/124214430/223155706-fc99393b-72fd-4ec8-8436-0f19b2205287.png)
+
+In the above diagram, we have two features. Hence, we first need to plot these two variables in two dimensional space where each point has two coordinates, called support vectors. The line splits the data into two different classified groups. This line would be the classifier.
+
+Here, we are going to build an SVM classifier by using scikit-learn and iris dataset. Sciktlearn libary has the **sklearn.svm** module and provides sklearn.svm.svc for classification. The SVM classifier to predict the class of the iris plant based on 4 features are shown below.
+
+### Dataset
+We will use the iris dataset which contains 3 classes of 50 instance each, where each class refers to a type of iris plant. Each instance has the four features namely sepal length, speal width, petal length and petal width. The SVM classifier to predict the class of the iris plant based on 4 features is shown below.
+
+### Dataset
+We will use the iris dataset which contains 3 classes of 50 instances each, where each class refers to a type of iris plant. Each instance has the four features namely sepal length, sepal width, petal length and petal width. The SVM classifier to predict the class of the iris plant based on 4 features is shown below.
+
+### Kernel
+It is a technique used by SVM. Basically these are the functions which take low-dimensional input space and transform it to a higher dimensional space. It converts non-separable problem to separable problem. The kernel function can be any on amoung linear, polynomial, rbf and sigmoid. In this example, we will use the linear kernel.
+
+Let us now import the following packages:
+
+```
+import pandas as pd
+import numpy as np
+from sklearn import svm, datasets
+import matplotlib.pyplot as plt
+```
+
+Now, load the input data:
+
+```
+iris = datasets.load_iris()
+```
+
+We are taking first two features:
+
+```
+x = iris.data [:, :2]
+y = iris.target
+```
+
+We will plot support vector machine boundaries with original data. We are creating a mesh to plot.
+
+```
+x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+y_min, y_max = X[:, 1].min() - 1, X[:, 1],max() + 1 
+h = (x_max / x_min)/100
+xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
+np.arange(y_min, y_max, h))
+X_plot = np.c_[xx.ravel(), yy.ravel()]
+```
+
+We need to give the value of regularization parameter.
+
+```
+C = 1.0
+```
+
+We need to crate the SVM classifier object.
+
+```
+Svc_classifier = svm_classifier.SVC(kernel='liner',
+C=C, decision_function_shape = 'ovr').fit(X, y)
+Z = svc_classifier.predict(X_plot)
+Z = Z.reshape(xx.shape)
+plt.figure(figsize = (15, 5))
+plt.subplot(121)
+plt.contourf(xx, yy, Z, cmap = plt.cm.tab10, alpha = 0.3)
+plt.scatter(X[:, 0], X[:, 1], c = y, cmap = plt.cm.Set1)
+plt.xlabel['Sepal length']
+plt.ylabel['Sepal width']
+plt.xlim(xx.min(), xx.max())
+plt.title('SVC with linear kernel')
+```
+
+![04 SVC_linear](https://user-images.githubusercontent.com/124214430/223155613-6cf9c68c-c9d3-4e3c-87ba-169a611327fa.png)
+
+## Logistic Regression
+Basically, logistic regression model is one of the members of supervised classification algorithm famiily. Logistic regression measures the reletionship between dependent variables and independent vaiables by estimating the probabilities using a logistic function.
+
+Here, if we talk about dependent and independent variables then dependent variable is the target class variable we are going to predict and on the other side the independent variables are the features we are going to use to predict the target class.
+
+In logistic regression, estimating the probabilities means to predict the likelihood occurance of the event. For example, the shop owner would like to predict the customer who entered into the shop will buty the play station (for example) or not. There would be many features of customer - gender, age, etc. which would be observed by the shop keeper to predict the likelihood occurance, i.e., buying a play station or not. The logistic function is the sigmoid curve that is used to build the function with various parameters.
+
+### Prerequistes
+Before building the classifier using logistic regression, we need to install the Tkinter package on our system, it can be installed from https://docs.python.org/2/libary/thinter.html
+
+Now, with the help of the code given below, we can create a classifier using logistic regression:
+
+First, we will import some packages:
+
+```
+import numpy as np
+from sklearn import linear_model
+import matplolib.pyplot as plt
+```
+
+Now, we need to define the sample data which can be done as follows:
+
+```
+x = np.array
+```
 
 
 # Reference
