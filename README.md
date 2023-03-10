@@ -1127,7 +1127,498 @@ import matplolib.pyplot as plt
 Now, we need to define the sample data which can be done as follows:
 
 ```
-x = np.array
+x = np.array([[2, 4.8], [2.9, 4.7], [2.5, 5], [3.2, 5.5], [6, 5], [7.6, 4],
+              [3.2, 0.9], [2.9, 1.9], [2.4, 3.5], [0.5, 3.4], [1, 4], [0.9, 5.9]])
+y = np.array ([0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3])
+```
+
+Next, we need to create the logistic regression classifier, which can be done as follows:
+
+```
+Classifier_LR = linear_model.logisticRegression(solver = 'liblinear', C = 75)
+```
+
+Last but not the least, we need to train this classifier:
+
+```
+Classifier_LR.fit(x, y)
+```
+
+Now, how we can visualize the output? It can be done by creating a function named Logistic_visualize() :
+
+```
+Def Logistic_visualize(Classifier_LR, X, y):
+  min_x, max_x = X[:, 0].min() - 1.0, X[:, 0].max() + 1.0
+  min_y, max_y = X[:, 1].min() - 1.0, X[:, 1].max() + 1.0
+```
+
+In the above line, we defined the minimum and maximum values X and Y to be used in mesh frid. In addition, we will define the step size for plotting the mesh grid.
+
+```
+mesh_step_size = 0.02
+```
+
+Let us define the mech grid of X and Y values as follows:
+
+```
+x_vals, y_vals = np.meshgrid(np.arrange(min_x), max_x, mesh_step_size),
+                 np.arange(min_y, max_y, mesh_step_size)
+```
+
+With the help of following code, we can run the classifier on the mesh grid:
+
+```
+output = classifier.predict(np.c_[x_vals.ravel(), y_vals.ravel()])
+output = output.reshape(x_vals.shape)
+plt.figure()
+plt.pcolermesh(x_vals, y_vals, output, cmap = plt.cm.gray)
+
+plt.scatter(x[:, 0], X[:, 1], c = y, s = y, s = 75, edgecolors = 'black',
+linewidth=1, cmap = plt.cm.Paired)
+```
+
+The following line of code will specify the boundaries of the plot:
+
+```
+plt.xlim(x_vals.min(), x_vals.max())
+plt.ylim(_vals.min(), y_vals.max())
+plt.xticks((np.arrange(int(X[:, 0].min() - 1), int(X[:, 0].max() + 1), 1.0)))
+plt.yticks((np.arrange(int(X[:, 1].min() - 1), int(X[:, 1].max() + 1), 1.0)))
+plt.show()
+```
+
+Now, after running the code we will get the following output, logistic regression classifier:
+
+![05 Prerequisites](https://user-images.githubusercontent.com/124214430/224377633-ed3850fc-82d0-4c03-8690-3109d66eb299.png)
+
+## Decision Tree Classifier
+A decision tree is basically a binary tree flowchart where each node splits a group of observations according to some feature variable.
+
+Here, we are building a Decision Tree classifier for predicting male or female. We will take a very small data set having 19 samples. These samples would consist of two features - 'height' and 'length of hair'.
+
+### Prerequisite
+For building the following classifier, we need to install **pydotplus** and **graphviz**. Basically, graphviz is a tool for drawing graphics using dot files and **pydotplus** is a module to Graphviz's Dot language. It can be installed with the package manager or pip.
+
+Now, we can build the decision tree classifier with the help of the following Python code:
+
+To begin with, let us import some important libaries as follows:
+
+```
+import pydotplus
+from sklearn.import tree
+from sklearn.datasets import load_iris
+from sklearn.metrics import classification_report
+from sklearn.import cross_validation
+import collections
+```
+
+Now, we need to provide the dataset as follows:
+
+```
+X = [[165, 19], [175 ,32], [136, 35], [174, 65], [141, 28], [176, 15], [131, 32],
+[166, 6], [128, 32], [179,10], [136, 34], [186, 2], [126, 25], [176, 28], [112, 38],
+[169, 9], [171, 36], [116, 25], [196, 25]]
+
+Y = ['Man', 'Woman', 'Woman', 'Man', 'Woman', 'Man', 'Woman', 'Man', 'Woman',
+'Man', 'Woman', 'Man', 'Woman', 'Woman', 'Woman', 'Man', 'Woman', 'Woman', 'Man']
+data_feature_names = ['height', 'length of hair']
+
+X_train, X_test, Y_train, Y_test = cross_validation.train_test_split
+(X, Y, test_size=0.40, random_state=5) 
+```
+
+After providing the dataset, we need to fit the model which can be done as follows:
+
+```
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(X, Y)
+```
+
+Prediction can be made with the help of the following code:
+
+```
+dot_data = tree.export_graphviz(clf, feature_names = data_feature_names,
+           out_file = None, filled = True, rounded = True)
+graph = pydotplus.graph_from_dot_data(dot_data)
+colors = ('orange', 'yellow')
+edges = collections.defaultdict(list)
+
+for edge in graph.get_edge_list():
+edges [edge.get_source()].append(int(edge.get_destination()))
+
+for edge in edges: edges[edge].sort()
+
+for i in range(2):dest = graph.get_node(str(edges[edge][i]))[0]
+dest.set_fillcolor(colors[i])
+graph.write_png('Decisiontree16.png')
+```
+
+It will give the prediction for the above code as **['Woman']** and create the following decision tree:
+
+![06 Prediction_based_on_model](https://user-images.githubusercontent.com/124214430/224377773-a28ec131-40c6-4fb7-8e7b-b07e58e43823.png)
+
+We can change the values of features in prediction to test it.
+
+## Random Forest Classifier
+As we know that ensemble methods are the methods which combine machine learning models into a more powerful machine learning model. Random Forest, a collection of decision trees, is one of them. It is better than single decision tree because while retraining the predictive powers it can reduce over-filtering by averaging the results. Here, we are going to implement the random forest model on scikit learn cancer dataset.
+
+Import the necessary packages:
+
+```
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_breast_cancer
+cancer = load_breast.cancer()
+import matplotlib.pyplot as plt
+import numpy as np
+```
+
+Now, we need to provide the dataset which can be done as follows&minus
+
+```
+cancer = load_breast_cancer()
+X_train, X_test, y_train,
+y_test = train_test_split(cancer.data, cancer.target, random_state = 0)
+```
+
+After providing the dataset, we need to fit the model which can be done as follows:
+
+```
+forest = RandomForestClassifier(n_estimators = 50, random_state = 0)
+forest.fit(X_train, y_train)
+```
+
+Now, get the accuracy on training as well as testing subset: if we will increase the number of estimators then, the accuracy of testing subset would be increased.
+
+```
+print('Accuracy on the training subset:(:.3f)', format(forest.score(X_train, y_train)))
+print('Accuracy on the training subset:(:.3f)', format(forest.score(X_test, y_test)))
+```
+
+### Output
+
+```
+Accuracy on the training subset:(:.3f) 1.0
+Accuracy on the training subset:(:.3f) 0.965034965034965
+```
+
+Now, like the decision tree, random forest has the **feature_importance** module which will provide a better view of feature weight than decision tree. It can be plot and visualize as follows:
+
+```
+n_features = cancer.data.shape[1]
+plt.barh(range(n_features),forest.feature_importances_, align='center')
+plt.yticks(np.arrange(n_features), cancer.feature_names)
+plt.xlabel('Feature Importance')
+plt.ylabel('Feature')
+plt.show()
+```
+
+![07 Feature-Importance](https://user-images.githubusercontent.com/124214430/224377859-c74413f7-5b2e-4d0f-bfa2-1fcce0683b30.png)
+
+## Performance of a classifier
+After implementing a machine learning algorithm, we need to find out how effective the model is. The criteria for measuring the effectivess may be based upon datasets and metric. For evaluating different machine learning algorithms, we can use different performance metrics. For example, suppose if a classifier is used to distinguish between images of different objects, we can use the classification performance metrics such as average accuracy, AUC, etc. In one or other sense, the metric we choose to evaluate our machine learning model is very important because the choice of metrics influences how the performance of a machine learning algorithm is measured and compared. Following are some the metrics:
+
+### Confusion Matrix
+Basically it is used for classification problem where the output can be of two or more types of classes. It is the easiest way to measure the performance of a classifier. A confusion matrix is basically a table with two dimensions namely "Actual" and "Predicted", Both the dimensions have "True Positives (TP)", "True Negatives (TN)", "False Positives (FP)", "False Negatives (FN)".
+
+![08 Confusion-Matrix](https://user-images.githubusercontent.com/124214430/224377908-7596915c-6b60-41eb-abba-04d593c9e2e5.png)
+
+In the confusion matrix above, 1 is for positive class and 0 is for negative class.
+
+Following are the terms associated with Confusion matrix:
+
+* **True Positives** - TPs are the cases when the actual class of data point was 1 and the predicted is also 1.
+* **True Negatives** - TNs are the cases when the actual class of the data point was 0 and the predicted is also 0.
+* **False Positives** - FPs are the cases when the actual class of data point was 0 and the predicted is also 1.
+* **False Negatives** - FNs are the cases when the actual class of the data point was 1 and the predicted is also 0.
+
+### Accuracy
+The confusion matrix itself is not a performance measure as such but almost all the performance matrices are based on the confusion matrix. One of them is accuracy. In classification problems, it may be defined as the number of correct predictions made by the model over all kinds of predictions made. The formula for calculating the accuracy is as follows:
+
+```
+$$Accuracy = \frac{TP+TN}{TP+FP+FN+TN}$$
+```
+
+### Precision
+It is mostly used in document retrievals. It may be defined as how many of the returned docuemnts are correct. Following is the formula for calculating the precision:
+
+```
+$$Precision = \frac{TP}{TP+FP}$$
+```
+
+### Recall or Sensitivity
+It may be defined as how many of the positives do the model return. Following is the formula for calculating the recall/sensitivity of the model:
+
+```
+$$Recall = \frac{TP}{TP+FN}$$
+```
+
+### Specificity
+It may be defined as how many of the negatives do the model return. It is exactly opposite to recall. Following is the formula for calculating the specificity of the model:
+
+```
+$$Specificity = \frac{TN}{TN+FP}$$
+```
+
+## Class Imbalance Problem
+Class imbalance is the scenario where the number of observation belonging to one class is significantly lower than those belonging to the other classes. For example, the problem is prominent in the scenario where we need to identify the rare diseases, fraudulent transaction in bank etc.
+
+### Example of imbalanced classes
+Let us consider an example of fraud detection data set to undestand the concept of imbalanced class:
+
+```
+Total observations = 5000
+Fradulent Observations = 50
+Non-Fradulent Observations = 4950
+Event Rate = 1%
+```
+
+### Solution
+**Balancing the classes'** acts as a solution to imbalanced classes. The main objective of balancing the classes is to either increase the frequency of the minority class or decrease the frequency of the majority class. Following are the approaches to solve the issue of imbalances classes:
+
+### Re-Sampling
+Re-sampling is a series of methods used to reconstruct the sample data sets - both training sets and testing sets. Re-sampling is done to improve the accuracy of model. Following are some re-sampling techniques:
+
+* **Random Under-Sampling**: This technique aims to balance class distribution by randomly eliminating majority class examples. This is done until the majority and minority class instances are balanced out.
+
+```
+Total observations = 5000
+Fradulent Observations = 50
+Non-Fradulent Observations = 4950
+Event Rate = 1%
+```
+
+In this case, we are taking 10% samples without replacement from non-fraud instance and then combine them with the fraud instances:
+
+Non-fraudulent, observations after random under sampling = 10% of 4950 = 495
+
+Total observations after combining them with fradulent observations = 50+495=545
+
+Hence now, the event rate for new dataset after under sampling = 9%
+
+The main advantage of this technique is that it can reduce run time and improve storage. But on the other side, it can discard useful information while reducing the number of training data samples.
+
+* **Random Over-Sampling**: This technique aims to balance class distribution by increasing the number of instances in the minority class by replacing them.
+
+```
+Total observations = 5000
+Fradulent Observations = 50
+Non-Fradulent Observations = 4950
+Event Rate = 1%
+```
+
+In case we are replacing 50 fraudulent observations 30 times then fraudulent observations after replicating the minority class observations would be 1500. And then total observation in the new data after oversampling would be 4950+1500 = 6400. Hence the event rate for the new data set would be 1500/6450 = 23%
+
+The main advantage of this method is that there would be no loss of useful information. But on the other hand, it has the increased chances of over-filtting because it replicates the minority class events.
+
+## Ensemble Techniques
+This methodology basically is used to modify existing classification algorithms to make them appropriate for imbalanced data sets. In this approach we construct several two stage classifier from the original dta and then aggregate their predictions. Random forest classifier is an example of ensemble based classifier. 
+
+# Regression
+Regression is one of the most important statistical and machine learning tools. We would not be wrong to say that the journey of machine learning starts from regression. It may be defined as the parametric technique that allows us to make decisions based upon data by learning the relationship between input and output variables. Here, the output variables dependent on the input variables, are continuous-valued real numbers. In regression, the relationship between input and output variables matters and it helps us in undestanding how the value of the output variable changes with the change of input variable. Regression is frequently used for prediction of prices, economics, variations, and so on.
+
+## Building Regressors in Python
+In this section, we will learn how to build single as well as multivariable regressor.
+
+### Linear Regressor/Single Variable Regressor
+Let us important a few required packages:
+
+```
+import numpy as np
+from sklearn import linear_model
+import sklearn.metrics as sm
+import matplotlib.pyplot as plt
+```
+
+Now, we need to provide the input data and we have saved our data in the file named linear.txt
+
+```
+input = 'D:/ProgramData/linear.txt'
+```
+
+We need to load this data by using the **np.loadtxt** function.
+
+```
+input_data = np.loadtxt(input, delimiter=',')
+X, y = input_data[:, :-1], input_data[:, -1]
+```
+
+The next step would be to train the model. Let us give training and testing samples.
+
+```
+training_samples = int(0.6 * len(X))
+testing_samples = len(X) - num_training
+
+X_train, y_train = X[:training_samples], y[:training_samples]
+
+X_test, y_test = X[training_samples:], y[training_samples:]
+```
+
+Now, we need to create a linear regressor object.
+
+```
+reg_linear = linear_model.linearRegression()
+```
+
+Train the object with the training samples.
+
+```
+reg_linear.fit(X_train, y_train)
+```
+
+We need to do the prediction with the testing data.
+
+```
+y_test_pred = reg_linear.predict(X_test)
+```
+
+Now plot and visualize the data.
+
+```
+plt.scatter(X_test, y_test, color = 'red')
+plt.plot(X_test, y_test_pred, color = 'black', linewidth = 2)
+plt.xticks(())
+plt.yticks(())
+plt.show()
+```
+
+### Output
+
+![09 Linear-Regressor](https://user-images.githubusercontent.com/124214430/224378113-df494022-7e58-4b32-8d10-a12c5b3ab15d.png)
+
+Now, we can compute the performance of our liner regression as follows:
+
+```
+print("Performance of Linear regressor:")
+print("Mean absolute error =", round(sm.mean_absolute_error(y_test, y_test_pred), 2))
+print("Mean squred error =", round(sm.mean_sqared_error(y_test, y_test_pred), 2))
+print("Median absolute error =", round(sm.median_absolute_error(y_test, y_test_pred), 2))
+print("Explain variance score =", round(sm.explained_variance_score(y_test, y_test_pred), 2))
+print("R2 score =", round(sm.r2_score(y_test, y_test_pred), 2))
+```
+
+### Output
+Performance of Linear Regressor:
+
+```
+Mean absolute error = 1.78
+Mean squared error = 3.89
+Median absolute error = 2.01
+Explain variance score = -0.09
+R2 score = -0.09
+```
+
+In the above code, we have used this small data. If you want some big dataset then you can use sklearn.dataset to import bigger dataset.
+
+```
+2,4.82.9,4.72.5,53.2,5.56,57.6,43.2,0.92.9,1.92.4,
+3.50.5,3.41,40.9,5.91.2,2.583.2,5.65.1,1.54.5,
+1.22.3,6.32.1,2.8
+```
+
+### Multivariable Regressor
+First, let us import a few required packages:
+
+```
+import numpy as np
+from sklearn import linear_model
+import sklearn.metrics as sm
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import PolynomialFeatures
+```
+
+Now, we need to provide the input data and we have saved our data in the file named linear.txt
+
+```
+input = 'D:/ProgramData/Mul_linear.txt'
+```
+
+We will load this data by using the **np.loadtxt** function.
+
+```
+input_data = np.loadtxt(input, delimiter=',')
+X, y = input_data[:, :-1], input_data[:, -1]
+```
+
+Th next step would be to train the model, we will give training and testing samples.
+
+```
+training_samples = int(0.6 * len(X))
+testing_samples = len(X) - num_training
+
+X_train, y_train = X[:training_samples], y[:training_samples]
+
+X_test, y_test = X[training_samples:], y[training_samples:]
+```
+
+Now, we need to create a linear regressor object.
+
+```
+reg_linear_mul = linear_model.linearRegression()
+```
+
+Train the object with the training samples.
+
+```
+reg_linear_mul.fit(X_train, y_train)
+```
+
+Now, at last we need to do the prediction with the testing data.
+
+```
+print("Performance of Linear regressor:")
+print("Mean absolute error =", round(sm.mean_absolute_error(y_test, y_test_pred), 2))
+print("Mean squred error =", round(sm.mean_sqared_error(y_test, y_test_pred), 2))
+print("Median absolute error =", round(sm.median_absolute_error(y_test, y_test_pred), 2))
+print("Explain variance score =", round(sm.explained_variance_score(y_test, y_test_pred), 2))
+print("R2 score =", round(sm.r2_score(y_test, y_test_pred), 2))
+```
+
+### Output
+Performance of Linear Regressor:
+
+```
+Mean absolute error = 0.6
+Mean squared error = 0.65
+Median absolute error = 0.41
+Explain variance score = 0.34
+R2 score = 0.33
+```
+
+Now, we will create a polynomial of defree 10 and train the regressor. We will provide the sample data point.
+
+```
+polynomial = PolynomialFeatures(defree = 10)
+X_train_transformed = polynomial.fit_transform(X_train)
+datapoint = [[2.23, 1.35, 1.12]]
+poly_datapoint = polynomial.fit_transform(datapoint)
+
+poly_linear_model = linear_model.linearRegression()
+poly_linear_model.fit(X_train_transformed, y_train)
+print("\nLinear regression :\n", reg_linear_mul.predict(datapoint))
+print("\nPolynomial regression:\n", poly_linear_model.predict(poly_datapoint))
+```
+
+### Output
+Linear regression:
+
+```
+[2.40170462]
+```
+
+Polynomial regression:
+
+```
+[1.8697225]
+```
+
+In the above code, we have used this small data. If you want a big dataset then, you can use sklearn dataset to import a bigger dataset.
+
+```
+2,4.8,1.2,3.22.9,4.7,1.5,3.62.5,5,2.8,23.2,5.5,3.5,2.16,5,
+2,3.27.6,4,1.2,3.23.2,0.9,2.3,1.42.9,5.9,5.6,0.81.2,2.58,
+3.45,1.233.2,5.6,2,3.25.1,1.5,1.2,1.34.5,1.2.4.1,2.32.3,
+6.3,2.5,3.22.1,2.8,1.2,3.6
 ```
 
 
