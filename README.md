@@ -2279,7 +2279,7 @@ Basically, it is a type of unsupervised learning method and a common technique f
 
 For example, the following diagram shows similar kind of data in different clusters:
 
-![Clustering](10.Clustering.png)
+![10 Clustering](https://user-images.githubusercontent.com/124214430/224790647-0fcf5e96-25d5-4c83-9c1b-f2c8f035c4b1.png)
 
 ## Algorithms for Clustering the Data
 Following are a few common algorithms for clustering the data.
@@ -2322,7 +2322,7 @@ plt.scatter(X[:, 0], X[:,1], s = 50);
 plt.show()
 ```
 
-![KMean](11.kmean.png)
+![11 kmean](https://user-images.githubusercontent.com/124214430/224790592-14ba7533-38fd-4cfa-b4df-4595cafbd874.png)
 
 Here, we are initializing kmeans to be the KMeans algorithm, with the required parameter of how many clusters(n_clusters).
 
@@ -2344,7 +2344,7 @@ plt.scatter(centers[:, 0], centers[:, 1], c = 'black', s = 200, alpha = 0.5);
 plt.show()
 ```
 
-![Machine Findings](12.machine_findings.png)
+![12 machine_findings](https://user-images.githubusercontent.com/124214430/224790550-b087364e-4eae-4642-8cd3-94fe5b3c43b6.png)
 
 ### Mean Shift Algorithm
 It is another popular and powerful clustering algorithm used in usupervised learning. It does not make any assumptions hence it is a non-parametric algorithm. It is also called hierarchical clustering or mean shift cluster analysis. Following would be the basic steps of this algorithm:
@@ -2381,7 +2381,7 @@ plt.scatter(X[:,0], X[:,1])
 plt.show()
 ```
 
-![Mean Shift](13.Mean-Shift.png)
+![13 Mean-Shift](https://user-images.githubusercontent.com/124214430/224790510-f7f6b3d8-bd71-44ae-8e02-5e844c51bd00.png)
 
 Now, we need to train the Mean Shift cluster model with the input data.
 
