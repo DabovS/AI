@@ -1927,6 +1927,602 @@ plt.scatter(X[:, 0], X[:,1], s = 50);
 plt.show()
 ```
 
+
+We will load this data by using the **np.loadtxt** function.
+
+```
+input_data = np.loadtxt(input, delimiter=',')
+X, y = input_data[:, :-1], input_data[:, -1]
+```
+
+Th next step would be to train the model, we will give training and testing samples.
+
+```
+training_samples = int(0.6 * len(X))
+testing_samples = len(X) - num_training
+
+X_train, y_train = X[:training_samples], y[:training_samples]
+
+X_test, y_test = X[training_samples:], y[training_samples:]
+```
+
+Now, we need to create a linear regressor object.
+
+```
+reg_linear_mul = linear_model.linearRegression()
+```
+
+Train the object with the training samples.
+
+```
+reg_linear_mul.fit(X_train, y_train)
+```
+
+Now, at last we need to do the prediction with the testing data.
+
+```
+print("Performance of Linear regressor:")
+print("Mean absolute error =", round(sm.mean_absolute_error(y_test, y_test_pred), 2))
+print("Mean squred error =", round(sm.mean_sqared_error(y_test, y_test_pred), 2))
+print("Median absolute error =", round(sm.median_absolute_error(y_test, y_test_pred), 2))
+print("Explain variance score =", round(sm.explained_variance_score(y_test, y_test_pred), 2))
+print("R2 score =", round(sm.r2_score(y_test, y_test_pred), 2))
+```
+
+### Output
+Performance of Linear Regressor:
+
+```
+Mean absolute error = 0.6
+Mean squared error = 0.65
+Median absolute error = 0.41
+Explain variance score = 0.34
+R2 score = 0.33
+```
+
+Now, we will create a polynomial of defree 10 and train the regressor. We will provide the sample data point.
+
+```
+polynomial = PolynomialFeatures(defree = 10)
+X_train_transformed = polynomial.fit_transform(X_train)
+datapoint = [[2.23, 1.35, 1.12]]
+poly_datapoint = polynomial.fit_transform(datapoint)
+
+poly_linear_model = linear_model.linearRegression()
+poly_linear_model.fit(X_train_transformed, y_train)
+print("\nLinear regression :\n", reg_linear_mul.predict(datapoint))
+print("\nPolynomial regression:\n", poly_linear_model.predict(poly_datapoint))
+```
+
+### Output
+Linear regression:
+
+```
+[2.40170462]
+```
+
+Polynomial regression:
+
+```
+[1.8697225]
+```
+
+In the above code, we have used this small data. If you want a big dataset then, you can use sklearn dataset to import a bigger dataset.
+
+```
+2,4.8,1.2,3.22.9,4.7,1.5,3.62.5,5,2.8,23.2,5.5,3.5,2.16,5,
+2,3.27.6,4,1.2,3.23.2,0.9,2.3,1.42.9,5.9,5.6,0.81.2,2.58,
+3.45,1.233.2,5.6,2,3.25.1,1.5,1.2,1.34.5,1.2.4.1,2.32.3,
+6.3,2.5,3.22.1,2.8,1.2,3.6
+```
+
+# Logic Programming
+In this chapter, we will focus logic programming and how it helps in Aritificial Intelligence.
+
+We already know that logic is they study of principles of correct reasoning or simple words it is the strudy of what comes after what. For example, if two statements are tru then we can infer any third statement from it.
+
+### Concept
+Logic Programming is the combination of two words, logic and programming Logic Programming is a programming paradigm in which the problems are expressed as facts and rules by program statements but within a system of formal logic. Just like other programming paradigms like object oriented, functional, declarative, and procedural, etc, it is also a particular way to approach programming.
+
+## How to Solve Problems with Logic Programming
+Logic Programming uses facts and rules for solving the problem. That is why they are called the building blocks of Logic Programming. A goal need to bespecified for every program in logic programming. To understand how a problem can be solved in logic programming, we need to know about the building blocks - Facts and Rules.
+
+### Facts
+Actaully, every logic program needs facts to work with so that it can achieve the given goal. Facts basically are true statements about the program and data. For example, Delhi is the capital of India.
+
+### Rules
+Actually, rules are the constraints which allow us to make conclusions about the problem domain. Rules basically written as logical clauses to express various facts. For example, if we are building any game then all the rules must be defined.
+
+Rules are very important to solve any problem in Logic Programming. Rules are basically logical conclusion which can express the facts. Following is the synatax of rule:
+
+```
+A:-B1,B2,...,B[].
+```
+
+Here, A is the head and B1, B2, ... Bn is the body.
+
+For example - ancestor(X,Y):-father(X,Y)
+
+ancestor(X,Z):-father(X,Y), ancestor(Y,Z).
+
+This an be read as, for every X and Y, if X is the father of Y and Y is an ancestor Z, X is the ancestor of Z. For every X and Y, X is the ancestor of Z, if X is the father of Y and Y is an ancestor of Z.
+
+## Installing Useful Packages
+For starting logic programming in Python, we need to install the fllowing two packages.
+
+### Kanren
+It provides us a way to simplify the way we made code for business logic. It lets us express the logic in term of rules and facts. The following command will help you install kanren:
+
+```
+pip install kanren
+```
+
+### SymPy
+SymPy is a Python libary for symbolic mathematics. It aims to become a full-featured computer algebra system (CAS) while keeping the code as simple as possible in order to be comprehensible and easily extensible. The following command will help you install SymPy:
+
+
+```
+pip install sympy
+```
+
+## Example of Logic Programming
+Following are some examples which can be solved by logic programming.
+
+### Matching mathematical expressions
+Actually we can find the unknown values by using logic programming in a very effective way. The following Python code will help you match a mathematical exprssion.
+
+Consider importing the following packages first:
+
+```
+from kanren import run, var, fact
+from kanren.assoccomm import eq_assoccomm as eq
+from kanren.assoccomm import commutative, associative
+```
+
+We need to define the mathematical operations which we are going to use:
+
+```
+add = 'add'
+mul = 'mul'
+```
+
+Both addition and multiplication are communicative processes. Hence, we need to specify it and this can be done as follows:
+
+```
+fact(commutative, mul)
+fact(commutative, add)
+fact(associative, mul)
+fact(associative, add)
+```
+
+It is compulsory to define variables; this can be done as follows:
+
+```
+a, b = var('a'), var ('b')
+```
+
+We need to match the expression with the original pattern. We have the following original pattern, which is basically (5+a)*b
+
+```
+Original_pattern = (mul, (add, 5, a), b)
+```
+
+We have the following two expressions to match with the original pattern:
+
+```
+exp1 = (mul, 2, (add, 3, 1))
+exp2 = (add, 5, (mul, 8,1))
+```
+
+Output can be printed with the following command:
+
+```
+print(run(0, (a,b), eq(original_pattern, exp1)))
+print(run(0, (a,b), eq(original_pattern, exp2)))
+```
+
+After running this code, we will get the following output:
+
+```
+((3, 2))
+()
+```
+
+The first output represents the values for **a** and **b**. The first expression matched the original pattern and returned the values for **a** and **b** but the second expression did not match the original pattern hence nothing has been returned.
+
+## Checking for Prime Numbers
+With the help of logic programming, we can find the prime numbers from a list of numbers and can also generate prime numbers. The Python code given below will find the prime number from a list of numbers and will also generate the firs 10 prime numbers.
+
+Let us first consider importing the following packages:
+
+```
+from kanren import isvar, run, membero
+from kanren.core import success, fail, goaleval, condeseq, eq, var
+from sympy.ntheory.generate import prime, isprime
+import itertools as it
+```
+
+Now, we will define a function called prime_check which will check the prime numbers based on the given numers as data.
+
+```
+def prime_check(x):
+if isvar(x):
+   return condeseq([(eq, x, p)] for p in map(prime, it.count(1)))
+else:
+   return success if isprime(x) else fail
+```
+
+Now, we need to declare a variable which will be used
+
+```
+x = var()
+print((set(run(0,x,(membero,x,(12,14,15,19,20,21,22,23,29,30,41,44,52,62,65,85)),(prime_check,x)))))
+print((run(10,x,prime_check(X))))
+```
+
+The output of the code will be as follows:
+
+```
+{19, 23, 29, 41}
+(2, 3, 5, 7, 11, 13, 17, 19, 23, 29)
+```
+
+## Solving Puzzles
+Logic programming can be used to solve many problems like 8-puzzles, Zebra puzzle, Sudoku, N-queen, etc. Here we are talking an example of a variant of Zebra puzzle which is as follows:
+
+```
+There are five houses.
+The English man lives in the red house.
+The Swede has a dog.
+The Dane drinks tea.
+The green house is immediately to the left of the white house.
+They drink coffee in the green house.
+The man who smokes Pall Mall has birds.
+In the yellow house they smoke Dunhill.
+In the middle house they drink milk.
+The Norwegian lives in the first house.
+The man who smokes Blend lives in the house next to the house with cats.
+In a house next to the house where they have a horse, they smoke Dunhill.
+The man who smokes Blue Master drinks beer.
+The German smokes Prince.
+The Norwegian lives next to the blue house.
+They drink water in a house next to the whouse where they smoke Blend.
+```
+
+We are solving it for the question **who owns zebra** with help of Python.
+
+Let us import the necessary packages.
+
+```
+from kanren import *
+from kanren.core import lall
+import time
+```
+
+Now, we need to define two functions - **left()** and **next()** to check whose house is left or next to who's house:
+
+```
+def left(q, p, list):
+    return membero((q, p), zip(list, list[1:]))
+    def next(q, , p, list):
+    return conde([left(q, p, list)], [left(p,q, lists)])
+```
+
+Now, we will declare a variable house as follows:
+
+```
+houses = var()
+```
+
+We need to define the rules with the help of lall package as follows:
+
+There are 5 houses:
+
+```
+rules_zebraproblem = lall(
+  (eq, (var(), var(), var(), var(), var()), houses),
+
+  (membero, ('Enhlishman', var(), var(), var(), 'red'), houses),
+  (membero, ('Swedie', var(), var(), 'dog', var()), houses),
+  (membero, ('Dane', var(), 'tea', var(), var()), 'houses),
+  (left,(var(), var(), var(), var()), 'green'),
+  (var(), var(), var(), var(), 'green'),
+  (membero,(var(), var(), 'coffee', var(), 'green'), houses),
+  (membero,(var(), 'Pall Mall', var(), 'birds', var()), houses),
+  (eq,(var(), var(), (var(), var(), 'milk', var(), var()), var(), var()), houses),
+  (eq,(('Norwegian', var(), var(), var(), var()), var(), var(), var(), var()), houses),
+  (next,(var(), 'Blend', var(), var(), var()),
+  (var(), var(), var(), 'cats', var()), houses),
+  (next,(var(), 'Dunhill', var(), var(), var()),
+  (var(), var(), var(), 'horse', var()), houses),
+  (membero, (var(), 'Blue Master', 'beer', var(), var()), houses),
+  (membero,('German', 'Prince', var(), var(), var()), houses),
+  (next,('Norwegian', var(), var(), var(), var()),
+  (var(), var(), var(), var(), 'blue'), houses),
+  (next,(var(), 'Blend', var(), var(), var()),
+  (var(), var(), 'water', var(), var()), houses),
+  (membero,(var(), var(), var(), 'zebra', var()), houses)
+)    
+```
+
+Now, run the solver with the preceding constraints:
+
+```
+solutions = run(0, houses, rules_zebraproblem)
+```
+
+With the help of the following code, we can extract the output from the solver:
+
+```
+output_zebra = [house for house in solutions [0] if 'zebra' in house][0][0]
+```
+
+The followng code will help print the solution:
+
+```
+print ('\n' + output_zebra + 'owns zebra.')
+```
+
+The output of the above code would be as follows:
+
+```
+German owns zebra.
+```
+
+# Unsupervised Learning Clustering
+Unsupervised machine learning algorithms do not have any supervisor to provide any sort of guidance. That is why they are closely aligned with what some call true artificial intelligence. 
+
+In unsupervised learning, there would be no correct answer and no teacher for the guidance. ALgorithms need to discover the interesting pattern in data for learning.
+
+## What is Clustering?
+Basically, it is a type of unsupervised learning method and a common technique for statistical data analysis used in many fields. Clustering mainly is a task of dividing the set of observation into subsets, called clusters, in such a way that observations in the same cluster are similar in one sense and they are dissimilar to the observations in other clusters. In simple owrds, we can say that the main goal of clustering is to group the data on the basis of similarity and dissimilarity.
+
+For example, the following diagram shows similar kind of data in different clusters:
+
+![Clustering](10.Clustering.png)
+
+## Algorithms for Clustering the Data
+Following are a few common algorithms for clustering the data.
+
+### K-Means algorithm
+K-means clustering algorithm is one of the well-known algorithms for clustering the data. We need to assume that the numbers of clusters are already known. This is also called flat clustering. It is an iterative clustering algorithm. The steps given below need to be followed for this algorithm:
+
+**Step 1** - We need to specify the desired number of K subgroups.
+
+**Step 2** - Fix the number of clusters and randomly assign each data point to a cluster. Or in other words we need to classify our data based on the number of clusters.
+
+In this step, cluster centroids should be computed.
+
+As this is an iterative algorithm, we need to update the locations of K centroids with every iteration until we find the global optima or in other words the centroids reach at their optimal locations.
+
+The following code will help in implementing K-means clustering algorithm in Python. We are going to use the Scikit-learn module.
+
+Let us import the necessary packages:
+
+```
+import matplotlib.pyplot as plt
+import seaborn as sns; sns.set()
+import numpy as np
+from sklearn.cluster import KMeans
+```
+
+The following line of code will help in generating the two-dimensional dataset, containing four blobs, by using **make_blob** from the **sklearn.dataset** package.
+
+```
+from sklearn.datasets.samples_generator import make_blobs
+
+X, y_true = make_blobs(n_samples = 500, centers = 4,
+            cluster_std = 0.40, random_state = 0 )
+```
+
+We can visualize the dataset by using the following code:
+
+```
+plt.scatter(X[:, 0], X[:,1], s = 50);
+plt.show()
+```
+
+![KMean](11.kmean.png)
+
+Here, we are initializing kmeans to be the KMeans algorithm, with the required parameter of how many clusters(n_clusters).
+
+We need to train the K-means model with the input data.
+
+```
+kmeans.fit(X)
+y_kmeans = kmeans.predict(X)
+plt.scatter(X[:, 0], X[:, 1], c = y_kmeans, s = 50, cmap = 'viridis')
+
+
+centers = kmeans.cluster_centers_
+```
+
+The code givin below will help us plot and visualize the machine's findings based on our data, and the fitment according to the number of clusters that are to be found.
+
+```
+plt.scatter(centers[:, 0], centers[:, 1], c = 'black', s = 200, alpha = 0.5);
+plt.show()
+```
+
+![Machine Findings](12.machine_findings.png)
+
+### Mean Shift Algorithm
+It is another popular and powerful clustering algorithm used in usupervised learning. It does not make any assumptions hence it is a non-parametric algorithm. It is also called hierarchical clustering or mean shift cluster analysis. Following would be the basic steps of this algorithm:
+
+* First of all, we need to start with the data points assigned to a cluster of their own.
+* Now, it computes the centroids and update the location of new centroids.
+* By repeating this process, we move closer the peak of cluster i.e. towards the region of higher density.
+* This algorithm stops at the stage where centroids do not move anymore.
+
+With the help of following code we are implementing Mean Shift clustering algorithm in Python. We are going to use Scikit-learn module.
+
+Let us import the necessary packages:
+
+```
+import numpy as np
+from sklearn.cluster import MeanShift
+import matplotlib.pyplot as plt
+from matplotlib import style
+style.use("ggplot")
+```
+
+The following code will help in generating the two-dimensional dataset, containing four blobs, by using **make_blob** from the **sklearn.dataset** package.
+
+```
+from sklearn.datasets.simples_generator import make_blobs
+```
+
+We can visualize the dataset with the following code
+
+```
+center = [[2,2],[4,5],[3,10]]
+X, _ = make_blobs(n_samples = 500, centers = centers, cluster_std = 1)
+plt.scatter(X[:,0], X[:,1])
+plt.show()
+```
+
+![Mean Shift](13.Mean-Shift.png)
+
+Now, we need to train the Mean Shift cluster model with the input data.
+
+```
+ms = MeanShift()
+ms.fit(X)
+labels = ms.labels_
+cluster_centers = ms.cluster_centers_
+```
+
+The following code will print the cluster centers and the expected numbr of cluster as perthe input data:
+
+```
+print(cluster_centers)
+n_clusters_ = len(np.unique(labels))
+print("Estimated cluster:", n_clusters_)
+[[3.230005036 3.84771893]
+[ 3.02057451 9.88928991]]
+Estimated cluster: 2
+```
+
+The code given below will help plot and visualize the machine's findings based on our data, and the fitment according to the number of clusters that are to be found.
+
+```
+colors = 10*['r.,','g.','b.','c.','k.','y.','m.']
+    for i in range(len(X)):
+    plt.plot(X[i][0], X[i][1], colors(labels[i]), markersize = 10)
+plt.scatter(cluster_centers[:, 0], cluster_centers[:,1],
+    marker = "x",color = 'k', s = 150, linewidths = 5, zorder = 10)
+plt.show()
+```
+
+![14 Visualize-Mean-Shift](https://user-images.githubusercontent.com/124214430/224789571-5eac1ecc-ddb4-4576-8172-d1c1fcd959f1.png)
+
+## Measuring the Clusterin Performance
+The real world data is not naturally organized into number of distinctive clusters. Due to this reason, it not easy to visualize and draw interferences. That is why we need to measure the clustering performance as well as its quality. It can be done withthe help of silhouette analysis.
+
+### Silhouette Analysis
+This method can be used to check the quality of clustering by measuring the distance between the clusters. Basically, it provides a way to assess the parameters like number of clusters by giving a silhouette score. This score is a metric that measures how close each point in one cluster is to the points in the neighboring clusters.
+
+### Analysis of silhouette score
+This method can be used to check the quality of clustering by measuring the distance between the clusters. Basically, it provides a way to assess the parameters like number of clusters by giving a silhouette score. This score is a metric that measures how close each point in one cluster is to the point in the neighboring clusters.
+
+### Analysis of silhouette score
+The score has range of [-1, 1]. Following is the analysis of the score:
+
+* **Score of +1**: Score near +1 indicates that the sample is far away from the neighboring cluster,
+* **Score of 0**: Score 0 indicates that the sample is on or very close to the decision boundary between two neighboring clusters.
+* **Score of -1**: Negative score indicates that the samples have been assigned to the wrong clusters.
+
+## Calculating Silhouette Score
+In this section, we will learn how to calculate the silhouette score.
+
+Silhouette score can be calculated by using the formula:
+
+```
+$$silhouette score =\frac{\left (p-q\right)}{max\left (p,q\right)}$$
+```
+
+Here, p is the mean distance to the points in the nearest cluster that the data point is not a part of. And, q is the mean intra-cluster distance to all the points in its own cluster.
+
+For finding the optimal number of clusters, we need to run the clustering algorithm again by importing the **metrics** module from the **sklearn** package. In the following example, we will run the K-means clustering algorithm to find the optimal number of clusters:
+
+Import the necessary packages as shown:
+
+```
+import matplotlib.pyplot as plt
+import seaborn as sns; sns.set()
+import numpy as np
+from sklearn.cluster import KMMeans
+```
+
+With the help of the following code, we will generate the two-dimensional dataset, containing four blobs, by using **make_blob** from the **sklearn.dataset** package.
+
+```
+from sklearn.datasets.samples_generator import make_blobs
+X, y_true = make_blobs(n_samples = 500, centers = 4, cluster_std = 0.50, random_state = 0)
+```
+
+Initiaze the variables as shown:
+
+```
+score = []
+values = np.arange(2, 10)
+```
+
+We need to iterate the K-means model through all the values and also need to train it witht he input data.
+
+```
+for num_clusters in values:
+kmeans = KMeans(init = 'k-means++', n_clusters = num_clusters, n_init = 10)
+kmeans.fit(X)
+```
+
+Now estimate the silhouette score for the current clustering model using the Euclidean distance metric:
+
+```
+score = metrics.silhouette_score(X, kmeans.labels_,
+metric = 'euclidean', sample_size = len(X))
+```
+
+The following line of code will help in displaying the number of clusters as well as Silhouette score.
+
+```
+print("\nNumber of clusters =", num_clusters)
+print("Solhouette score =", score)
+scores.append(score)
+```
+
+You will recieve the following output:
+
+```
+Number of clusters = 9
+Silhouette score = 0.340391138371
+
+num_clusters = np.argmax(scores) + values[0]
+print('\nOptimal number of clusters =', num_clusters)
+```
+
+Now, the output for optimal number of clusters would be as follows:
+
+```
+Optimal number of clusters = 2
+```
+
+## Finding Nearest Neighbors
+If we want to build recommender systems such as a movie recommender system then we need to understand the concept of finding the nearest neighbors. It is because the recommender system utilizes the concept of nearest neighbors.
+
+The **concept of finding nearest neighhbors** may be defined as the process of finding the closest point to the input point from the given dataset. The main use of this KNN)K-nearest neighbors) algorithm is to build classification system that classify a data point on the proximity of the input data point to various classes.
+
+The Python code given below helps in finding the K-nearest neighbors of a given data set:
+
+Import the necessary packages as shown below. Here, we are using the **NearestNeighbors** module from the **sklearn** package:
+
+```
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.neighbors import NearestNeighbors
+```
+
+
 # Reference
 
 * [Artificial Intelligence - Quick Guide](https://www.tutorialspoint.com/artificial_intelligence/artificial_intelligence_quick_guide.htm#)
