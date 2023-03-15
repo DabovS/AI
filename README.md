@@ -2549,7 +2549,7 @@ plt.title('Input data')
 plt.scatter(A[:,0], A[:,1], marker = 'o', s = 100, color = 'black)
 ```
 
-![Finding Nearest Neighbors](15.Knearest-neighbor.png)
+![15 Knearest-neighbor](https://user-images.githubusercontent.com/124214430/225270248-d6caf270-9de5-42f9-a05b-0d43288b7f8f.png)
 
 Now, we need to build the K Nearest Neighbor. The object also needs to be trained:
 
@@ -2579,7 +2579,7 @@ plt.scatter(test_data[0], test_data[1],
 plt.show()
 ```
 
-![Finding Nearest Neighbors](16.Knearest-neighbor-found.png)
+![16 Knearest-neighbor-found](https://user-images.githubusercontent.com/124214430/225270200-450cbcbe-7bdc-449c-b08a-f300241b8c56.png)
 
 ### Output
 
@@ -2636,12 +2636,12 @@ Image_display(0)
 **Image_display(0)**
 Image of 0 is displayed as follows:
 
-![Image_display - 0](17.KNeighborsClassifier.png)
+![17 KNeighborsClassifier](https://user-images.githubusercontent.com/124214430/225269926-ef20ebe2-7283-4c01-a0f6-5c258fc86712.png)
 
 **Image_display(9)**
-Image of 0-3 is displayed as follows:
+Image of 9 is displayed as follows:
 
-![Image_display - 9](18.KNeighborsClassifier.png)
+![18 KNeighborsClassifier](https://user-images.githubusercontent.com/124214430/225269779-e1681a91-3d24-4cd2-9c8a-579594b7449f.png)
 
 **digit_keys()**
 Now, we need to create the training and testing data set and supply testing data set to the KNN classifiers.
@@ -2672,7 +2672,7 @@ Image_display(1725)
 **Image_display(6)**
 Image of 6 is displayed as follows:
 
-![Image_display - 6](19.KNeighborsClassifier.png)
+![19 KNeighborsClassifier](https://user-images.githubusercontent.com/124214430/225269668-e92cd3ba-b79f-4d89-84a7-ef607ec06f4d.png)
 
 Now we predict the test data as follows:
 
@@ -2958,7 +2958,7 @@ Upon execution of the following code, we can draw our output in the form of a tr
 output.draw()
 ```
 
-![Chunking Down](20.Chunking.Down.png)
+![20 Chunking Down](https://user-images.githubusercontent.com/124214430/225269546-dbbb7067-4d3e-46f4-bae8-f4547e2af0fb.png)
 
 ## Bag of Word (BoW) Model
 Bag of Word (BoW), a model in natural language processing, is basically used to extract the features from text so that the text can be used in modeling such that in machine learning algorithms.
