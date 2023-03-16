@@ -3176,6 +3176,491 @@ if __name ==' __main__';
 Create the training data using labeled names (male as well as female) available in NLTK:
 
 
+```
+male_list = [(name, 'male') for name in maes.words('male.txt')]
+female_list = [(name, 'female') for name in names.words('female.txt')]
+data = (male_list + female_list)
+
+random.seed(5)
+random.shuffle(data)
+```
+
+Now, test data will be created as follows:
+
+```
+namesInput = ['Rajesh', 'Gaurav', 'Swati', 'Shubiha']
+```
+
+Define the number of samples used for train and test with the following code
+
+```
+train_sample = int(0.8 * len(data))
+```
+
+Now, we need to iterate through different lengths so that the accuracy can be compared:
+
+```
+for i in range(1, 6):
+    print('\nNumber of end letters: ', i)
+    features = [(extract_features(n, i), gender) for (n, gender) in data]
+    train_data, test_data = features[:train_sample],
+features[train_sample:]
+    classifier = NaiveByesClassifier.train(train_data)
+```
+
+The accuracy of the classifier can be computed as follows:
+
+```
+accuracy_classifier = round(100 * nltk_accuracy(classifier, test_data), 2)
+  print('Accuracy = ' + str(accuracy_classifier) + '&')
+```
+
+Now, we can predit the output:
+
+```
+for name in nameInput:
+  print(name, '==>', classifier.classifier.classify(extract_features(name, i)))
+```
+
+The above program will generate the following output:
+
+```
+Number of end letters: 1
+Accuracy = 74.7%
+Rajesh -> female
+Gaurav -> male
+Swati -> female
+Shubha -> female
+
+Number of end letters: 2
+Accuracy = 78.79%
+Rajesh -> male
+Gaurav -> male
+Swati -> female
+Shubha -> female
+
+Number of end letters: 3
+Accuracy = 77.22%
+Rajesh -> male
+Gaurav -> female
+Swati -> female
+Shubha -> female
+
+Number of end letters: 4
+Accuracy = 69.98%
+Rajesh -> female
+Gaurav -> female
+Swati -> female
+Shubha -> female
+
+Number of end letters: 5
+Accuracy = 64.63%
+Rajesh -> female
+Gaurav -> female
+Swati -> female
+Shubha -> female
+```
+
+In the above output, we can see that accuracy in maximum number of end letters are two and it is decreasing as the number of end letters are increasing.
+
+## Topic Modeling: Identifying Patterns in Text Data
+We knoww that generally documents are grouped into topics. Sometimes we need to identify the patterns in a text that correspond to a particular topic. The technique of doing this is called topic modeling is a technique to uncover abstract themes or hidden structure in the given set of documents.
+
+We can use the topic modeling technique in the following scenarios:
+
+**Text Classification**
+With the help of topic modeling, classification can be improved because it groups similar words together rather than using each word separately as a feature.
+
+**Recommender Systems**
+With the help of topic modeling, we can build the recommender systems by using similarity measures.
+
+## Algorithms for Topic Modeling
+Topic modeling can be implemented by using algorithms. The algorithms are as follows:
+
+**Latent Direchlet Allocation(LDA)**
+This algorithm is the most popular for topic modeling. It uses the probablistic graphical models for implementing topic modeling. We need to import gensim package in Python for using LDA algorithm.
+
+**Latent Semantic Analysis(LDA) or Latent Semantic Indexing(LSI)**
+The algorithm is based upon Linear Algebra. Basically it uses the concept of SVD (Singular Value Decomposition) on the document term matrix.
+
+**Non-Negative Matrix Factorization (NMF)**
+It is also based upon Linear Algebra.
+
+All of the above mentioned algorithms for topic modeling would have the **number of topics** as a parameter, **Document-Word Matrix** as an input and **WTM(Word Topic Matrix)** & **TDM(Topic Document Matrix)** as output.
+
+# Analyzing Time Series Data
+Predicting the next in a given input sequence is another important concept in machine learning. This chapter gives you a detailed explanation about analyzing time series data.
+
+## Introduction
+Time series data means the data that is in a series of particular time intervals. If we want to build sequence prediction in machine learning, then we have to deal with sequential data and time. Series data is an abstract of sequential data. Ordering of data is an important feature of sequential data.
+
+**Basic Concept of Sequence Analysis of Time Series Analysis**
+Sequence analysis or time series analysis to predict the next in a given input sequence based on the previously observed. The prediction can be of anything that may come next a symbol, a number, next day weather, next term in speech etc. Sequence analysis can be very handly in applications such as stock market analysis, wheather forecasting, and product recommendations.
+
+**Example**:
+Consider the following example to undestand sequence prediction. Here **A, B, C, D** are the given values and you have to predict the value **E** using a Sequence Prediction Model.
+
+![Sequence Analysis](21.Sequence.Prediction.Model.png)
+
+## Installing Useful Packages
+For time series data analysis using Python, we need to install the following packages:
+
+**Pandas**
+Pandas is an open source BSD-licensed libary which provides high-performance, ease of data structure usage and data analysis tools for Python. You can install Pandas with the help of the following command:
+
+```
+pip install pandas
+```
+
+If you are using Anaconda and want to install by using the **conda** package manager, then you can use the following command:
+
+```
+conda install -c anaconda pandas
+```
+
+## hmmlearn
+It is an open source BSD-licensed libary which consists of simple algorithms and models to learn Hidden Markov Models(HMM) in Pyhon. You can install it with the help of the following command:
+
+```
+pip install hmmlearn
+```
+
+If you are using Anaconda and want to install by using the **conda** package manager, then you can use the following command:
+
+```
+conda install -c omnia hmmlearn
+```
+
+### PyStruct
+It is a structured learning and prediction libary. Learning algorithms implemented in PyStruct have names such as conditional random fields(CRF), Maximum-Margin Markov Random Networks (M3N) or structural support vector machines. You can install it with the help of the following command:
+
+```
+pip install pystruct
+```
+
+### CVXOPT
+It is used for convex optimization based on Python programming language. It is also a free software package. You can install it with the help of following command:
+
+```
+conda install -c anaconda cvdoxt
+```
+
+## Pandas: Handling, Slicing and Extracting Statistic from Time Series Data
+Pandas is a very useful tool if you have to work with time series data. With the help of Pandas, you can perform the following:
+
+* Create a range of dates by using the **pd.date_range** package
+* Index pandas with dates by using the **pd.Series** package
+* Perform re-sampling by using the **ts.resample** package
+* Change the frequency
+
+**Example**
+The following example shows you handling and slicing the time serires data by using Pandas. Note that here we are using the Monthly Arctic Oscillation data, which can be downloaded from monthly.ao.inde.b50.current.ascii and can be converted to text format for our use.
+
+**Handling time series data**
+For handling time series data, you will have to perform the following steps:
+
+The first step involves importing the following packages:
+
+```
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+```
+
+Next, define a function which will read the data from the input file, as shown in the code given below:
+
+```
+def read_data(input_file):
+    input_data = np.loadtxt(input_file, delimiter = None)
+```
+
+Now, convert this data to time series. For this, create the range of  dates of our time series. In this example, we keep one month as frequency of data. Our file is having the data which starts from January 1950.
+
+```
+dates = pd.date_range('1950-1', periods = input_data.shape[0], freq = 'M')
+```
+
+In this step, we create the time series data with the help of Pandas Serires, as shown below:
+
+```
+output - pd.Series(input_data[:, index], index = dates)
+return output
+
+if __name ==' __main__':
+```
+
+Enter the path of the input file as shown here:
+
+```
+input_file = "/Users/admin/Ai.txt"
+```
+
+Now, convert the column to timeseries format, as shown here:
+
+```
+timeseries = read_data(input_file)
+```
+
+Finally, plot and visualiza the data, using the commands shown:
+
+```
+plt.figure()
+timeseries.plot()
+plt.show()
+```
+
+You will boserver the plots as shown in the following images:
+
+![Plot](22.Plots.png)
+
+![Output](23.Plots.png)
+
+### Slicing time series data
+Slicing involves retrieving only some part of the time series data. As a part of example, we are slicing the data only from 1980 to 1990. Observe the following code that performs this task
+
+```
+timeseries['1890':'1990'].plot()
+  <matplotlib.axes_subplots.AxesSubplot at 0xa0e4b00>
+
+plt.show()
+```
+
+When you run the code for slicing the time series data, you can observe the following graph as shown in the image here:
+
+![Output](24.Plots-2.png)
+
+## Extracting Statistic from Time Series Data
+You will have to extract some statistics from a given data, in cases where you need to draw some important conclusion. Mean, variance, correlation, maximum value, and minimum value are some of such statistics. You can use the following code if you want to extract such statistics from a given time series data:
+
+### Mean
+You can use the **mean()** function, for finding the mean as shown here:
+
+```
+timeseries.mean()
+```
+
+Then the output that you observe for the example discussed is:
+
+```
+-0.1114312816238671
+```
+
+### Maximum
+You can use the **max()** function, for finding maximum as shown here:
+
+```
+timeseries.max()
+```
+
+Then the output that you will observe for the example disscused is:
+
+```
+3.49529999999999999
+```
+
+### Minimum
+You can use the min() function, for finding minimum, as shown here:
+
+```
+timeseries.min()
+```
+
+Then the output that you will observe for example discussed is:
+
+```
+-4.265699999999999999
+```
+
+### Getting everything at once
+If you want to calculate all statistics at a time, you can use the **describe()** function as shown here:
+
+```
+timeseries.describe()
+```
+
+Then the output that you will observe for the example disscussed is:
+
+```
+count   817.00000
+mean    -0.111431
+std      1.003151
+min     -4.265700
+25%     -0.649430
+50%     -0.042744
+75%      0.475720
+max      3.495300
+dtype:  float64
+```
+
+### Re-sampling
+You can resample the data to a different time frequency. The two parameters for performing re-sampling are:
+
+* Time period
+* Method
+
+### Re-sampling with mean()
+You can use the following code to resample the data with the mean() method, which is the deafult method:
+
+```
+timeseries_mm = timeseries.resample("A").mean()
+timeseries_mm.plot(style = 'g--')
+plt.show()
+```
+
+![re-sampling with mean()](24.re-sampling-mean.png)
+
+### Re-sampling with median()
+You can use the following code to resample the data using the **median()** method:
+
+```
+timseries_mm = timseries.resample("A").median()
+timeserries_mm.plot()
+plot.show()
+```
+
+Then, you can observe the following graph as the output of re-sampling with mean():
+
+![re-sampling with median()](24.re-sampling-median.png)
+
+### Rolling Mean
+You can use the following code to calculate the rolling (moving) mean:
+
+```
+timeseries.rolling(windows = 12, center = False).mean().plot(style = 'g')
+plt.show()
+```
+
+Then, you can observe the following graph as the output of the rolling (moving) mean:
+
+![rolling mean](25.rolling-mean.png)
+
+## Analyzing Sequential Data by Hidden Markov Model (HMM)
+HMM is a statisstic model which is widely used for daya having continuation and extensibility such as time serires stock market analysis, health checkup, and speech recognition. This section deals in detail with analyzign sequential data using Hidden Markov Model (HMM),
+
+### Hidden Markov Model (HMM)
+HMM is a stochastic model which is built upon the concept of Markov chain based on the assumption that probability of future stats depends only on the current process state rather any state that preceded it. For example, when tossing a coin, we cannot say that the result of the fifth toss will be a head. This is because a coin does not have any memory and the next result does not depend on the previous result.
+
+Mathematically, HMM consists of the following variables:
+
+**States (S)**
+It isa set of hidden or latent states present in a HMM. It is denoted by S.
+
+**Output Symbols (O)**
+It is a set of possible output symbols present in a HMM. It is denoted by 0.
+
+**State Transition Probability Matrix (A)**
+It is the probability of making transition from one state to each of the other state. It is denoted by A.
+
+**Observation Emission Probability Matrix (B)**
+It is the probability of emitting/observing a symbol at particular state. It is denoted B.
+
+**Prior Probability Matrix (Pi)**
+It is the probability of starting at a particular state from various state of the system. It is denoted by Pi.
+
+Hence, a HMM may be defined as sigma = (S,O,A,B, pi), where,
+
+* S = {s1, s2, ... Sn} is a set of N possible states,
+* O = {o1, o2, ... om} is a set of M possible observation symbols,
+* A is an NxN state Transition Probability Matrix (TPM),
+* B is an NxM observation or Emission Probability Matrix (EPM),
+* pi is an N dimensional initial state probability distribution vector.
+
+## Example: Analysis of Stock Market data
+In this example, we are going to analyze the dataof stock market, step by step, to get an idea about how the HMM works with sequential or time series data. Please note that we are implementing the example in Python.
+
+Import the necessary package as shown below:
+
+```
+import datetime
+import warnings
+```
+
+Now, use the stock market data from the **matpotlib.finance** package, as shown here:
+
+```
+import numpy as np
+from matplotlb import cm, pyplot as plt
+from matplotlib.dates import YearLocator, MonthLocator
+try:
+    from matplotlib.finance import quotes_historical_yahoo_och1
+except ImportError:
+    from matplotlib.finance import (
+      quotes_historical_yahoo as quotes_historical_yahoo_och1)
+from hmmlearn.hmm import GaussianHMM
+```
+
+Load the data from a start date and end date, i.e., between two specific dates as shown here:
+
+```
+start_date = datetime.date(1995, 10, 10)
+end_fate = datetime.date(2015, 4, 25)
+quotes = quotes_historical_yahoo_och1('INTC', start_date, end_date)
+```
+
+In this step, we will extract the closing quotes every day. For this, use the following command:
+
+```
+volumes = np.array([quote[5] for quote in quotes])[1:]
+```
+
+Here, take the percentage difference of closing stock prices, using the codes shown below:
+
+```
+diff_percentages = 100.0 * np.diff(closing_quotes) / closing_quotes[:-]
+dates = np.array([quote[0] for quote in quotes], dtype = np.int)[1:]
+training_data = np.column_stack([diff_percentages,volumes])
+```
+
+In this step, create and train the Gaussian HMM. For this, use the following code:
+
+```
+hmm = GaussianHMM(n_components = 7, covariance_type = 'diag', n_iter = 1000)
+with warnings.catch_warnings():
+    warnings.simplefilter('ignore')
+    hmm.fit(training_data)
+```
+
+Now, generate data using the HMM model, using the commands shown:
+
+```
+plt.figure()
+plt.title('Difference percentages')
+plt.plot(np.arrange(num_samples), samples [:,0, c='black'])
+```
+
+Use the following code to plot and visualize the volume of shares trades:
+
+```
+plt.figrue()
+plt.title('Volume of shares')
+plt.plot(np.arrange(num_samples), samples[:, 1], c = 'black')
+```
+
+Use the following code to plot and visualize thevolume of shares traded:
+
+```
+plt.figure()
+plt.title('Volume of shartes')
+plt.plot(np.arramge(num_samples), samples[:,1], c = 'blacl')
+plt.ylim(ymin = 0)
+plt.show()
+```
+
+# Speech Recognition
+In this chapter, we will learn about speech recognition using AI with Python.
+
+Speech is the most basic means of adult human communication. The basic goal of speech processing is to provide an interaction between a human and a machine. 
+
+Speech processing system has mainly three tasks:
+
+* **Fist**, speech recognition that allows the machine to cats the words, phrases and sentences we spwak
+* **Second**, natural language processing to allow the machine to undestand what we speak, and
+* **Third**, speech synthesis to allow the machine to speak.
+
+This chapter focuses on **speech recognition**, the process of undestanding the words that are spoken by human beings. Remmeber that the speech signalss are captured with the help of a microphone and then it has to be understood by the system.
+
+## Building a Speech Recognizer
+
 
 
 # Reference
