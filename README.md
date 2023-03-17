@@ -4,7 +4,9 @@
 
 [What is Intelligence?](https://github.com/DabovS/AI#what-is-intelligence)
 
-* [Analyzing Time Series Data](https://github.com/DabovS/AI#analyzing-time-series-data)
+* [What's Involved in AI](https://github.com/DabovS/AI/blob/main/README.md#whats-involved-in-ai)
+
+[Analyzing Time Series Data](https://github.com/DabovS/AI#analyzing-time-series-data)
 
 [Pandas: Handling, Slicing and Extracting Statistic from Time Series Data](https://github.com/DabovS/AI#pandas-handling-slicing-and-extracting-statistic-from-time-series-data)
 
