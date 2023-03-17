@@ -1,4 +1,5 @@
 # AI 
+Welcome to the AI manual, your guide to the rapidly evolving world of Artificial Intelligence. This manual provides an overview of AI technology, its various applications, and the ethical considerations surrounding its development and implementation. Whether you are a student, researcher, or industry professional, this manual offers a comprehensive introduction to the exciting and dynamic field of AI.
 
 # Content
 
