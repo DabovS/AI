@@ -4,10 +4,6 @@
 
 [What is Intelligence?](https://github.com/DabovS/AI#what-is-intelligence)
 
-
-
-
-
 [Pandas: Handling, Slicing and Extracting Statistic from Time Series Data](https://github.com/DabovS/AI#pandas-handling-slicing-and-extracting-statistic-from-time-series-data)
 
 # Primer Concepts
@@ -3417,9 +3413,9 @@ plt.show()
 
 You will boserver the plots as shown in the following images:
 
-![Plot](22.Plots.png)
+![22 Plots](https://user-images.githubusercontent.com/124214430/225862076-b7b17d04-2858-4ef4-9353-37012408e41f.png)
 
-![Output](23.Plots.png)
+![23 Plots](https://user-images.githubusercontent.com/124214430/225862103-65e002b5-7baa-431b-9d7e-c5aacc9db30b.png)
 
 ### Slicing time series data
 Slicing involves retrieving only some part of the time series data. As a part of example, we are slicing the data only from 1980 to 1990. Observe the following code that performs this task
@@ -3433,7 +3429,7 @@ plt.show()
 
 When you run the code for slicing the time series data, you can observe the following graph as shown in the image here:
 
-![Output](24.Plots-2.png)
+![24 Plots-2](https://user-images.githubusercontent.com/124214430/225862162-f03e76ed-788d-4c25-b761-e9c86865edb0.png)
 
 ## Extracting Statistic from Time Series Data
 You will have to extract some statistics from a given data, in cases where you need to draw some important conclusion. Mean, variance, correlation, maximum value, and minimum value are some of such statistics. You can use the following code if you want to extract such statistics from a given time series data:
@@ -3513,7 +3509,7 @@ timeseries_mm.plot(style = 'g--')
 plt.show()
 ```
 
-![re-sampling with mean()](24.re-sampling-mean.png)
+![24 re-sampling-mean](https://user-images.githubusercontent.com/124214430/225862295-604be046-bc5f-41b5-9397-3da2ff5c883a.png)
 
 ### Re-sampling with median()
 You can use the following code to resample the data using the **median()** method:
@@ -3526,7 +3522,7 @@ plot.show()
 
 Then, you can observe the following graph as the output of re-sampling with mean():
 
-![re-sampling with median()](24.re-sampling-median.png)
+![24 re-sampling-median](https://user-images.githubusercontent.com/124214430/225862328-c67113c8-8476-4cfa-8de5-5b85aff40a96.png)
 
 ### Rolling Mean
 You can use the following code to calculate the rolling (moving) mean:
@@ -3538,7 +3534,7 @@ plt.show()
 
 Then, you can observe the following graph as the output of the rolling (moving) mean:
 
-![rolling mean](25.rolling-mean.png)
+![25 rolling-mean](https://user-images.githubusercontent.com/124214430/225862371-1454f89c-af5a-4975-8f56-368d8cc9eda2.png)
 
 ## Analyzing Sequential Data by Hidden Markov Model (HMM)
 HMM is a statisstic model which is widely used for daya having continuation and extensibility such as time serires stock market analysis, health checkup, and speech recognition. This section deals in detail with analyzign sequential data using Hidden Markov Model (HMM),
