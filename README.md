@@ -16,7 +16,7 @@ A branch of Computer Science named Artificial Intelligence pursues creating the 
 ## Basic Concept of Artificial Intelligence (AI)
 According to the father of Artificial Intelligence, John McCarthy, it is "The sceince and engineering of making intelligent machines, especially intelligent computer programs". 
 
-Artificail Intelligence is a way of making a computer, a computer-controlled robot, or a software think intelligently, in the similar manner to intelligent human think. AI is accomplished by studying how human brain thinks and how humans learn, decide, and work while trying to solve a problem, and then using the ourcomes of this study as a basis of developing intelligent software and systems.
+Artificial Intelligence is a way of making a computer, a computer-controlled robot, or a software think intelligently, in the similar manner to intelligent human think. AI is accomplished by studying how human brain thinks and how humans learn, decide, and work while trying to solve a problem, and then using the ourcomes of this study as a basis of developing intelligent software and systems.
 
 While exploiting the power of AI started with intention of creating similar intelligence in machines that we find and regard high in humans.
 
@@ -3304,7 +3304,7 @@ Sequence analysis or time series analysis to predict the next in a given input s
 **Example**:
 Consider the following example to undestand sequence prediction. Here **A, B, C, D** are the given values and you have to predict the value **E** using a Sequence Prediction Model.
 
-![Sequence Analysis](21.Sequence.Prediction.Model.png)
+![21 Sequence Prediction Model](https://user-images.githubusercontent.com/124214430/225864088-b2651e54-51b4-41fe-9fb7-304be8bcc2dd.png)
 
 ## Installing Useful Packages
 For time series data analysis using Python, we need to install the following packages:
