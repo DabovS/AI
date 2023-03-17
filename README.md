@@ -3705,3 +3705,4 @@ This chapter focuses on **speech recognition**, the process of undestanding the 
 * [Basics of Artificial Intelligence (AI)](https://prutor.ai/ai-with-python-prime-concept/)
 * [Inductive Reasoning](https://www.scribbr.com/methodology/inductive-reasoning/)
 * [What Is Deductive Reasoning?](https://www.scribbr.com/methodology/deductive-reasoning/)
+* [Simple NN with Python: Multi-Layer Perceptron](https://www.kaggle.com/code/androbomb/simple-nn-with-python-multi-layer-perceptron)
