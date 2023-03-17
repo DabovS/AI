@@ -4,6 +4,12 @@
 
 [What is Intelligence?](https://github.com/DabovS/AI#what-is-intelligence)
 
+
+
+
+
+[Pandas: Handling, Slicing and Extracting Statistic from Time Series Data](https://github.com/DabovS/AI#pandas-handling-slicing-and-extracting-statistic-from-time-series-data)
+
 # Primer Concepts
 Since the invention of computers or machines, their capability to perform various tasks has experienced an exponential growth. Humans have developed the power of computer systems in terms of their diverse working domains, their incresing speed, and reducing size with respect to time.
 
