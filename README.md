@@ -10,6 +10,22 @@
 
 [Getting Started](https://github.com/DabovS/AI/blob/main/README.md#getting-started)
 
+[Machine Learning](https://github.com/DabovS/AI/blob/main/README.md#getting-started)
+
+[Most Common Machine Learning Algorithms](https://github.com/DabovS/AI/blob/main/README.md#most-common-machine-learning-algorithms)
+
+[Data Preparation](https://github.com/DabovS/AI/blob/main/README.md#data-preparation)
+
+[Classification](https://github.com/DabovS/AI/blob/main/README.md#classification)
+
+* [Support Vector Machine (SVM)](https://github.com/DabovS/AI/blob/main/README.md#support-vector-machine-svm-1)
+* [Logistic Regression](https://github.com/DabovS/AI/blob/main/README.md#logistic-regression)
+* [Decision Tree Classifier](https://github.com/DabovS/AI/blob/main/README.md#decision-tree-classifier)
+* [Random Forest Classifier](https://github.com/DabovS/AI/blob/main/README.md#random-forest-classifier)
+* [Class Imbalance Problem](https://github.com/DabovS/AI/blob/main/README.md#random-forest-classifier)
+
+[Regression](https://github.com/DabovS/AI/blob/main/README.md#regression)
+
 [Analyzing Time Series Data](https://github.com/DabovS/AI#analyzing-time-series-data)
 
 [Pandas: Handling, Slicing and Extracting Statistic from Time Series Data](https://github.com/DabovS/AI#pandas-handling-slicing-and-extracting-statistic-from-time-series-data)
