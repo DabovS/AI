@@ -26,9 +26,13 @@
 
 [Regression](https://github.com/DabovS/AI/blob/main/README.md#regression)
 
+[Logic Programming](https://github.com/DabovS/AI/blob/main/README.md#logic-programming)
+
+[Unsupervised Learning Clustering](https://github.com/DabovS/AI/blob/main/README.md#unsupervised-learning-clustering)
+
 [Analyzing Time Series Data](https://github.com/DabovS/AI#analyzing-time-series-data)
 
-[Pandas: Handling, Slicing and Extracting Statistic from Time Series Data](https://github.com/DabovS/AI#pandas-handling-slicing-and-extracting-statistic-from-time-series-data)
+[Speech Recognition](https://github.com/DabovS/AI/blob/main/README.md#speech-recognition)
 
 # Primer Concepts
 Since the invention of computers or machines, their capability to perform various tasks has experienced an exponential growth. Humans have developed the power of computer systems in terms of their diverse working domains, their incresing speed, and reducing size with respect to time.
