@@ -3696,6 +3696,2010 @@ Speech processing system has mainly three tasks:
 This chapter focuses on **speech recognition**, the process of undestanding the words that are spoken by human beings. Remmeber that the speech signalss are captured with the help of a microphone and then it has to be understood by the system.
 
 ## Building a Speech Recognizer
+Speech Recognition or Automatic Speech Recognition (ASR) is the center of attention for AI projects like robotics. Without ASR, it is not possible to imagine a cognitive robot interacting with a human. However, it is not quite easy to build a speech recognizer.
+
+### Difficulties in devolping a speech recognition system
+Developing a high quality speech recognition system is really a difficult problem. The difficulty of speech recognition technology can be broadly characterized along a number of dimensions as discussed below:
+
+* **Size of the vocabulary**: Size of the vocabulary impacts the ease of developing an ASR. Consider the following sizes of vocabulary for a better understanding.
+  * A small size size vocabulary consists of 2-100 words, for example, as in a voice-menu system
+  * A medium size vocabulary consists of several 100s to 1000s of words, for example, as in a database-retrieval task
+  * A large size vocabulary consists of several 10000s of words, as in a general dictation task. 
+
+Note that, the larger the size of vocabulary, the harder it is to perform recognition.
+
+* **Channel characteristics**: Channel quality is also an important dimension. For example, human speech contains high bandwidthe with full frequency range, while a telephone speech consists of low bandwidth with limited frequency range. Note that it is harder in latter.
+* **Speaking mode**: Ease of developing an ASR also depends on the speaking mode, that is wheather the speech is in isolated word mode, or connected word mode, or in a continuous speech mode. Note that a continuous speech is harder to recognize.
+* **Speaking style**: A read speech may be in a formal style, or spontaneous and conversational with casual style. The latter is harder to recognize.
+* **Speaker dependency**: Speech can be speaker dependent, speaker adaptive, or speaker independent. A speaker independent is the hardest to build.
+* **Type of noise**: Noise is another factor to consider while developing an ASR. Signal to noise ration may be in various ranges, depending on the acoustic environment that observes less versus more background noise:
+  * If the signal to noise ratio is greater than 30dB, it is considered as high range
+  * If the signal to noise ratio lies between 30dB to 10db, it is considered as medium SNR
+  * If the signal to noise ratio is lesser than 10dB, it is considered as low range
+
+For example, the type of background noise such as stationary, non-human noise, background speech and crosstalk by other speakers also contributes to the difficulty of the problem.
+
+* **Microphone characteristics**: The quality of microphone may be good, average, or below average. Also, the distance between mouth and micro-phone can vary. These factors also should be considered for recognition systems.
+
+Despite these difficulties, researchers worked a lot on various aspects of speech such as understanding the speech signal, the speaker, and identifying the accents.
+
+You will have to follow the steps given below to build a speech recognizer.
+
+## Visualizing Audio Signals - Reading from a File and Working on it
+This is the first step in building speech recognition system as it gives an undestanding of how an audio signal is structured. Some common steps that can be followed to work with audio signals are as follows:
+
+### Recording
+When you have to read the audio signal from a file, then record it using a microhpone, at first
+
+### Sampling
+When recording with microphone, the signals are stored in a digitized form. But to work upon it, the machine needs them in the discrete numeric form. Hence, we should perform sampling at a certain frequency and convert the signal into the discrete numerical form. Choosing the high frequency for sampling implies that when humans listen to the signal, they feel it as a continuous audio signal.
+
+### Example
+The following example shows a stepwise approach to analyze an audio signal, using Python, which is stored in a file. The frequency of this audio signal is 44,100 HZ.
+
+Import the necessary packages as shown here:
+
+```
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.io import wavfile
+```
+
+Now, read the stored audio file. It will return two values: the sampling frequency and the audio signal. Provide the path of the audio file where it is stored, as shown here:
+
+```
+frequency_sampling, audio_signal = wavfile.read("/Users/admin/aduio_file.wav")
+```
+
+Display the parameters like sampling frequency of the audio signal, data type of signal and its duration, using the commands shown:
+
+```
+print('\nSignal shape:', audio_signal.shape)
+print('Signal Datatype:', audio_signal.dtype)
+print('Signal duration:', round(audio_signal.shape[0] / 
+floadt(frequency_sampling), 2), 'seconds')
+```
+
+The step involves normalizing the signal as shown below:
+
+```
+audio_signal = audio_signal / np.power(2,15)
+```
+
+In this step, we are extracting the first 100 values from this signal to visualize. Use the following commands for this purpose:
+
+```
+audio_signal = audio_signal [:100]
+time_axis = 1000 * np.arrange(0, len(signal), 1) / float(frequency_sampling)
+```
+
+Now, visualize the signal using the commands given below:
+
+```
+plt.plot(time_axis, signal, color='blue')
+plt.xlabel('Time(milliseconds)')
+plt.ylabel('Amplitude')
+plt.title('Input audio signal')
+plt.show()
+```
+
+You would be able to see an output graph and data extracted for the above audio signal as shown in the image here:
+
+![Framing Sound](26.framing_sound.png)
+
+```
+Signal shape: (132300,)
+Signal Datatype: int16
+Signal duration: 3.0 seconds
+```
+
+## Characterizing the Audio Signal: Transforming to Frequency Domain
+Characterizing an audio signal involves converting the time domain signal into frequency domain, and undestranding its frequency components, by. This is an important steps because it gives a lot of information about the signal. You can use a mathematical tool like Fourier Transform to perform this transformation.
+
+**Example**
+The following example shows, step-by-step, how to characterize the signal, using Python, which is stored in a file. Note that here we are using Fourier Transform mathematical tool to convert it into frequency domain.
+
+Important the necessary packages, as shown here:
+
+```
+import numpy as np
+import matplotlib.pyplot as plt 
+from scipy.io import wavfile
+```
+
+Now, read the stored audio file. It will return two values: the sampling frequency and the audio signal. Provide the path of the audio file wher it is stored as shown in the command here:
+
+```
+frequency_sampling, audio_signal = wavfile.read("/Users/admin/sample.wav")
+```
+
+In this step, we will display the parameters like sampling frequency of audio signal, data type of signal and its duration, using the command given below:
+
+```
+print('\nSignal shape:', audio_signal.shape)
+print('Signal Datatype:', audio_signal.dtype)
+print('Signal duration:', round(audio_signal.shape[0] /
+float(frequency_sampling), 2), 'seconds')
+```
+
+In this step, we need to normalize the signal, as shown in the following command:
+
+```
+audio_signal = audio_signal / np.power(2, 15)
+```
+
+This step involves extracting the length and half length of the signal. Use the following commands for this purpose:
+
+```
+length_signal = len(audio_signal)
+half_length = np.ceil((length_signal +1) / 2.0).astype(np.int)
+```
+
+Now, we need to apply mathemactics tools for transforming into frequency domain. Here we are using the Fourier Transform.
+
+```
+signal_frequency = np.fft.fft(audio_signal)
+```
+
+Now, do the normalization of frequency domain signal and square it:
+
+```
+signal_frequency = abs(signal_frequency[0:half_length]) / length_signal
+signal_frequency = **=2
+```
+
+Next, extract the length and half length of the frequency transformed signal:
+
+```
+len_fts = len(signal_frequency)
+```
+
+Note that the Fourier transformed signal must be adjusted for even as well as odd case.
+
+```
+if length_signal % 2
+   signal_frequency[1:len_fts] *=2
+else
+   signal_frequency[1:len_fts-1] *= 2
+```
+
+Now visualize the characterization of signal as follows:
+
+```
+plt.figure()
+plt.plot(x_axis, signal_power, color='black')
+plt.xlabel('Frequency(kHz)')
+plt.ylabel('Signal power (dB)')
+plt.show()
+```
+
+You can observe the output graph of the above code as shown in the image below:
+
+![Visualize the Characterization](27.output.graph.png)
+
+## Generating Monotone Audio Signal
+The two steps that you have seen till now are important to learn about signals. Now, this step will be useful if you want to generate the audio signal with some predefined parameters. Note that this step will save the audio signal in an output file.
+
+### Example
+In the following example, we are going to generate a monotone signal, using Python, which will be stored in a file. For this, you will have to take the following steps:
+
+Import the necessary packages as shown:
+
+```
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.io.wavfile import write
+```
+
+Provide the file where the output file should be saved
+
+```
+output_file = 'audio_signal_generated.wav'
+```
+
+Now, specify the parameters of your choice, as shown:
+
+```
+duration = 4 # in seconds
+frequency_sampling = 44100 # in Hz
+frequency+tone = 784
+min_val = -4 * np.pi
+max_val = 4 * np.pi
+```
+
+In this step, we can generate the audio signal, as shown:
+
+```
+t = np.linspace(min_val, max_val, duration * frequency_sampling)
+audio_signal = np.sin(2* np.pi * tone_freq * t)
+```
+
+Now, save the audio file in the output file:
+
+```
+write(output_file, frequency_sampling, signal_scaled)
+```
+
+Extract the first 100 values for our graph, as shown:
+
+```
+audio_signal = audio_signal[:100]
+time_axis = 1000 * np.arrange(0, len(signal), 1) / float(sampling_freq)
+```
+
+Now, visualize the generated audio signal as follows:
+
+```
+plt.plot(time_axis, signal, color='blue')
+plt.xlabel('Time in milliseconds')
+plt.ylabel('Amplitude')
+plt.title('Generated audio signal')
+plt.show()
+```
+
+You can observe the plot as shown in figure given here:
+
+![Visualize the generated audio signal](28.visualize-the-generated-audio-signal.png)
+
+## Feature Extraction from Speech
+This is the most important step in building a speech recognizer because after converting the speech signal into the frequency domain, we must convert it into the usable from of feature vector. We can use different feature extraction techniques like MFCC, PLP, PLP-RASTA etc. for this purpose.
+
+### Example
+In the following example, we are going to extract the features from signal, step-by-step, using Python, by using MFCC technique. 
+
+Import the necessary packages, as shown here:
+
+```
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.io import wavfile
+from python_speech_features import mfcc, logfbank
+```
+
+Now, read the stored audio file. It will return two values - the sampling frequency and the audio signal. Provide the path of the audio file where it is stored.
+
+```
+frequency_sampling, audio_signal = wavfile.read("/Users/admin/audio_file.wav")
+```
+
+Note that here we are talking first 15000 samples for analysis.
+
+```
+audio_signal = audio_signal[:15000]
+```
+
+Use the MFCC techniques and execute the following command to extract the MFCC features:
+
+```
+features_mfcc = mfcc(audio_signal, frequency_sampling)
+```
+
+Now, print the MFCC parameters, as shown:
+
+```
+print('\nMFCC:\nNumber of windows =', features_mfcc.shape[0])
+print('Length of each feature=', features_mfcc.shape[1])
+```
+
+Now, plot and visualize the MFCC features using the commands given below:
+
+```
+features_mfcc = features_mfcc.T
+plt.matshow(features_mfcc)
+plt.titile('MFCC')
+```
+
+In this step, we work with the filter bank featuers as shown:
+
+Extract the filter bank features:
+
+```
+filterbank_features = logfbank(audio_signal, frequency_sampling)
+```
+Now, print the filterbank parameters.
+
+```
+print('\nFilter bank:\nNumber of windows =', filterbank_features.shape[0])
+print('Length of each feature =', filterbank_features.shape[1])
+```
+
+Now, plot and visualize the filterbank features.
+
+```
+filterbank_features = filterbank+features.T
+plt.matshow(filterbank_features)
+plt.title('Filter bank')
+plt.show()
+```
+
+As a result of the steps above, you can observe the following output: Figure1 for MFCC and Figure2 for Filter Bank
+
+![MFCC](29.MFCC.png)
+
+![Filter Bank](30.Filter%20Bank.png)
+
+## Recognition of Spoken Words
+Speech recognition means  that when humans are speaking, a machine undestands it. Here we are using Google Speech API in Python to make it happen. We need to install the following packages for this:
+
+* **Pyaduio**: It can be installed by using **pip install Pyaudio** command.
+* **SpeechRecognition**: This package can be installed by using **pip install SpeechRecognition**.
+* **Google-Speech-API**: It can be installed by using the command **pip install google-api-python-client**.
+
+### Example
+Observer the following example to undestand about recognition of spoken words:
+
+import the necessary packages as shown:
+
+```
+import speech_recognition as sr
+```
+
+Create an object as shown below:
+
+```
+recording = sr.Recognizer()
+```
+
+Now, the **Microphone()** module will take the voice as input:
+
+```
+with sr.Microphone() as source: recording.adjust_for_ambient_noise(source)
+    print("Please Say something:")
+    audio = recording.listen(source)
+```
+
+Now google API would recognize the voice and gives the output:
+
+```
+try:
+    print("You said: \n" + recording.recognize_google(audio))
+except Exception as e:
+    print(e)
+```
+
+You can see the following output:
+
+```
+Please Say Something:
+You said:
+```
+
+For example, if you said **tutorialspoint.com**, then the system recognizes it correctly as follows:
+
+```
+turorialspoint.com
+```
+
+# Hueristic Search
+Heuristic search plays a key role in artificial intelligence. In this chapter, you will learn in detail about it.
+
+## Concept of Heuristic Seach in AI
+Heuristic is a rule of thumb which lead us to the probable solution. Most problems in artificial intelligence are of exponential nature and have many possible solutions. You do not know exactly which solutions are correct and checking all the solutions would be very expensive.
+
+Thus, the use of heuristic narrow down the search for solution and eleminates the wrong options the method of using heuristic to lead the search in search space is called heuristic Search. Heuristic techniques are very useful because the search can be boosted when you use them.
+
+## Difference between Uniformed and Informed Search
+There are two types of control strategies or search techniques uninformed and informed. The are explained in detail as given here:
+
+
+### Ininformed Search
+It is also called blind search or blind control strategy. It is named so because there as information only about the problem definition, and no other extra information is available about the states. This kind of search techniques would search the whole state space for getting the solution. Breadth First Search (BFS) and Depth First Search (DFS) are the exaxmples of uninformed search.
+
+### Informed Search
+It is also called heuristic search or heuristic control strategy. It is named so because there is some extra information about states. This extra information is useful to complete the preference among the child nodes to explore and expand. There would be a heuristic function associated with each node. Best First Search (BFS), A*, Mean and Analysis are the examples of informed search.
+
+### Constraint Satisfaction Problems (CSPs)
+Constraint means restriction or limitation. In AI, constraint satisfaction problems are the problems which must be solved under some constraints. The focus must be on not to violate the constraint while solving such problems. Finally, when we reach the final solution, CSP must obey restriction.
+
+## Real World Problem Solved by Constraint Satisfaction
+The previous selection dealt with creating contraint satisfaction problems. Now, let us apply this to real world problems too. Some examples of real world problems solved by constraint satisfaction are as follows
+
+### Solving algebraic relation
+With the help of constraint satisfaction problem, we can solve alalgebraic relations. In this example, we will try to solve a simple algebraic relation **a*2 = b**. It wil return the value of **a** and **b** within the range that we would define.
+
+After completing this Python program, you would be able to undestand the basics of solving problems with constraint satisfaction.
+
+Note that before writing the program, we install Python package called python-constraint. You can install it with the help of the followng command:
+
+```
+pip install python-constraint
+```
+
+The following steps show you a Python program for solving algebraic relation using constraint satisfaction:
+
+Import the **constraint** package using the following command:
+
+```
+from constraint import *
+```
+
+Now, create an object of module named **problem()** as shown below:
+
+```
+problem = Problem()
+```
+
+Now, define variables. Note that here we have two variables a and b, and we are defining 10 as their range, which means we got the solution within first 10 numbers.
+
+```
+problem.addVariable('a', range(10))
+problem.addVariable('b', range(10))
+```
+
+Next, define the particular constraint that we want to apply on this problem. Observe that here we are using the constraint **a*2 = b**
+
+```
+problem.addConstraint(lambda a, b: a * 2 == b)
+```
+
+Now, create the object of **getSolution()** module using the following command:
+
+```
+solutions = problem.getSolution()
+```
+
+Lastly, print the output using the following command:
+
+```
+print (solutions)
+```
+
+You can observe the output of the above program as follows:
+
+```
+[{'a':4, 'b':8}, {'a':3,'b':6}, {'a' :2, 'b' :4},{'a':1,'b':2},{'a':0,'b':0}]
+```
+
+### Magic Square
+A magic square is an arrangement of distinct numbers, generally integers, in a square grid, where the numbers in each rowm and in each column, and the numbers in the diagonal, all add up to the same number called the *magic constant*.
+
+The following is a stepwise execution of simple Python code for generating mahic squares:
+
+Define a function named **magic_square**, as shown below:
+
+```
+def magic_square(matrix_ms):
+    iSize = len(matrix_ms[0])
+    sum_list = []
+```
+
+The following code shows the code for vertical of squares:
+
+```
+for col in range(iSize):
+    sum_list.append(sum(row[col] for row in matrix_ms))
+```
+
+The following code shows the code for horizantal of squares:
+
+```
+sum_list.extend([sum (lines) for lines in matrix_ms])
+```
+
+The following code shows the code for horizontal of squares:
+
+```
+dlResult = 0
+for i in range(o,iSize):
+    dlResult +=matrix_ms[i][i]
+sum_list.append(dlResult)
+drResult = 0
+for i in range(iSize-1, -1, -1):
+    drResult +=matrix_ms[i][i]
+sum_list.append(drResult)
+
+if len(set(sum_list))>1:
+    return False
+return True
+```
+
+Now give the values of the matrix and check the output
+
+```
+print(magic_square([[1,2,3],[4,5,6], [7,8,9]]))
+```
+
+You can observe that the output would be **False** as the sum is not up to the same number.
+
+```
+print(magic_square([[3,9,2], [3,5,7], [9,1,6]]))
+```
+
+You can observe that the output would be **True** as the sum is the samme number, that is 15 here.
+
+# Gaming
+Games are played with strategy. Evey player or team would make a strategy before starting the game and they have to change or build new strategy acoording to the current situation(s) in the game.
+
+## Search Algorithms
+You will have to consider computer games also with the same strategy as above. Note that Search Algorithms are the ones that figure out the strategy in computer games.
+
+### How it works
+The goal of search algorithms is to find the optimnal set of moves so that they can reach at the final destination and win. These algorithms use the winning set of conditions, different for every game, to find the best moves. 
+
+Visualize a computer game as the tree. We knmow that tree has noes. Starting from the root, we can come to the final winning node, but with optimal moves. That is the work os search algorithms. Every node in such tree represents a future state. The search algorithms search through this tree to make decisions at each step or node of the game.
+
+## Combination Search 
+The major disadvantage of using search algorithms isthat they are exhaustive in nature, which is why they explore the entire search space to find the solution that leads to wastage of resources. It would be more cumbersome if these algorithms need to search the whole search space for finding the final solution.
+
+To eliminate such kind of problem, we can use combinational search which uses the heuristic to explore the search space and reduces uts suze by eliminating the possible worng moves. Hence, such algorithms can save the resources. Some of the algorithms that use heuristic to search the space and save the resources are discussed here:
+
+## Minimax Algorithm
+It is the strategy used by combinational search that uses heuristic to speed up the search strategy. The concept of Minimax strategy can be undestood with the example of two player games, in which each player tries to predict the next move of the opponent and tries to minimize that function. Also, in order to win, the player always try to maximize its own function based on the current situation.
+
+## Alpha-Beta Pruning
+A major issue with Minimax algorithm is that it can explore those parts of the tree that are irelevant, leads to the wastage of resources. Hence there must be a strategy to decide which part of the tree is relevant and which is irrelevant and leave the irrelevant part unexplored. Alpha-Beta pruning is one such kind of strategy.
+
+The main goal of Alpha-Beta prunning algorithm is to avoid the searching those parts of the tree that do not have any solution. The main concept of Alpha-Beta pruning is to use two bound named **Alpha**, the maximum lower bound, and **Beta, the minimum upper bound. These two parameters are the values that restrict the set of possible solutions. it compares the value of the current node with the value of alpha nad beta parameters, so that it can move the part of the tree that has the solution and discard the rest.
+
+## Negamax Algorithm
+This algorithm is not different from Minimax algorithm, but it has a more legant implementation. The main disadvantage of using Minimax algorithm is that we need to define two different heuristic functions. The connection between these heuristic is that, the better a state of a game is for one player, the worse it is for the other player, In Negamax algorithm, the same work of two heuristic function is done with the help of a signle heuristic function.
+
+## Building Bots to Play Games
+For building bots to play two player games in AI, we need to install the easyAI libary. It is an arteficial intelligence framework that provides all the functionality to build two-player games. You can download it with the help of the following command:
+
+```
+pip install easyAI
+```
+
+## A Bot to Play Las Coin Standing
+In this game, there would be a pile of coins. Each player has to take a number of coins from that pile. The goal of the game is to avoid taking the last coing in the pile. We will be using the class **LastCoinStanding** inherited from the **TwoPlayers** class of the **easyAI** libary. The following code shows the Python code for this code:
+
+Import the required packages as shown:
+
+```
+from easyAI import TwoPlayersGame, id_solve, Human_Player, AI_Player
+from easyAI.AI import TT
+```
+
+Now, inherit the class from the **TwoPlayerGame** class to handle all operations of the game:
+
+```
+class LastCoin_game(TwoPlayersGame):
+    def __init__(self, players):
+```
+
+Now, define the players and the players who is going to start the game.
+
+```
+self.players = players
+self.nplayer = 1
+```
+
+Now, define the number of coins in the game, here we are using 15 coins for the game.
+
+```
+self.num_coins = 15
+```
+
+Define the maximum number of coins a player can take in a move.
+
+```
+self.max_coins = 4
+```
+
+Now there are some certain things to define as shown in the following code. Dfine possible moves.
+
+```
+def possible_moves(self):
+  return [str(a) for a in range(1, self.max_coins +1)]
+```
+
+Define the removal of the coins.
+
+```
+def win_game(self):
+  return self.num_coins <= 0
+```
+
+Define when to stop the game, that is when somebody wins.
+
+```
+def is_over(self):
+  return self.win()
+```
+
+Define how to compute the score.
+
+```
+def score(self):
+  return 100 if self.win_game() else 0
+```
+
+Define number of coins remaining in the pile.
+
+```
+def show(self):
+  print(self.num_coins, 'coins left in the pile')
+if __name__ == " __main__":
+    tt = TT()
+    LastCoin_game.ttentry = lambda self: self.num_coins
+```
+
+Solving the game with the following code block:
+
+```
+r, d, m = id_solve(LastCoin_game,
+    range(2, 20), win_score=100, tt=tt)
+print(r, d, m)
+```
+
+Deciding who will start the game
+
+```
+game = LastCoing_game([AI_Player(tt), Human_Player()])
+game.play()
+```
+
+You can find the following output and a simple play of this game:
+
+```
+d:2, a:0, m:1
+d:3, a:0, m:1
+d:4, a:0, m:1
+d:5, a:0, m:1
+d:6, a:100, m:4
+1  6  4
+16 coins left in the pile
+Move #1: player 1 plays 4 :
+11 coins left in the pile
+Player 2 what do you play? 2
+Move #2: player 2 plays 2 :
+9 coins left in the pile
+Move #3: player 1 plays 3 :
+6 coins left in the pile
+Player 2 what do you play ? 1
+Move #4: player 2 plays 1 :
+5 coins left in the pile
+Move #5: player 1 plays 4 :
+1 coin left in the pile
+Player 2 what do you play? 1
+Move #6: player 2 plays 1 :
+0 coins left in the pile
+```
+
+## A bot to Play Tic Tac Toe
+Tic-Tac-Toe is very familiar and one of the most popular games. Let us crate this game by using the **easyAI** libary in Python. The following code is the Python code of this game:
+
+Import the packages as shown:
+
+```
+from easyAI import TwoPlayersGame, AI_Player, Negamax
+from easyAI.Player import Human_Player
+```
+
+Inherit the class from the **TwoPlayerGame** class to handle all operatons of the game: 
+
+```
+class TicTacToe_game(TwoPlayersGame):
+  def __init__(self,players):
+```
+
+Now, define the player and the player who is going to start the game:
+
+```
+self.players = players
+self.nplayer = 1
+```
+
+Define the type of board:
+
+```
+self.board = [0] * 9
+```
+
+Now there are some certain things to define as follows:
+
+Define possible moves:
+
+```
+def possible_moves(self):
+  return [x + 1 for x, y in enumerate(self.board) if y == 0]
+```
+
+Define the move of a player:
+
+```
+def make_move(self, move):
+  self.boardp[int(move) -1] = self.nplayer
+```
+
+To boost AI, define when a player makes a move:
+
+```
+def umake_move(self, move):
+    self.board[int(move) -1] = 0
+```
+
+Define the lose condition that an opponent have three in a line:
+
+```
+def condition_for_lose(self):
+  possible_combinations = [[1,2,3],[4,5,6],[7,8,9,],
+    [1,4,7],[2,5,8],[3,6,9], [1,5,9], [3,5,7]]
+  return any([all([(self.board[z-1] == self.nopponent)
+    for z in combination]) for combination in possible_combination])
+```
+
+Define a check for the finish of game:
+
+```
+def is_over(self):
+  return(self.possible_moves() == []) or self.condition_for_lose()
+```
+
+Show the current position of the player in the game
+
+```
+def show(self):
+    print('\n'+'\n'.join([['.', '0', 'X'][self.board[3*j +i]]
+      for i in range (3)]))
+```
+
+Compute the scores:
+
+```
+def scoring(self)
+    return -100 if self.condition_for_lose() else 0
+```
+
+Define the main method to define the algorithm and start the game:
+
+```
+if __name__ == "__main__":
+    algo = Negamax(7)
+    TicTacToe_game([Human_Player(), AI_Player(algo)]).play()
+```
+
+You can see the following output and a simple play of this game:
+
+```
+. . .
+. . .
+. . .
+Player 1 what do you play ? 1
+Move #1: player 1 plays 1 :
+0 . .
+. . . 
+. . .
+Move #2: player 2 playes 5 :
+0 . .
+. X .
+121
+. . .
+Player 1 what do you play? 3
+Move #3: player 1 plays 3 :
+0 . 0
+. X .
+121
+. . .
+Move #4: player 2 plays 2 :
+0 X 0
+. X .
+. . .
+Player 1 what do you play ? 4
+Move #5: player 1 plays 4
+0 X 0
+0 X .
+. . .
+Move #6: player 2, playes 8 :
+0 X 0
+0 X .
+. X .
+```
+
+# Nueral Networks
+Neural networks are parallel computing devices that are an attempt to make a computer model of brain. The main objective behind is to develop a system to perform various computational task faster than the traditional systems. These tasks include Pattern Recognition and Classification, Approximation, Optimization and Data Clustering.
+
+## What is Artificial Neural Networks (ANN)
+Artificial Neural network (ANN) is an efficient computing system whose central theme is borrowed from the analogy of biological neural networks. ANNs are also named as Artificial Neural Systems, Parallel Distributed Processing Systems, and Connectionist Systems. ANN acquires large collection of units that are interconnected in some pattern to allow communications between them. These units, also referred to as nodes or neurons, are simple processors which operate in parallel.
+
+Every neuron is connected with other neuron through a **connection link**. Each connection link is associated with a weigh having the information about the input signal. This is the most useful information for neurons to solve a particular problem because the **weight** usually excites or inhibits the signal that is being communicated. Each neuron is having its internal state which is called **activation signal**. Output signals, which are produced after combining input signals and activation rule, may be sent to other units.
+
+If you want to study neural networks in details then you can follow the link - Artificial Neural Network.
+
+## Installing Useful Packages
+For creating neural networks in Python, we can use a powerful package for neural networks called **NeuroLab**. It is a libary of basic neural network algorithms with flexible network configuration and learning algorithms for Python. You cna install this package with the help of the following command on command prompt:
+
+```
+pip install NeuroLab
+```
+
+If you are using the Anaconda environment, then use the following command to install NeuroLab:
+
+```
+conda install -c labfabulous neurolab
+```
+
+## Building Neural Networks
+In this section, let us build some neural networks in Python by using the NeuroLab package.
+
+### Perception based Classifier
+Perceptions are the building blocks of ANN. If you want ot know more about Perceptron, you can follow the link - artificial_neural_network
+
+Following is a stepwise execution of the Python code for building a simple neural network perception based classifier:
+
+Import the necessary packages as shown:
+
+```
+import matplotlib.pyplot as plt
+import neurolab as nl
+```
+
+Enter the input values, Note that is is an example of supervised learning, hence you will have to provide target values too.
+
+```
+input = [[0, 0], [0, 1], [1, 0], [1, 1]]
+target = [[0], [0], [0], [1]]
+```
+
+Create the network with 2 inputs and 1 neuron:
+
+```
+net = nl.net.newp([[0, 1],[0, 1]], 1)
+```
+
+Now, train the network. Here, we are using Delta rule for training.
+
+```
+error_progress = net.train(input, target, epochs=100, show=10, lr=1.1)
+```
+
+Now, visualize the output and plot the graph:
+
+```
+plt.figure()
+plt.plot(error_progress)
+plt.xlabel('Number of epochs')
+plt.ylabel('Training error')
+plt.grid()
+plt.show()
+```
+
+You can see the following graph showing the training progress using the error metric:
+
+![Training Process](31.error-metric.png)
+
+### Single - Layer Neural Networks
+In this example, we are creating a signle layer neural network that consists of independent neurons acting on input data to produce the output. Note that we are using the text file named **neural_simple.txt** as our input.
+
+Import the useful packages as shown:
+
+```
+import numpy as np
+import matplotlib.pyplot as plt
+import neurolab as nl
+```
+
+Load the dataset as follows:
+
+```
+input_data = np.loadtxt("/Users/admin/neural_simple.txt")
+```
+
+The following is the data we are going to use. Note that in this data, first two columns are the features and last two columns are the labels.
+
+```
+array([[2. , 4. , 0.  , 0.],
+       [1.5, 3.9, 0.  , 0.],
+       [2.2, 4.1, 0.  , 0.],
+       [1.9, 4,7, 0.  , 0.],
+       [5.4, 2.2, 0.  , 1.],
+       [4.3, 7.1, 0.  , 1.],
+       [5.8, 4.9, 0.  , 1.],
+       [6.5, 3.2, 0.  , 1.],
+       [3. , 2. , 1.  , 0.],
+       [2.5, 0.5, 1.  , 0.],
+       [3.5, 2.1, 1.  , 0.],
+       [2.9, 0.3, 1.  , 0.],
+       [6.5, 8.3, 1.  , 1.],
+       [3.2, 6.2, 1.  , 1.],
+       [4.9, 7.8, 1.  , 1.],
+       [2.1, 4.8, 1.  , 1.]])
+```
+
+Now, separate these four columns into 2 data columns and 2 labels:
+
+```
+data = input_data[:, 0:2]
+labels = input_data[:, 2]
+```
+
+Plot the input data using the following commands:
+
+```
+plt.figure()
+plt.scatter(data[:,0], data[:,1])
+plt.xlabel('Dimension 1')
+plt.ylabel('Dimension 2')
+plt.title('Input data')
+```
+
+Now, define the minimum and maximum values for each dimension as shown here:
+
+```
+dim1_min, dim1_max = data[:,0].min(), data[:,0].max()
+dim2_min, dim2_max = data[:,1].min(), data[:,1].max()
+```
+
+Next, define the number of neurons in the output layer as follows:
+
+```
+nn_output_layer = labels.shape[1]
+```
+
+Now, define a single-layer neural network:
+
+```
+dim1 = [dim1_min, dim1_max]
+dim2 = [dim2_min, dim2_max]
+neural_net = n1.net.newp([dim1, dim2], nn_output_layer)
+```
+
+Train the neural network with number of epochs and learning rate as shown:
+
+```
+error = neural_net.train(data, labels, epochs = 200, 20, lr = 0.0)
+```
+
+Now, visualize and plot the training progress using the following commands:
+
+```
+plt.figure()
+plt.plot(error)
+plt.xlabel('Number of epochs')
+plt.yxlabel('Training error')
+plt.title('Training error progress')
+plt.grid()
+plt.show()
+```
+
+Now, use the test data-points in above classifier:
+
+```
+print('\nTest Results:')
+data_test = [[1.5, 3.2], [3.6, 1.7], [3.6, 5.7], [1.6, 3.9]] for item in data_test:
+    print(item, '-->', neural_net.sim([item])[0])
+```
+
+You can find the test results as shown here:
+
+```
+[1.5, 3.2] --> [1. 0.]
+[3.6, 1.7] --> [1. 0.]
+[3.6, 5.7] --> [1. 0.]
+[1.6, 3.9] --> [1. 0.]
+```
+
+You can see the following graph as the output of the code disscused till now:
+
+![Single - Layer Neural Networks](31.Single-Networks.png)
+
+![Trainning Error Progress](32.Training-error.png)
+
+### Multi-Layer Neural Networks
+In this example, we are creating a multi-layer neural network that consists of more than one layer to extract the underlying pattern in the training data. This multilayer neural network will work like a regressor. We are going to generate some data points based on the equation: y=2x(2)+8
+
+Import the necessary packages as shown:
+
+```
+import numpy as np
+import matplotlib.pyplot as plt
+import neuralab as nl
+```
+
+Generate some data point based on the above mentioned equation:
+
+```
+min_val = -30
+max_val = 30
+num_points = 160
+x = np.linspace(min_val, max_val, num_points)
+y = 2 * np.squre(x) + 8
+y /= np.linalg.norm(y)
+```
+
+Now, reshape this data set as follows:
+
+```
+data = x.reshape(num_points, 1)
+labels = y.reshape(num_points, 1)
+```
+
+Visualize and plot the input data set using the following commands:
+
+```
+plt.figure()
+plt.scatter(data, labels)
+plt.xlabel('Dimension 1')
+plt.ylabel('Dimension 2')
+plt.title('Data-points')
+```
+
+Now, build the neural network having two hidden layers with **neurolab** with **ten** neurons in the first hidden layer, **six** in the second hidden layer and **one** in the output layer.
+
+```
+neural_net = nl.net.newff([[min_val, max_val]], [10, 6, 1])
+```
+
+Now use the gradient training algorithm:
+
+```
+neural_net.trainf = nl.train.train_gd
+```
+
+Now train the network with goal of learning on the data generated above:
+
+```
+error = neural_net.train(data, labels, epochs = 1000, show = 100, hoal = 0.01)
+```
+
+Now, run the neural networks on the training data points:
+
+```
+output = neural_net.sim(data)
+x_pred = output.reshape(num_points)
+```
+
+Now plot and visualize task:
+
+```
+plt.figure()
+plt.plot(error)
+plt.xlabel('Number of epochs')
+plt.ylabel('Error')
+plt.title('Training error progress')
+```
+
+Now we will be plotting the actual versus predicted output:
+
+```
+x_dense = np.linspace(min_val, max_val, num_points * 2)
+y_dense_pred = neural_net.sim(x_dense.reshape(x_dense.size,1)).reshape(x_dense.size)
+plt.figure()
+plt.plot(x_dense, y_dense_pred, '-', x, y, '-', x, y_pred, 'p')
+plt.title('Actual vs predicted')
+plt.show()
+```
+
+As a result of the above commands, you can observe the graphs as shown below:
+
+
+![Multi-Layer Neural Networks](33.Multi-Layer.png)
+
+![Multi-Layer Neural Networks: Training error](34.Multi-Layer-error.png)
+
+![Multi-Layer Neural Networks: Actual vs Predicted](35.Multi-Layer-Actual.png)
+
+# Reinforcement Learning
+In this chapter, you will learn in detail about theconcepts reinforcement learning in AI with Python.
+
+## Basics of Reinforcement Learning
+This type of learning is used to reinforce or strengthen the network based on critic information. That is a network being trained under reinforcement learning, receives some feedback from the environment. However, the feedback is evaluative and not instructive as in the case of supervised learning. Based on this feedback, the network performs the adjustments of the weights to obtain better critic information in future.
+
+This learning process is similar to supervised learning but we might have very less information. The following figure gives the block diagram of reinforcement learning:
+
+![Reinforcement Learning](36.reinforcement_learning.png)
+
+## Building Blocks: Environment and Agent
+Environment and Agent are main building blocks of reinforcement learning in AI. This section discusses them in detail:
+
+**Agent**
+An agent is anything that can perceive its environment through sensors and acts upon that environment through effectors.
+
+* A **human agent** has sensory organs such as eyes, ears, nose, tongue and skin parallel to the sensors, and other organs such as hands, legs, moth, for effectors.
+* A **robotic agent** replaces cameras and infrared range finders for the sensors, and various motors and actuators for effectors.
+* A **software agent** has encoded bit strings as its programs and actions.
+
+**Agent Terminology**
+The following terms are more frequently used in reinforcement learning in AI:
+
+* **Performance Measure of Agent**: It is the criteria, which determines how succesful an agent is.
+* **Behaviour of Agent**: It is the action that agent performs after any given sequence of percepts.
+* **Percept**: It is agent's perceptual inputs at a given instance.
+* **Percept Sequence**: It is the history of all that an agenet has perceived til date.
+* **Agent Function**: It is a map from the precept sequence to an action.
+
+**Environment**
+Some programs operate in an entirely **artificial environment** confined to keyboard input, database, computer file systems and character output on a screen.
+
+In contrast, some software agents, such as software robots or softbots, exist in rich and unlimited softbot domains. The simulator has a **very detailed**, and **complex environment**. The software agent needs to choose from a long array of actions in real time.
+
+For example, a softbot designed to scan the online preferences of the customer and display intresting items to the customer works in the **real** as well as an **artificial** environment.
+
+**Properties of Environment**
+The environment has multifold properties as discussed below:
+
+* **Discrete/Continuous**: If there are a limited number of distinct, clearly defined, states of environment, the environment is discrete, otherwise it is continuous. For example, chess is a discrete environment and driving is a continuous environment.
+* **Observable/Partially Observable**: If it is possible to determine the complete state of the environment at each time point from the percepts, it is observable, otherwise it is only partially observable.
+* **Static/Dynamic**: If the environment does not change while an agent is acting, then it is static; otherwise it is dynamic.
+* **Single agent/Multiple agents**: The environment may contain other agents which may be of the same or different kind as that of the agent.
+* **Accessible/Inaccessible**: If the agent's sensory apparatus can have access to the complete state of the environment, then the environment is accessible to that agent, otherwise it is inaccessible.
+* **Deterministic/Non-deterministic**: If the next state of the environment is completely determined by the currebnt state and the actions of the agent, then the environment is deterministic, otherwise it is non-deterministic.
+* **Episodic/Non-episodic**: In an episodic environment, each episode consists of the agent perceiving and then acting. The quality of its action depends just on the episode itself. Subsequent episodes do not depend on the actions in the previous episodes. Episodic environments are much simpler because the agent does not need to think ahead.
+
+![Environment and Agent](37.Environment-and-Agent.png)
+
+## Constructing an Environment with Python
+For building reinforcement learning agent, we will beusing the **OpenAI Gym** package which can be installed with the help of the following command:
+
+```
+pip install gym
+```
+
+There are various environments in OpenAI gym which can be used for various purposes. Few of them are **Cartpole-v0**, **Hopper-v1**, and **MsPacman-v0**. They require different engines. The deatiled documentation of **OpenAI Gym** can be found on https://gym.openai.com/docs/#environments.
+
+The following code showns an example of Python code for carpole-v9 environment:
+
+```
+import gym
+env = gym.make('CartPole-v0')
+env.reset()
+for _ in range(1000):
+    env.render()
+    env.step(env.action_space.sample())
+```
+
+![Example of Python code for carpole-v9](38.carpole-v9.png)
+
+You can construct other environments in a similar way.
+
+## Constructing a learning agent with Python
+For building reinforcement learning agent, we will be using the **OpenAI Gym** package as shown:
+
+```
+import gym
+env = gym.make('CartPole-v0')
+for _ in range(20):
+    observation = env.reset()
+    for i in range(100):
+      env.render()
+      print(observation)
+      action = env.action_space_sample()
+      observation, rewards, done, info = env.step(action)
+      if done:
+        print("Episode finished after () timesteps".format(i+1))
+        break
+```
+
+![Example of Python code for carpole-v9 - 2](39.carpole-v9.png)
+
+Observe that the carpole can balance itself.
+
+# Genetic Algorithms
+This chapter discusses Genetic Algorithms of AI in detail.
+
+## What are Genetic Algorithms?
+Genetic Algorithms (GAs) are search based algorithms based on the concepts of natural selection and genetics. GAs are a subset of a much larger branch of computation known as Evolutionary Computation.
+
+GAs were developed by John Holland and his students and collegues at the University of Michigan, most notably David E. Goldvberg. It has since been tried on various optimization problems with a high degree of success.
+
+In GAs, we have a pool of possible solutions to the given problem. These solutions then undergo recombination and mutation (like in natural genetics), produces new children, and the process is repeated for various generations. Each individual (or candidate solution) is assigned a fitness value (based on its objective function value) and the fitter individuals are given a higher chance to mate and yield **fitter** individuals. This is in line with the Darwinian Theory of **Survival of the Fittest**.
+
+Thus, it keeps **evolving** better individuals or solutions over generations, till it reaches a stopping criterion.
+
+Genetic Algorithms are sufficiently randomized in nature, but they perform much better than random local search (where we just try random solutions, keeping track of the best so far), as they explot historical information as well.
+
+## How to Use GA for Optimization Problems?
+Optimization is an action of making design, situation, resource and system, as effective as possible. The following block diagram shows the optimization process:
+
+![Use GA for Optimization](40.Use-GA.png)
+
+**Stage of GA mechanism for optimization process**
+The following is a sequence of steps of GA mechanism when used for optimization of problems:
+
+* Step 1 - Generate the initial population randomly.
+* Step 2 - Select the initial solution with best fitness values.
+* Step 3 - Recombine the selected solutions using mutation and crossover operators.
+* Step 4 - Insert an offspring into the population.
+* Step 5 - Now, if the stop conditions is met, return the solution with their best fitness value. Else go to step 2.
+
+## Installing Necessary Packages
+For solving the problem by using Genetic Algorithms in Python, we are going to use a powerful package for GA called **DEAP**. It is a libary of novel evolutionary computation framework for rapid prototyping and testing of ideas. We can install this package with the help of the following command on command prompt:
+
+```
+pi install deap
+```
+
+If you are using **anaconda** environment, then following command can be used to install deap:
+
+```
+conda install -c conda-forge deap
+```
+
+## Implementing Solutions using Genetic Algorithms
+This section explains you the implementation of solutions using Genetic Algorithms.
+
+**Generating bit patterns**
+The following example shows you how to generate a bit string that would contain 15 ones, based on the **One Max** problem.
+
+Import the necesasry packages as shown:
+
+```
+import random 
+from deap import base, creator, tools
+```
+
+Define the evaluation function. It is the first step to create a genetic algorithm.
+
+```
+def eval_func(individual):
+    target_sum = 15
+    return len(individual) - abs(sum(individual) - target_sum),
+```
+
+Now, create the toolbox with the right parameters:
+
+```
+def create_toolbox(num_bits):
+    creator.create("FitnessMax", base.Fitness, weights = (1.0,))
+    creator.create("Individual, list, fitness=creator.FitnessMax)
+```
+
+Initialize the toolbox
+
+```
+    toolbox = base.Toolbox()
+toolbox.register("attr_bool", random.randint, 0, 1)
+toolbox.register("individual", tools.initRepeat, creator.Individual, 
+    toolbox.attr_bool, num_bits)
+toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+```
+
+Register the evaluation operator
+
+```
+toolbox.register("evaluate", eval_func)
+```
+
+Now, register the crossover operator
+
+```
+toolbox.register("mate", tools.cxTwoPoint)
+```
+
+Register a mutation operator
+
+```
+toolbox.register("mutate", tools.mutFlipBit, indpb = 0.05)
+```
+
+Define the operator for breeding
+
+```
+toolbox.register("select", tools.selTournament, tournsize = 3)
+return toolbox
+if __name__ == "__main__":
+    num_bits = 45
+    toolbox = create_toolbox(num_bits)
+    random.seed(7)
+    population = toolbox.population(n = 500)
+    probab_crossing, probab_mutating = 0.5, 0.2
+    num_generations = 10
+    print('\nEvaluated', len(population), 'individuals')
+```
+
+Create and iterate through generations:
+
+```
+for g in range(num_generations):
+    print("\n- Generation", g)
+```
+
+Selecting the next generation individuals
+
+```
+offspring = list(map(toolbox.clone, offspring))
+```
+
+Apply crossover and mutation on the offspring:
+
+```
+for chid1, child 2 in zip[::2], offspring[1::2]:
+    if random.random() < probab_crossing:
+    toolbox.mate(child1, child 2)
+```
+
+Delete the fitness value of child
+
+```
+def child1.fitness.values
+def child2.fitness.values
+```
+
+Now, apply mutation:
+
+```
+for mutant in offspring:
+    if random.random() < probab_mutating:
+    toolbox.mutate(mutant)
+    del mutant.fitness.values
+```
+
+Evaluate the individuals with an invalid fitness:
+
+```
+invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
+fitnesses = map(toolbox.evaluate, invalid_ind)
+for ind, fit in zip(invalid_ind, fitnesses):
+    ind.fitness.values = fit
+print('Evaluated', len(invalid_ind), 'invdividuals')
+```
+
+Now, replace population with next generation individual:
+
+```
+population[:] = offspring
+```
+
+Print the statistics for the current generations:
+
+```
+fits = [ind.fitness.values[0] for ind in population]
+length = len(population)
+mean = sum(fits) / length
+sum2 = sum(x*x for x in fits)
+std = abs(sum2 / length - mean**2)**0.5
+print('Min =', min(fits), ', Max =', max(fits))
+print('Average = ', round(mean, 2), ', Standard deviation =',
+round(std, 2))
+print("\n- Evolution ends")
+```
+
+Print the final output:
+
+```
+    best_ind = tools.selBest(population, 1)[0]
+    print('\nBest individual:\n', best_ind)
+    print('\nNumber of ones:', sum(best_ind))
+Following would be the output:
+Evoltion process starts
+Evaluated 500 individuals
+- Generation 0
+Evaluated 295 individuals
+Min = 32.0, Max = 45.0
+Average = 40.29 , Standard deviation = 2.61
+- Generation 1
+Evaluated 292 individuals
+Min = 34.0 , Max = 45.0
+Average = 42.35 , Standard deviation = 1.91
+- Generation 2
+Evaluated 277 individuals
+Min = 37.0 , Max = 45.0
+Average = 43.39 , Standard deviation = 1.46
+- - - -
+- Generation 9
+Evaluated 299 individuals
+Min = 40.0 , Max = 45.0
+Average = 44.12 , Standard deviation = 1.11
+- Evolution ends
+Best individual:
+[0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1,
+ 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0,
+ 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1,]
+Number of ones: 15
+```
+
+**Symbol Regression Problem**
+It is one of the best known problems in genetic programming. All symbolic regression problems use an arbitrary data distribution, and try to fit the most accurate data with a symbolic formula. Usually, a measure like the RMSE(Root Mean Square Error) is used to measure an individual's fitness. It is a classic regressor problem and here we are using the equation **5x(3)-6x(2)+8x=1**. We meed to follow all the steps as followed in the above example, but the main part would be to create the primitive sets because they are the building blocks for the individuals so the evaluation can start. Here we will be using the classic set of primitives.
+
+The following Python code explains this in details:
+
+```
+import operator
+import math
+import random
+import numpy as np
+from deap import algorithms, base, creator, tools, gp
+
+def division_operator(numerator, denominator):
+    if denominator == 0:
+        return 1
+    return numerator / denominator
+
+def eval_func(individual, points):
+    func = toolbox.compile(expr=individual)
+    mse = ((func(x) - math.sin(x))**2 for x in points)
+    return math.fsum(mse) / len(points),
+
+def create_toolbox():
+    pset = gp.PrimitiveSet("MAIN", 1)
+    pset.addPrimitive(operator.add, 2)
+    pset.addPrimitive(operator.sub, 2)
+    pset.addPrimitive(operator.mul, 2)
+    pset.addPrimitive(division_operator, 2)
+    pset.addPrimitive(operator.neg, 1)
+    pset.addPrimitive(math.cos, 1)
+    pset.addPrimitive(math.sin, 1)
+    pset.addEphemeralConstant("rand101", lambda: random.randint(-1, 1))
+    pset.renameArguments(ARG0='x')
+
+    creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
+    creator.create("Individual", gp.PrimitiveTree, fitness=creator.FitnessMin)
+
+    toolbox = base.Toolbox()
+    toolbox.register("expr", gp.genHalfAndHalf, pset=pset, min_=1, max_=2)
+    toolbox.register("individual", tools.initIterate, creator.Individual, toolbox.expr)
+    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+    toolbox.register("compile", gp.compile, pset=pset)
+    toolbox.register("evaluate", eval_func, points=[x/10. for x in range(-10, 10)])
+    toolbox.register("select", tools.selTournament, tournsize=3)
+    toolbox.register("mate", gp.cxOnePoint)
+    toolbox.register("expr_mut", gp.genFull, min_=0, max_=2)
+    toolbox.register("mutate", gp.mutUniform, expr=toolbox.expr_mut, pset=pset)
+    toolbox.decorate("mate", gp.staticLimit(key=operator.attrgetter("height"), max_value=17))
+    toolbox.decorate("mutate", gp.staticLimit(key=operator.attrgetter("height"), max_value=17))
+    return toolbox
+
+if __name__ == "__main__":
+    random.seed(7)
+    toolbox = create_toolbox()
+    population = toolbox.population(n=450)
+    hall_of_fame = tools.HallOfFame(1)
+    stats_fit = tools.Statistics(lambda ind: ind.fitness.values)
+    stats_size = tools.Statistics(len)
+    mstats = tools.MultiStatistics(fitness=stats_fit, size=stats_size)
+    mstats.register("avg", np.mean)
+    mstats.register("std", np.std)
+    mstats.register("min", np.min)
+    mstats.register("max", np.max)
+
+    probab_crossover = 0.4
+    probab_mutate = 0.2
+    number_gen = 10
+
+    population, log = algorithms.eaSimple(population, toolbox, probab_crossover, probab_mutate, number_gen,
+                                          stats=mstats, halloffame=hall_of_fame, verbose=True)
+
+```
+
+Note that all the basic steps are same as used while generating bit patterns. This program will give us the output as min, max, std (standard deviation) after 10 number of generations.
+
+# Computer Vision
+Computer vision is concerned with modeling and replicating human vision using computer software and hardware. In this chapter, you will learn in detail about this.
+
+## Computer Vision
+Computer vision is a discipline that studies how to reconstruct, interrupt and undestand a 3d scene from its 2d images, in terms of the properties of the structure present in the scene.
+
+### Computer Vision Hierarchy
+Computer vision is divided into three basic categories as follows:
+
+* **Low-level vision**: it includes process image for feature extraction.
+* **Intermediate-level vision**: It includes objective recognition and 3D scene interpretation.
+* **High-level vision**: It includes conceptual description of a scene like activity, intention and behavior.
+
+## Computer Vision Vs Image Processing
+Image processing studies image to image transformation. The input and output of image processing are both images.
+
+computer vision is the construction of explicit, meaningful descriptions of phisical objects from their image. The output of computer vision is a description or an interpretation of structures in 3D scene.
+
+**Applications**
+Computer vision finds applications in the following fields:
+
+**Robotics**
+
+* Localization-determine robot location automatically
+* Navigation
+* Obstacles avoidance
+* Assembly (peg-in-hole, welding, painting)
+* Manipulation (e.g. PUMA robort manipulator)
+* Human Robot Interaction (HRI): Intelligent robotics to interact with and serve people.
+
+**Medicine**
+
+* Classification and detection (e.g. lesion or cells classification and tumor detection)
+* 2D/3D segmentation
+*  3D human organ reconstruction (MRI or ultrasound)
+* Vision-guided robotics surgery
+
+**Security**
+
+* Biometrics (iris, finger print, face recognition)
+* Surveilance-detecting certain suspicious activities or behaviors
+
+**Transportation**
+
+* Autonomous vechicle
+* Safety, e.g., driver vigilance monitoring
+
+**Industrial Automation Application**
+
+* Industrial inspection(defect detection)
+* Assembly
+* Barcode and package label reading
+* Object sorting
+* Document undestanding (e.g, OCR)
+
+## Installing Useful Packages
+For Computer vision with Python, you can use a popular library called **OpenCV** (Open Source Computer Vision). It is a library of programming functions mainly aimed at the real-time computer vision. It is written in C++ and its primary interface is in C++. You can install this package with the help of the following command:
+
+```
+pip install opncv_python-X.X-cp36-cp36m-winX.wh1
+```
+
+Here X represents the version of Python installed on your machine as well as the win32 or 64 bit you are having.
+
+If you are using the **anaconda** environment, then use the following command to install OpenCV:
+
+```
+conda install -c conda-forge opencv
+```
+
+## Reading, Writing and Displaying an Image
+Most of the CV applications need to get the images as input and produce the images as output. In this section, you will learn how to read and write image file with the help of functions provided by OpenCV.
+
+### OpenCV functions for Reading, Showing, Writing an Image File
+OpenCV provides the followingfunctions for ths purpose:
+
+* **imread()function**: This is the function for reading an image. OpenCV imread() supports various image formats like PNG, JPEG, TIFF, etc.
+* **imshow()function**: This is the function for showing an image in a window. The window automatically fits to the image size. OpenCV imshow() supports various image formats like PNG, JPEG, JPG, TIFF, etc.
+* **imwrite()function**: This is the function for writing an image. OpenCV imwrite() supports various image formats like PNG, JPEG, TIFF, etc.
+
+**Example**
+This example shows the Python code for reading an image in one format - showing it in a window and writing the same image in other format. Consider the steps shown below:
+
+Import the OpenCV package as shown:
+
+```
+import cv2
+```
+
+Now, for reading a particular image, use the imread() function
+
+```
+image = cv2.imread('image_flower.jpg')
+```
+
+For showing the image, use the **imshow()** function. The name of the window in which you can see the image would be **image_flower**.
+
+```
+cv2.imshow('image_flower', image)
+cv2.destroyAllwindows()
+```
+
+![Example](40.Example.png)
+
+Now, we can write the same image into the other format, say .png using the imwrite() function:
+
+```
+cv2.imwrite('image_flower.png', image)
+```
+
+The output True means that the image has been successfully written as .png file also in the same folder.
+
+```
+True
+```
+
+Note: The function destroyallWindows() simply destroys all the windwos we created.
+
+## Color Space Conversion
+In OpenCV, the images are not stored by using the conventional RGB color, rather they are stored in the reverse order i.e. in the BGR order. Hence the default color code while reading an image is BGR. The **cvtColor()** conversion function in for converting the image from one color code to other.
+
+**Example**
+Consider this example to convert image from BGR to grayscale.
+
+Import **OpenCV** package as shown:
+
+```
+import cv2
+```
+
+Now, for reading a particular image, use the imread() function:
+
+```
+image = cv2.imread('image_flower.jpg')
+```
+
+Now, if we see this image using **imshow()** function, then we can see that this image is in BGR.
+
+```
+cv2.imshow('BGR_Penguins", image)
+```
+
+![BGR_Penguins](41.BGR_Penguins.png)
+
+Now, use **cvtColor()** function to convert this image to grayscale.
+
+```
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+cv2.imshow('gray_penguins', image)
+```
+
+![BGR_Penguins - gray](43.BGR_Penguins.png)
+
+## Edge Detection
+Humans, after seeing a rough sketch, can easily recognize many object types and their poses. That is why edges play an important role in the life of humans as well as in the applications of computer vision. OpenCV provides very simple and useful function called **Canny()** for detecting the edges.
+
+**Example**
+The following example shows clear identification of the edges.
+
+Import OpenCV package as shown:
+
+```
+import cv2
+import numpy as np
+```
+Now, for reading a particular image, use the **imread()** function.
+
+```
+image = cv2.imread('Penguins.jpg')
+```
+
+Now, use the **Canny()** function for detecting the edge of the already read image.
+
+```
+cv.imwrite('edges_Penguins.jpg', cv2, Canny(image,200, 300))
+```
+
+Now, for showing the image with edges, use the imshow() function.
+
+```
+cv2.imshow('edges', cv2.imread(''exdges_Penguins.jpg'))
+```
+
+This Python program will creat an image named **edges_penguins.jpg** with edge detection.
+
+![BGR_Penguins - edge detection](44.BGR_Penguins.png)
+
+## Face Detection
+Face detection is one the fascinating applications of computer vision which makes it more realistic as well as futuristic. OpenCV has a built-in facility to perform face detection. We are going to use the **Haar** cascade classifier for face detection.
+
+### Haar Cascade Data
+We need data to use the Haar cascade classifier. YOu can find this data in our OpenCV package. After installing OpenCV, you can see the folder name **haarcascades**. There would be .xml files for different application. Now, copy all of them for different use and paste then in a new folder under the current project.
+
+**Example**
+The following is the Python code using Haar Cascade to detect the face of Amitabh Bachan shown in the following image:
+
+![Haar Cascade](45.Haar-Cascade-example.png)
+
+Import the **OpenCV** package as shown:
+
+```
+import cv2
+import numpy as np
+```
+
+Now, use the **HaarCascadeClassifier** for detecting face
+
+```
+face_detection=
+cv2.CascadeClassifier('D:/ProgramData/cascadeclassifer/
+haarcascade_frontalface_default.xml')
+```
+
+Now, for reading a particular image, use the **imread()** function:
+
+```
+img = cv2.imread('AB.jpg')
+```
+
+Now, convert it into grayscale because it would accept gray images:
+
+```
+gray = cv2.cvtColor(img, cv2, COLOR_BGR2GRAY)
+```
+
+Now, using **face_detection.detectMultiScale**, perform actual face detection:
+
+```
+faces = face_detection.detectMultiScale(gray, 1.3, 5)
+```
+
+Now, draw a rectangle around the hole face:
+
+This Python program will create an image named **Face_AB.jpg** with face detection as shown:
+
+![Haar Cascade - Face A/B](46.Haar-Cascade-example-A-B.png)
+
+## Eye Detection
+Eye detection is another facinating application of computer vision which makes it more realistic as well as futuristic. OpenCV has a built-in facility to perform eye detection. We are going to use the **Haar cascade** classifier for eye detection.
+
+**Example**
+The following example gives the Python code using Haar Cascade to detect the face of Amitabh Bachan.
+
+![Eye Detection](47.Haar-Cascade-example-A-B)
+
+Import OpenCV package as shown:
+
+```
+import cv2
+import numpy as np
+```
+
+Now, use the **HaarCascadeClassifier** for detecting face:
+
+```
+eye_cascade = cv2.CascadeClassifier('D:/ProgramData/cascadeclassifier/haarcascade_eye.xml)
+```
+
+Now, for reading a particular image, use the **imread()** function:
+
+```
+img = cv2.imread('AB_Eye.jpg')
+```
+
+Now, convert it into grayscale because it would accept grey images:
+
+```
+gray = cv2.cvtColor(img, cv2.COLOR_BGRGRAY)
+```
+
+Now with the help of **eye_cascade.detectMultiScale** perform actual face detection:
+
+```
+eyes = eye_cascade.detectMultiScale(gray, 1.03, 5)
+```
+
+Now, draw a rectangle around the whole face:
+
+```
+for (ex,ey,ew,eh) in eyes:
+    img = cv2.rectangle(img,(ex,ey),(ex+ew, ey+eh), (0,255,0), 2)
+cv2.imwrite('Eye_AB.jpg, img)
+```
+
+This Python program will create an image named **Eye_AB.jpg** with eye detection as shown:
+
+![Eye_AB](48.Haar-Cascade-example-A-B-eye)
+
+# Deep Learning
+Artificial Neural Network (ANN) it is an efficient computing system, whose central theme isborrowed from the analogy of biological neural networks. Neural networks are one type of model for machine learning. In the mid-1980s and early 1990s, much important architectural advancements were made in neural networks. In this chapter, you will learn more about Deep Learning, an approach of AI.
+
+Deep learning emerged from a decade's explosive compulational growth as a serious contender in the field. Thus, deep learning is particular kind of machine learning whose algorithms are inspired by structure and function of human brain.
+
+## Machine Learning v/s Deep Learning
+Deep learning is the most powerful machine learning technique these days. It is so powerful because they learn the best way to represent the problem while learning how to solve the problem. A comparison of Deep learning and Machine learning is given below:
+
+**Data Dependency**
+The first point of difference is based upon the performance of DL and ML when the scale of data increases. When the data is large, deep learning algorithms perform very well.
+
+**Machine Dependency**
+Deep learning algorithms need high-end machines to work perfectly. On the other hand, machine learning algorithms can work on low-end machines too.
+
+**Feature Extraction**
+Deep learning algorithms can extract high level features and try to learn from the same too. On the other hand, an expert is required to identify most of the features extracted by machine learning.
+
+**Time of Execution**
+Execution time depends upon the numerous parameters used in an algorithm. Deep learning has more parameters than machine learning algorithms. Hence, the execution time of DL algorithms, specially the training time, is much more than ML algorithms. But the testing time of DL algorithms is less than ML algorithms.
+
+**Approach to Problem Solving**
+Deep learning solves the problem end-to-end while machine learning uses the traditional way of solving the problem i.e. by breaking down it into parts.
+
+## Convolutional Neural Network (CNN)
+Convolutional neural networks are the same as ordinary neural networks because they are also made up of neurons that have learnable weights and biases. Ordinary neural networks ignore the structure of input data and all the data is converted into 1-D array before feeding it into the network. This process suits the regular data, however if the data contains images, the process may be cumbersome.
+
+CNN solves the problem easily. It takes the 2D structure of the images into account when they process them, which allows them to extract the properties specific to images. In this way, the main goal of CNNs is to go from the raw image data in the input layer to the correct class in the output layer. The only difference betwen an ordinary NNs and CNNs is in the treatment of input data and in the type of layers.
+
+**Architecture Overview of CNNs**
+Architecturally, the ordinary neural networks receive an input and transform it through a series of hidden layer. Every layer is connected to the other layer with the help of neurons. The main disadvantage of ordinary neural networks is that they do not scale well to full images.
+
+The architecture of CNNs have neurons arranged in 3 dimensions called width, height and depth. Each neuron is the current layer is connected to a small patch of output from the previous layer. It is similar to overlaying a **NxN** filter on the input image. It uses **M** filters to be sure about getting all the details. These **M** filters are feature extractors which extract features like edges, corners, etc.
+
+**Layers used to construct CNNs**
+Following layers are used to construct CNNs:
+
+* **Input Layer**: It takes the raw image data as it is.
+* **Convolutional Layer**: This layer is the core building block of CNNs that does most of the computations. This layer computes the convolutions between the neurons and the various patches in the input.
+* **Rectified Linear Unit Layer**: It applies an activation function to the output of the previous layer. It adds non-linearly to the network so that it can generalize well to any type of function.
+* **Pooling Layer**: Pooling helps us to keep only the important parts as we progress in the network Pooling layer operates independently on every depth slice of the input and resizes it spatially. It uses the MAX function.
+* **Fully Connected layer/Output layer**: This layer computes the output scores in the last layer. The resulting output is of the size **1X1XL**, where L is the number training dataset classes.
+
+## Installing Useful Python Packages
+You can use **Keras**, which is an high level neural networks API, written in Python and capable of running on top of TensorFlow, CNTK or Theno. It is compatible with Python 2.7-3.6. You can learn more about it from https://keras.io/
+
+Use the following commands to install keras:
+
+```
+pip install keras
+```
+
+On **conda** environment, you can use the following command:
+
+```
+code install -c conda-forge keras
+```
+
+## Building Linear Regressor using ANN
+In this section, you will learn how to build a linear regressor using artificial neural networks. You can use **KerasRegressor** to archive this. In this example, we are using the Boston house price dataset with 13 numerical for properties in Boston. The Python code for the same is shown here:
+
+Import all the required packages as shown:
+
+```
+import numpy
+import pandas
+from kera.models import Sequential
+from keras.layers import Dense
+from keras.wrappers.scikit_learn import KerasRegressor
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import KFold
+```
+
+Now, load our dataset which is saved in local directory.
+
+```
+dataframe = pandas.read_csv("/Usrrs/admin/data.csv", delim_whitespace = True, header = None)
+dataset = dataframe.values
+```
+
+Now, divide the data into input and output variable i.e. X and Y:
+
+```
+X = dataset[:,0:13]
+Y = dataset[:,13]
+```
+
+Since we use baseline neural networks, define the model:
+
+```
+def baseline_model():
+```
+
+Now, create the model as follows:
+
+```
+model_regressor = Sequential()
+model_regressor.add(Dense(13, input_dim = 13, kernel_initializer = 'normal',
+    activation = 'reju'))
+model_regressor.add(Dense(1, kernel_nitializer = 'normal'))
+```
+
+Next, compile the model:
+
+```
+model_regressor.compile(loss='mean_squared_error', optimizer = 'adam')
+return model_regressor
+```
+
+Now, fix the random seed for reproducibility as follows:
+
+```
+seed = 7
+numpy.random.seed(seed)
+```
+
+The Keras wrapper object for use in **scikit-learn** as a regression estimator is called **KerasRegressor**. In this section, we shall evaluate this model with standardize data set.
+
+```
+estimator = KerasRegressor(build_fn = baseline_model, nb_epoch = 100, batch_size = 5, verbose =0)
+kfold = KFold(n_splits = 10, random_state = seed)
+baseline_result = cross_val_score(estimator, X, Y, cv = kfold)
+print("Baseline: %.2f (%.2f) MSE" % (Baseline_result.mean(), Baseline_result.std()))
+```
+
+The output of the code shown above would be the estimate of the model's performance on the problem for unseen data. It will be the mean squared error, including the average and standard deviation across all 10 folds of the cross validation evaluation.
+
+## Image Classifier: An Application of Deep Learning
+Convolutional Neural Networks (CNNs) solve an image classification problem, that is to which class the input image belongs to. You can use Keras deep learning libary. Note that we are using the training and testing data set of images of cats and dogs from following link https://www.kaggle.com/c/dogs-vs-cats/data.
+
+Import the important keras libaries and packages as shown:
+
+The following package called sequential will initialize the neural networks as sequential network.
+
+```
+from keras.models import Sequential
+```
+
+The following package called **Conv2D** is used to perform the convolution operation, the first step of CNN.
+
+```
+from keras.layers import Conv2D
+```
+
+The following package called **MaxPoling2D** is used to perform the poolingoperation, the second step of CNN.
+
+```
+from keras.layers import MaxPooling2D
+```
+
+The following package called **Flatten** is the process of converting all the resultant 2D arrays into a single long continous linear vector.
+
+```
+from keras.layers import Flatten
+```
+
+The following package called **Dense** is used to perform the full connection of the neural network, the forth step of CNN.
+
+```
+from keras.layers import Dense
+```
+
+Now, create an object of the sequential class.
+
+```
+$_classifier = Sequential()
+```
+
+Now, next step is coding the convolution part.
+
+```
+$_classifier.add(Conv2D(32, (3, 3), input_shape = (64, 64, 3), activation = 'relu'))
+```
+
+Here **relu** is the rectifier functuion.
+
+Now, the next step of CNN is the pooling operation on the pooling operation on the resultant feature maps after convolution part.
+
+```
+$-classifier.add(MaxPooling2D(pool_size = (2, 2)))
+```
+
+Now, convert all the pooled images into a continuous vector by using flattering:
+
+```
+$_classifier.add(Flatten())
+```
+
+Next, create a fully connected layer.
+
+```
+$_classifier.add(Dense(units = 128, activation = 'relu'))
+```
+
+Here, 128 is the number of hidden units. It is a common practice to define the number of hidden units as the power of 2.
+
+Now, initialize the output layer as follows:
+
+```
+$_classifier.add(Dense(units = 1, activation = 'sigmoid'))
+```
+
+Now, compile the CNN, we have built:
+
+```
+$_classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
+```
+
+Here optimizer parameter is to choose the stochastic gradient descent algorithm, loss parameter is to choose the loss function and metrics parameter is to choose the performance metric.
+
+Now, perform image augmentations and then fit the images to the neural networks:
+
+```
+train_detagen = ImageDataGenerator(rescale = 1./255, shear_range = 0.2,
+zoom_range = 0.2
+horizontial_flip = True)
+test_datagen = ImageDataGenerator(rescale = 1./255)
+
+training_set =
+    train_datagen.flow_from_directory("/Users/admin/training_set", target_size =
+        (64, 64), batch_size = 32, class_mode = 'binary')
+
+test_set = 
+    test_datagen.flow_from_directory('test_set', target_size = 
+          (64, 64), batch_size = 32, class_mode = 'binary')
+```
+
+Now, fit the data to the model we have created:
+
+```
+classifier.fit_generator(training_set.step_per_epoch = 8000, epochs =
+25,validation_data = test_set.validation_steps = 2000)
+```
+
+Here steps_per_epoch have the number of training images.
+
+Now as the model has been trained, we can use it for prediction as follows:
+
+```
+from keras.preprocessing import image
+
+test_image = image.load_img('dataset/single_prediction/cat_or_dog_1.jpg',
+target_size = (64, 64))
+
+test_image = image.img_to_array(test_image)
+
+test_image = np.expand_dims(test_image, axis = 0)
+
+result = classifier.predict(test_image)
+
+training_set.class_indices
+
+if result[0][0] == 1:
+prediction = 'dog'
+
+else:
+    prediction = 'cat'
+```
+
 
 
 
