@@ -6,6 +6,9 @@
 
 * [What's Involved in AI](https://github.com/DabovS/AI/blob/main/README.md#whats-involved-in-ai)
 * [Application of AI](https://github.com/DabovS/AI/blob/main/README.md#application-of-ai)
+* [Cognitive Modeling: Simulating Human Thinking Procedure](https://github.com/DabovS/AI/blob/main/README.md#application-of-ai)
+
+[Getting Started](https://github.com/DabovS/AI/blob/main/README.md#getting-started)
 
 [Analyzing Time Series Data](https://github.com/DabovS/AI#analyzing-time-series-data)
 
