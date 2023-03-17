@@ -5,7 +5,7 @@ AI is a rapidly advancing field with groundbreaking applications. Python, with i
 
 # Content
 
-[What is Intelligence?](https://github.com/DabovS/AI#what-is-intelligence)
+[**What is Intelligence?**](https://github.com/DabovS/AI#what-is-intelligence)
 
 * [What's Involved in AI](https://github.com/DabovS/AI/blob/main/README.md#whats-involved-in-ai)
 * [Application of AI](https://github.com/DabovS/AI/blob/main/README.md#application-of-ai)
