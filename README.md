@@ -4834,7 +4834,7 @@ cv2.imshow('image_flower', image)
 cv2.destroyAllwindows()
 ```
 
-![40 Use-GA](https://user-images.githubusercontent.com/124214430/226453808-814b1c3e-1aa1-4ac9-a307-a8e3dc22b9a6.png)
+![40 Example](https://user-images.githubusercontent.com/124214430/226455462-cc51bee1-aa9c-4ccf-b5ad-1083bf18cdcd.png)
 
 Now, we can write the same image into the other format, say .png using the imwrite() function:
 
