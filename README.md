@@ -4,43 +4,44 @@ Welcome to the AI manual, your guide to the rapidly evolving world of Artificial
 AI is a rapidly advancing field with groundbreaking applications. Python, with its libraries and frameworks, has become a popular language for developing AI solutions. Python's extensive libraries and frameworks, such as TensorFlow and PyTorch, provide efficient and user-friendly tools for developing AI applications.
 
 # Content
-**Primer Concepts**
 
-Getting Started
+[**Primer Concepts**](https://github.com/DabovS/AI/blob/main/README.md#primer-concepts)
 
-Machine Learning
+[Getting Started](https://github.com/DabovS/AI/blob/main/README.md#getting-started)
 
-Data Preparation
+[Machine Learning](https://github.com/DabovS/AI/blob/main/README.md#machine-learning)
 
-Regression
+[Data Preparation](https://github.com/DabovS/AI/blob/main/README.md#data-preparation)
 
-Logic Programming 
+[Regression](https://github.com/DabovS/AI/blob/main/README.md#regression)
 
-Unsupervised Learning Clustering
+[Logic Programming](https://github.com/DabovS/AI/blob/main/README.md#logic-programming) 
 
-Natural Language Processing
+[Unsupervised Learning Clustering](https://github.com/DabovS/AI/blob/main/README.md#unsupervised-learning-clustering)
 
-NLTK Package
+[Natural Language Processing](https://github.com/DabovS/AI/blob/main/README.md#natural-language-processing)
 
-Analyzing Time Series Data
+[NLTK Package](https://github.com/DabovS/AI/blob/main/README.md#nltk-package)
 
-Speech Recognition
+[Analyzing Time Series Data](https://github.com/DabovS/AI/blob/main/README.md#analyzing-time-series-data)
 
-Heuristic Search
+[Speech Recognition](https://github.com/DabovS/AI/blob/main/README.md#speech-recognition)
 
-Gaming
+[Heuristic Search](https://github.com/DabovS/AI/blob/main/README.md#hueristic-search)
 
-Neural Networks
+[Gaming](https://github.com/DabovS/AI/blob/main/README.md#gaming)
 
-Reinforcement Learning
+[Neural Networks](https://github.com/DabovS/AI/blob/main/README.md#nueral-networks)
 
-Genetic Algorithms
+[Reinforcement Learning](https://github.com/DabovS/AI/blob/main/README.md#reinforcement-learning)
 
-Computer Vision
+[Genetic Algorithms](https://github.com/DabovS/AI/blob/main/README.md#genetic-algorithms)
+
+[Computer Vision](https://github.com/DabovS/AI/blob/main/README.md#computer-vision)
 
 Vision of Tommorow
 
-**Reference**
+[**Reference**](https://github.com/DabovS/AI/blob/main/README.md#reference)
 
 # Primer Concepts
 Since the invention of computers or machines, their capability to perform various tasks has experienced an exponential growth. Humans have developed the power of computer systems in terms of their diverse working domains, their incresing speed, and reducing size with respect to time.
