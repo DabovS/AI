@@ -5272,3 +5272,4 @@ As the technology evolves, it is crucial to remain mindful of the ethical implic
 * [Inductive Reasoning](https://www.scribbr.com/methodology/inductive-reasoning/)
 * [What Is Deductive Reasoning?](https://www.scribbr.com/methodology/deductive-reasoning/)
 * [Simple NN with Python: Multi-Layer Perceptron](https://www.kaggle.com/code/androbomb/simple-nn-with-python-multi-layer-perceptron)
+* [Suggestions for the Role of AI in the Arms Control and Non-Proliferation of WMD](https://scholar.kyobobook.co.kr/file/view?downOrView=pdf&schlrCmdtcode=4010036882622&artlNum=13182748&artlName=Suggestions%20for%20the%20Role%20of%20AI%20in%20the%20Arms%20Control%20and%20Non-Proliferation%20of%20WMD)
