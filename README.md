@@ -5,23 +5,41 @@ AI is a rapidly advancing field with groundbreaking applications. Python, with i
 
 # Content
 **Primer Concepts**
+
 Getting Started
+
 Machine Learning
+
 Data Preparation
+
 Regression
+
 Logic Programming 
+
 Unsupervised Learning Clustering
+
 Natural Language Processing
+
 NLTK Package
+
 Analyzing Time Series Data
+
 Speech Recognition
+
 Heuristic Search
+
 Gaming
+
 Neural Networks
+
 Reinforcement Learning
+
 Genetic Algorithms
+
 Computer Vision
+
 Vision of Tommorow
+
 **Reference**
 
 # Primer Concepts
