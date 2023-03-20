@@ -4,41 +4,25 @@ Welcome to the AI manual, your guide to the rapidly evolving world of Artificial
 AI is a rapidly advancing field with groundbreaking applications. Python, with its libraries and frameworks, has become a popular language for developing AI solutions. Python's extensive libraries and frameworks, such as TensorFlow and PyTorch, provide efficient and user-friendly tools for developing AI applications.
 
 # Content
-
-[**What is Intelligence?**](https://github.com/DabovS/AI#what-is-intelligence)
-
-* [What's Involved in AI](https://github.com/DabovS/AI/blob/main/README.md#whats-involved-in-ai)
-* [Application of AI](https://github.com/DabovS/AI/blob/main/README.md#application-of-ai)
-* [Cognitive Modeling: Simulating Human Thinking Procedure](https://github.com/DabovS/AI/blob/main/README.md#application-of-ai)
-
-[Getting Started](https://github.com/DabovS/AI/blob/main/README.md#getting-started)
-
-[Machine Learning](https://github.com/DabovS/AI/blob/main/README.md#getting-started)
-
-[Most Common Machine Learning Algorithms](https://github.com/DabovS/AI/blob/main/README.md#most-common-machine-learning-algorithms)
-
-[Data Preparation](https://github.com/DabovS/AI/blob/main/README.md#data-preparation)
-
-[Classification](https://github.com/DabovS/AI/blob/main/README.md#classification)
-
-* [Support Vector Machine (SVM)](https://github.com/DabovS/AI/blob/main/README.md#support-vector-machine-svm-1)
-* [Logistic Regression](https://github.com/DabovS/AI/blob/main/README.md#logistic-regression)
-* [Decision Tree Classifier](https://github.com/DabovS/AI/blob/main/README.md#decision-tree-classifier)
-* [Random Forest Classifier](https://github.com/DabovS/AI/blob/main/README.md#random-forest-classifier)
-* [Class Imbalance Problem](https://github.com/DabovS/AI/blob/main/README.md#random-forest-classifier)
-
-[Regression](https://github.com/DabovS/AI/blob/main/README.md#regression)
-
-[Logic Programming](https://github.com/DabovS/AI/blob/main/README.md#logic-programming)
-
-[Unsupervised Learning Clustering](https://github.com/DabovS/AI/blob/main/README.md#unsupervised-learning-clustering)
-
-[Analyzing Time Series Data](https://github.com/DabovS/AI#analyzing-time-series-data)
-
-[Speech Recognition](https://github.com/DabovS/AI/blob/main/README.md#speech-recognition)
-
-
-[**Reference**](https://github.com/DabovS/AI/blob/main/README.md#reference)
+**Primer Concepts**
+Getting Started
+Machine Learning
+Data Preparation
+Regression
+Logic Programming 
+Unsupervised Learning Clustering
+Natural Language Processing
+NLTK Package
+Analyzing Time Series Data
+Speech Recognition
+Heuristic Search
+Gaming
+Neural Networks
+Reinforcement Learning
+Genetic Algorithms
+Computer Vision
+Vision of Tommorow
+**Reference**
 
 # Primer Concepts
 Since the invention of computers or machines, their capability to perform various tasks has experienced an exponential growth. Humans have developed the power of computer systems in terms of their diverse working domains, their incresing speed, and reducing size with respect to time.
