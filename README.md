@@ -3364,7 +3364,7 @@ plt.show()
 
 You would be able to see an output graph and data extracted for the above audio signal as shown in the image here:
 
-![Framing Sound](26.framing_sound.png)
+![26 framing_sound](https://user-images.githubusercontent.com/124214430/226454793-ec4a81e1-2618-4435-95f7-ab17dfc00cbf.png)
 
 ```
 Signal shape: (132300,)
@@ -3454,7 +3454,7 @@ plt.show()
 
 You can observe the output graph of the above code as shown in the image below:
 
-![Visualize the Characterization](27.output.graph.png)
+![27 output graph](https://user-images.githubusercontent.com/124214430/226454749-48e47c70-e5ca-4d57-98b8-9673c3d37872.png)
 
 ## Generating Monotone Audio Signal
 The two steps that you have seen till now are important to learn about signals. Now, this step will be useful if you want to generate the audio signal with some predefined parameters. Note that this step will save the audio signal in an output file.
@@ -3518,7 +3518,7 @@ plt.show()
 
 You can observe the plot as shown in figure given here:
 
-![Visualize the generated audio signal](28.visualize-the-generated-audio-signal.png)
+![28 visualize-the-generated-audio-signal](https://user-images.githubusercontent.com/124214430/226454725-cad8b1ee-ec71-4acc-be3e-f339c4c2f2ca.png)
 
 ## Feature Extraction from Speech
 This is the most important step in building a speech recognizer because after converting the speech signal into the frequency domain, we must convert it into the usable from of feature vector. We can use different feature extraction techniques like MFCC, PLP, PLP-RASTA etc. for this purpose.
@@ -3593,9 +3593,9 @@ plt.show()
 
 As a result of the steps above, you can observe the following output: Figure1 for MFCC and Figure2 for Filter Bank
 
-![MFCC](29.MFCC.png)
+![29 MFCC](https://user-images.githubusercontent.com/124214430/226454642-479aab45-00d1-4ba6-8972-a607b056fe33.png)
 
-![Filter Bank](30.Filter%20Bank.png)
+![30 Filter Bank](https://user-images.githubusercontent.com/124214430/226454629-239688c8-b28d-4822-b0e7-ba272abdf3e2.png)
 
 ## Recognition of Spoken Words
 Speech recognition means  that when humans are speaking, a machine undestands it. Here we are using Google Speech API in Python to make it happen. We need to install the following packages for this:
@@ -4136,7 +4136,7 @@ plt.show()
 
 You can see the following graph showing the training progress using the error metric:
 
-![Training Process](31.error-metric.png)
+![31 error-metric](https://user-images.githubusercontent.com/124214430/226454528-5717c1c5-ceb4-408f-b170-f730fd504e2d.png)
 
 ### Single - Layer Neural Networks
 In this example, we are creating a signle layer neural network that consists of independent neurons acting on input data to produce the output. Note that we are using the text file named **neural_simple.txt** as our input.
@@ -4251,9 +4251,9 @@ You can find the test results as shown here:
 
 You can see the following graph as the output of the code disscused till now:
 
-![Single - Layer Neural Networks](31.Single-Networks.png)
+![31 Single-Networks](https://user-images.githubusercontent.com/124214430/226454497-7e975ae7-9609-44db-b5c2-49353eafa8d6.png)
 
-![Trainning Error Progress](32.Training-error.png)
+![32 Training-error](https://user-images.githubusercontent.com/124214430/226454477-1f4738ed-7e51-4d69-91fb-33d9b0947173.png)
 
 ### Multi-Layer Neural Networks
 In this example, we are creating a multi-layer neural network that consists of more than one layer to extract the underlying pattern in the training data. This multilayer neural network will work like a regressor. We are going to generate some data points based on the equation: y=2x(2)+8
@@ -4342,12 +4342,11 @@ plt.show()
 
 As a result of the above commands, you can observe the graphs as shown below:
 
+![33 Multi-Layer](https://user-images.githubusercontent.com/124214430/226454435-4ef26436-84a1-4d54-83ab-89f4678dc6a7.png)
 
-![Multi-Layer Neural Networks](33.Multi-Layer.png)
+![34 Multi-Layer-error](https://user-images.githubusercontent.com/124214430/226454415-6a799310-7893-411f-9c43-ab6c189186be.png)
 
-![Multi-Layer Neural Networks: Training error](34.Multi-Layer-error.png)
-
-![Multi-Layer Neural Networks: Actual vs Predicted](35.Multi-Layer-Actual.png)
+![35 Multi-Layer-Actual](https://user-images.githubusercontent.com/124214430/226454397-52158fce-c021-4192-bf94-cf8ef6aac8cd.png)
 
 # Reinforcement Learning
 In this chapter, you will learn in detail about theconcepts reinforcement learning in AI with Python.
@@ -4357,7 +4356,7 @@ This type of learning is used to reinforce or strengthen the network based on cr
 
 This learning process is similar to supervised learning but we might have very less information. The following figure gives the block diagram of reinforcement learning:
 
-![Reinforcement Learning](36.reinforcement_learning.png)
+![36 reinforcement_learning](https://user-images.githubusercontent.com/124214430/226454367-277b2259-f991-490f-a6e7-5c5419980932.png)
 
 ## Building Blocks: Environment and Agent
 Environment and Agent are main building blocks of reinforcement learning in AI. This section discusses them in detail:
@@ -4396,7 +4395,7 @@ The environment has multifold properties as discussed below:
 * **Deterministic/Non-deterministic**: If the next state of the environment is completely determined by the currebnt state and the actions of the agent, then the environment is deterministic, otherwise it is non-deterministic.
 * **Episodic/Non-episodic**: In an episodic environment, each episode consists of the agent perceiving and then acting. The quality of its action depends just on the episode itself. Subsequent episodes do not depend on the actions in the previous episodes. Episodic environments are much simpler because the agent does not need to think ahead.
 
-![Environment and Agent](37.Environment-and-Agent.png)
+![37 Environment-and-Agent](https://user-images.githubusercontent.com/124214430/226454342-1c2a219b-1e9b-49a1-8729-8eaed3bce2b8.png)
 
 ## Constructing an Environment with Python
 For building reinforcement learning agent, we will beusing the **OpenAI Gym** package which can be installed with the help of the following command:
@@ -4418,7 +4417,7 @@ for _ in range(1000):
     env.step(env.action_space.sample())
 ```
 
-![Example of Python code for carpole-v9](38.carpole-v9.png)
+![38 carpole-v9](https://user-images.githubusercontent.com/124214430/226454319-b002b9a1-6159-48f7-84ca-8404018aee93.png)
 
 You can construct other environments in a similar way.
 
@@ -4440,7 +4439,7 @@ for _ in range(20):
         break
 ```
 
-![Example of Python code for carpole-v9 - 2](39.carpole-v9.png)
+![39 carpole-v9](https://user-images.githubusercontent.com/124214430/226454297-6f0ac35e-2ebc-43cb-b80d-76baea9d8e1c.png)
 
 Observe that the carpole can balance itself.
 
@@ -4461,7 +4460,7 @@ Genetic Algorithms are sufficiently randomized in nature, but they perform much 
 ## How to Use GA for Optimization Problems?
 Optimization is an action of making design, situation, resource and system, as effective as possible. The following block diagram shows the optimization process:
 
-![Use GA for Optimization](40.Use-GA.png)
+![40 Use-GA](https://user-images.githubusercontent.com/124214430/226454221-551d9332-8a4c-4862-866d-d635ecab1c2c.png)
 
 **Stage of GA mechanism for optimization process**
 The following is a sequence of steps of GA mechanism when used for optimization of problems:
