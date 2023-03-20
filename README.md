@@ -5,9 +5,8 @@ AI is a rapidly advancing field with groundbreaking applications. Python, with i
 
 # Content
 
-[**Primer Concepts**](https://github.com/DabovS/AI/blob/main/README.md#primer-concepts)
-
-[Getting Started](https://github.com/DabovS/AI/blob/main/README.md#getting-started)
+1. [**Primer Concepts**](https://github.com/DabovS/AI/blob/main/README.md#primer-concepts)
+2. [Getting Started](https://github.com/DabovS/AI/blob/main/README.md#getting-started)
 
 [Machine Learning](https://github.com/DabovS/AI/blob/main/README.md#machine-learning)
 
