@@ -4835,7 +4835,7 @@ cv2.imshow('image_flower', image)
 cv2.destroyAllwindows()
 ```
 
-![Example](40.Example.png)
+![40 Use-GA](https://user-images.githubusercontent.com/124214430/226453808-814b1c3e-1aa1-4ac9-a307-a8e3dc22b9a6.png)
 
 Now, we can write the same image into the other format, say .png using the imwrite() function:
 
@@ -4875,7 +4875,7 @@ Now, if we see this image using **imshow()** function, then we can see that this
 cv2.imshow('BGR_Penguins", image)
 ```
 
-![BGR_Penguins](41.BGR_Penguins.png)
+![42 BGR_Penguins - Copy](https://user-images.githubusercontent.com/124214430/226453771-e6dd4b13-3c63-4e6a-a4de-9df91f28cd7f.png)
 
 Now, use **cvtColor()** function to convert this image to grayscale.
 
@@ -4884,7 +4884,7 @@ image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 cv2.imshow('gray_penguins', image)
 ```
 
-![BGR_Penguins - gray](43.BGR_Penguins.png)
+![43 BGR_Penguins](https://user-images.githubusercontent.com/124214430/226453729-192e2101-0fb7-4341-a2bb-7b08fc8133de.png)
 
 ## Edge Detection
 Humans, after seeing a rough sketch, can easily recognize many object types and their poses. That is why edges play an important role in the life of humans as well as in the applications of computer vision. OpenCV provides very simple and useful function called **Canny()** for detecting the edges.
@@ -4918,7 +4918,7 @@ cv2.imshow('edges', cv2.imread(''exdges_Penguins.jpg'))
 
 This Python program will creat an image named **edges_penguins.jpg** with edge detection.
 
-![BGR_Penguins - edge detection](44.BGR_Penguins.png)
+![44 BGR_Penguins](https://user-images.githubusercontent.com/124214430/226453697-f4f8059a-1d1b-475e-bc8e-076570bcadc2.png)
 
 ## Face Detection
 Face detection is one the fascinating applications of computer vision which makes it more realistic as well as futuristic. OpenCV has a built-in facility to perform face detection. We are going to use the **Haar** cascade classifier for face detection.
@@ -4929,7 +4929,7 @@ We need data to use the Haar cascade classifier. YOu can find this data in our O
 **Example**
 The following is the Python code using Haar Cascade to detect the face of Amitabh Bachan shown in the following image:
 
-![Haar Cascade](45.Haar-Cascade-example.png)
+![45 Haar-Cascade-example](https://user-images.githubusercontent.com/124214430/226453664-c3c36c96-6a48-4173-8fbd-59d6e6ead794.png)
 
 Import the **OpenCV** package as shown:
 
@@ -4968,7 +4968,7 @@ Now, draw a rectangle around the hole face:
 
 This Python program will create an image named **Face_AB.jpg** with face detection as shown:
 
-![Haar Cascade - Face A/B](46.Haar-Cascade-example-A-B.png)
+![46 Haar-Cascade-example-A-B](https://user-images.githubusercontent.com/124214430/226453630-1f02ba5c-fdc7-4e20-8959-3c8c26ac2ebc.png)
 
 ## Eye Detection
 Eye detection is another facinating application of computer vision which makes it more realistic as well as futuristic. OpenCV has a built-in facility to perform eye detection. We are going to use the **Haar cascade** classifier for eye detection.
@@ -4976,7 +4976,7 @@ Eye detection is another facinating application of computer vision which makes i
 **Example**
 The following example gives the Python code using Haar Cascade to detect the face of Amitabh Bachan.
 
-![Eye Detection](47.Haar-Cascade-example-A-B)
+![47 Haar-Cascade-example-A-B-PNG](https://user-images.githubusercontent.com/124214430/226453607-fa5556c2-9cfe-49e8-b82e-d69581fb1efa.png)
 
 Import OpenCV package as shown:
 
@@ -5019,7 +5019,7 @@ cv2.imwrite('Eye_AB.jpg, img)
 
 This Python program will create an image named **Eye_AB.jpg** with eye detection as shown:
 
-![Eye_AB](48.Haar-Cascade-example-A-B-eye)
+![48 Haar-Cascade-example-A-B-eye-PNG](https://user-images.githubusercontent.com/124214430/226453388-7e632e18-1500-4a25-a994-039b02a1ab5c.png)
 
 # Deep Learning
 Artificial Neural Network (ANN) it is an efficient computing system, whose central theme isborrowed from the analogy of biological neural networks. Neural networks are one type of model for machine learning. In the mid-1980s and early 1990s, much important architectural advancements were made in neural networks. In this chapter, you will learn more about Deep Learning, an approach of AI.
