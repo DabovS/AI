@@ -24,7 +24,8 @@ AI is a rapidly advancing field with groundbreaking applications. Python, with i
 15. [Genetic Algorithms](https://github.com/DabovS/AI/blob/main/README.md#genetic-algorithms)
 16. [Computer Vision](https://github.com/DabovS/AI/blob/main/README.md#computer-vision)
 17. [Vision of Tommorow](https://github.com/DabovS/AI/blob/main/README.md#vision-of-tommorow)
-* [**Reference**](https://github.com/DabovS/AI/blob/main/README.md#reference)
+
+[**Reference**](https://github.com/DabovS/AI/blob/main/README.md#reference)
 
 # Primer Concepts
 Since the invention of computers or machines, their capability to perform various tasks has experienced an exponential growth. Humans have developed the power of computer systems in terms of their diverse working domains, their incresing speed, and reducing size with respect to time.
