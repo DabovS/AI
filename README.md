@@ -39,7 +39,7 @@ AI is a rapidly advancing field with groundbreaking applications. Python, with i
 
 [Computer Vision](https://github.com/DabovS/AI/blob/main/README.md#computer-vision)
 
-Vision of Tommorow
+[Vision of Tommorow](https://github.com/DabovS/AI/blob/main/README.md#vision-of-tommorow)
 
 [**Reference**](https://github.com/DabovS/AI/blob/main/README.md#reference)
 
