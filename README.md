@@ -7,40 +7,23 @@ AI is a rapidly advancing field with groundbreaking applications. Python, with i
 
 1. [**Primer Concepts**](https://github.com/DabovS/AI/blob/main/README.md#primer-concepts)
 2. [Getting Started](https://github.com/DabovS/AI/blob/main/README.md#getting-started)
-
-[Machine Learning](https://github.com/DabovS/AI/blob/main/README.md#machine-learning)
-
-[Data Preparation](https://github.com/DabovS/AI/blob/main/README.md#data-preparation)
-
-[Regression](https://github.com/DabovS/AI/blob/main/README.md#regression)
-
-[Logic Programming](https://github.com/DabovS/AI/blob/main/README.md#logic-programming) 
-
-[Unsupervised Learning Clustering](https://github.com/DabovS/AI/blob/main/README.md#unsupervised-learning-clustering)
-
-[Natural Language Processing](https://github.com/DabovS/AI/blob/main/README.md#natural-language-processing)
-
-[NLTK Package](https://github.com/DabovS/AI/blob/main/README.md#nltk-package)
-
-[Analyzing Time Series Data](https://github.com/DabovS/AI/blob/main/README.md#analyzing-time-series-data)
-
-[Speech Recognition](https://github.com/DabovS/AI/blob/main/README.md#speech-recognition)
-
-[Heuristic Search](https://github.com/DabovS/AI/blob/main/README.md#hueristic-search)
-
-[Gaming](https://github.com/DabovS/AI/blob/main/README.md#gaming)
-
-[Neural Networks](https://github.com/DabovS/AI/blob/main/README.md#nueral-networks)
-
-[Reinforcement Learning](https://github.com/DabovS/AI/blob/main/README.md#reinforcement-learning)
-
-[Genetic Algorithms](https://github.com/DabovS/AI/blob/main/README.md#genetic-algorithms)
-
-[Computer Vision](https://github.com/DabovS/AI/blob/main/README.md#computer-vision)
-
-[Vision of Tommorow](https://github.com/DabovS/AI/blob/main/README.md#vision-of-tommorow)
-
-[**Reference**](https://github.com/DabovS/AI/blob/main/README.md#reference)
+3. [Machine Learning](https://github.com/DabovS/AI/blob/main/README.md#machine-learning)
+4. [Data Preparation](https://github.com/DabovS/AI/blob/main/README.md#data-preparation)
+5. [Regression](https://github.com/DabovS/AI/blob/main/README.md#regression)
+6. [Logic Programming](https://github.com/DabovS/AI/blob/main/README.md#logic-programming) 
+7. [Unsupervised Learning Clustering](https://github.com/DabovS/AI/blob/main/README.md#unsupervised-learning-clustering)
+8. [Natural Language Processing](https://github.com/DabovS/AI/blob/main/README.md#natural-language-processing)
+9. [NLTK Package](https://github.com/DabovS/AI/blob/main/README.md#nltk-package)
+10. [Analyzing Time Series Data](https://github.com/DabovS/AI/blob/main/README.md#analyzing-time-series-data)
+11. [Speech Recognition](https://github.com/DabovS/AI/blob/main/README.md#speech-recognition)
+12. [Heuristic Search](https://github.com/DabovS/AI/blob/main/README.md#hueristic-search)
+13. [Gaming](https://github.com/DabovS/AI/blob/main/README.md#gaming)
+14. [Neural Networks](https://github.com/DabovS/AI/blob/main/README.md#nueral-networks)
+15. [Reinforcement Learning](https://github.com/DabovS/AI/blob/main/README.md#reinforcement-learning)
+16. [Genetic Algorithms](https://github.com/DabovS/AI/blob/main/README.md#genetic-algorithms)
+17. [Computer Vision](https://github.com/DabovS/AI/blob/main/README.md#computer-vision)
+18. [Vision of Tommorow](https://github.com/DabovS/AI/blob/main/README.md#vision-of-tommorow)
+19. [**Reference**](https://github.com/DabovS/AI/blob/main/README.md#reference)
 
 # Primer Concepts
 Since the invention of computers or machines, their capability to perform various tasks has experienced an exponential growth. Humans have developed the power of computer systems in terms of their diverse working domains, their incresing speed, and reducing size with respect to time.
